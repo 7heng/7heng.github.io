@@ -96,7 +96,7 @@
 <p><img src="/images/Com/2.png"></p>
 <p>串行通信又可分为<strong>异步通信</strong>和<strong>同步通信</strong>。</p>
 <p>异步通信是以字符<strong>（构成的帧）</strong>为单位，进行传输，字符与字符之间的间隙<strong>（时间间隔）</strong>是任意的，但每个字符中的各位是以固定的时间传送的，即字符之间不一定有“ 位间隔 ”的整数倍的关系，<strong>但同一字符内的各位之间的距离均为“  位间隔 ”的整数倍。</strong></p>
-<p><img src="images/Com/3.png"></p>
+<p><img src="/images/Com/3.png"></p>
 <p><strong>异步通信</strong>是一种很常用的通信方式（效率较低），异步通信在发送字符时，发送端可以在任意时刻开始发送字符，因此必须在每一个字符的开始和结束的地方加上标志，即加上开始位和停止位，以便使接收端能够正确地将每一个字符接受下来。所传送地数据以字节为单位。每个字节前加上一位起始位，每个字节后面加上停止位。&emsp;&emsp;优点：异步通信地好处是通信设备简单、便宜，但传输效率较低。</p>
 <p><strong>同步通信：</strong></p>
 <p>同步通信时要建立发送发时钟对接收方时钟地直接控制，使双方达到完全同步。此时，传输数据的位之间的距离均为“ 位间隔  ”的整数倍，同时传送的字符间不留间隙，即<strong>保持同步</strong>关系，也<strong>保持字符同步关系</strong>。发送发对接收方的同步可以通过两种方法实现。</p>
@@ -121,7 +121,7 @@
 <p><strong>SBUF：</strong></p>
 <p>&emsp;&emsp;在逻辑上，SBUF只有一个，它即表示发送寄存器，又表示接收寄存器，具有同一个单元地址99H。但在物理结构上，则有两个完全独立的SBUF，一个是发送缓冲寄存器SBUF，另一个是接收缓冲寄存器SBUF。如果<strong>CPU写SBUF</strong>，数据就会被送入<strong>发送寄存器</strong>准备发送；如果<strong>CPU读SBUF</strong>，则读入的数据一定<strong>来自接收缓冲器</strong>。即CPU对SBUF的读写，实际上是分别对访问上述两个不同的寄存器。</p>
 <p><strong>（收） a = SBUF;</strong>&emsp;&emsp;&emsp;<strong>（发）SBUF =a;</strong></p>
-<h4 id="串行口工作前需要对相关寄存器进行配置，设定其工作模式："><a href="#串行口工作前需要对相关寄存器进行配置，设定其工作模式：" class="headerlink" title="串行口工作前需要对相关寄存器进行配置，设定其工作模式："></a>串行口工作前需要对相关寄存器进行配置，设定其工作模式：</h4><p><img src="images/Com/4.png"></p>
+<h4 id="串行口工作前需要对相关寄存器进行配置，设定其工作模式："><a href="#串行口工作前需要对相关寄存器进行配置，设定其工作模式：" class="headerlink" title="串行口工作前需要对相关寄存器进行配置，设定其工作模式："></a>串行口工作前需要对相关寄存器进行配置，设定其工作模式：</h4><p><img src="/images/Com/4.png"></p>
 <ol>
 <li>设定T1的<strong>工作方式</strong>（编程TMOD寄存器）；</li>
 <li>计算T1的初值，装载TH1、TL1；</li>
@@ -129,11 +129,11 @@
 <li>确定<strong>串行口控制</strong>（编程SCON寄存器）；</li>
 <li>如需串行口在中断方式工作时，需进行中断设置编程IE寄存器。</li>
 </ol>
-<p><img src="images/Com/5.png"></p>
+<p><img src="/images/Com/5.png"></p>
 <p>当T1作为波特率发生器时，最典型的用法是<strong>使T1工作在自动再装入</strong>的<strong>8位定时器方式（即方式2，且TCON的 TR1 = 1，以启动定时器）。</strong>这时溢出率取决于TH1中的计数值。</p>
 <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>T1 溢出率 = fosc / { 12 × [ 256 - (TH1) ] }</strong></p>
-<p><img src="images/Com/6.png"></p>
-<p><img src="images/Com/7.png"></p>
+<p><img src="/images/Com/6.png"></p>
+<p><img src="/images/Com/7.png"></p>
 <p><strong>fosc:外部晶振（11.0595）</strong></p>
 <p><strong>自动再装：TL1、TH1的赋值。 TL1从初值开始加，加到255溢出后，会自动取TH1的初值。</strong></p>
 <p><strong>产生波特率误差要为0，不能有误差！</strong></p>
