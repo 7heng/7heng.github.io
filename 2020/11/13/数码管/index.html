@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数码管 | Hexo</title>
+
+  
+  <meta name="author" content="7heng">
+  
+
+  
+  <meta name="description" content="数码管显示">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="数码管"/>
+
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Hexo</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>数码管</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/11/13/数码管/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-11-13T13:50:38.000Z">
+          2020-11-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="数码管显示"><a href="#数码管显示" class="headerlink" title="数码管显示"></a>数码管显示</h2><a id="more"></a>
+
+<p>数码管：</p>
+<p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605361170090&di=1e0ea0a40fc5bce489b8d45f8ed82559&imgtype=0&src=http://gss0.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/b999a9014c086e0631bbface01087bf40ad1cb20.jpg"></p>
+<p>数码管根据内部连接的不同分为共阴极和共阳极。八段数码管内部有8颗LED组成，如果想要显示特定字形，只需控制相应的LED亮起，其它LED熄灭即可。</p>
+<h4 id="判断数码管是共阴极还是共阳极"><a href="#判断数码管是共阴极还是共阳极" class="headerlink" title="判断数码管是共阴极还是共阳极:"></a>判断数码管是共阴极还是共阳极:</h4><p> &nbsp; &emsp;&nbsp;如果是共阴极，中间公共脚为GND，如果是共阳极，中间公共脚为VCC。</p>
+<p> &emsp;&nbsp;&nbsp;用万用表黑笔脚接在公共脚上，红笔表假设接在a上，如果a恒亮，代表是一个共阴极数码管。如果a不亮，将黑表笔接在a脚，红表笔接在公共脚上，如果a恒亮，则为共阳极。(指针式万用表在电阻挡，红表笔输出负电压，是负极。黑表笔输出正电压，是正极。 &emsp;一般为红正极黑负极。)</p>
+<h4 id="锁存器："><a href="#锁存器：" class="headerlink" title="锁存器："></a>锁存器：</h4><p><img src="http://www.elecfans.com/article/UploadPic/2008-4/2008411031937957.jpg"></p>
+<p><img src="http://www.elecfans.com/article/UploadPic/2008-4/20084110314262946.jpg"></p>
+<h4 id="上拉电阻的作用"><a href="#上拉电阻的作用" class="headerlink" title="上拉电阻的作用:"></a>上拉电阻的作用:</h4><p>&emsp;&emsp;上拉就是将不确定的信号通过一个电阻钳位在高电平，电阻同时起限流作用。下拉同理，也是将不确定的信号通过一个电阻钳位在低电平。</p>
+<p>&emsp;&emsp;当P0口作为输入/输出口时，上电复位后处于开漏模式。P0口内部无上拉电阻，所以作io口必须外接10k~ 4.7k的上拉电阻。</p>
+<p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605366286862&di=2677112b48636c43f39ae464924c4dd8&imgtype=0&src=http://pics6.baidu.com/feed/8694a4c27d1ed21b878053600e7482c350da3f8f.jpeg?token=dc2d75945facce9c7b435202621b3fc8"></p>
+<h4 id="场效应管"><a href="#场效应管" class="headerlink" title="场效应管:"></a>场效应管:</h4><p><img src="https://dfsimg1.hqewimg.com/group1/M00/12/63/wKhk713mAyaAfEUWAAA_CTEWvaw730.jpg"></p>
+<p>三个电极分别是：</p>
+<ul>
+<li>栅极 G</li>
+<li>源计 S</li>
+<li>漏极 D</li>
+</ul>
+<p>与三极管相比，场效应管具有很高的输入电阻。</p>
+<p>准双向io口可以正常输出高低电平。</p>
+<p>漏极开漏输出：</p>
+<ul>
+<li>可以输出低电频，但不可以输出高电频。（因此要加一个上拉电阻，才可以既能输出高电频又能输出低电频。&lt;源极S接地，G与S之间要有一个正偏，场效应管(D与S之间)才能导通&gt; ）</li>
+</ul>
+<blockquote>
+<p>数码管输入数据时流程：</p>
+<ul>
+<li>打开位选锁存器</li>
+<li>赋予数据</li>
+<li>锁存位选数据，关闭位选锁存器</li>
+<li>打开段选锁存器</li>
+<li>赋予数据</li>
+<li>锁存器段选数据，关闭段选锁存器</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 7heng
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

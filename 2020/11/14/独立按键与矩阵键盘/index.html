@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>独立按键与矩阵键盘 | Hexo</title>
+
+  
+  <meta name="author" content="7heng">
+  
+
+  
+  <meta name="description" content="独立按键:">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="独立按键与矩阵键盘"/>
+
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Hexo</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>独立按键与矩阵键盘</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/11/14/独立按键与矩阵键盘/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-11-14T12:56:49.000Z">
+          2020-11-14
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="独立按键"><a href="#独立按键" class="headerlink" title="独立按键:"></a>独立按键:</h2><a id="more"></a>
+
+<p>单片机上使用的大部分都是轻触开关，轻触按键。</p>
+<p>独立键盘：每个按键占用一个io口，当按键数量较多时，io口利用效率不高，但程序简单，适用于所需按键较少的场合。</p>
+<p>矩阵键盘：电路连接复杂，但提高了io口的利用率，软件编程较复杂。适用于使用大量按键的场合。</p>
+<p>独立按键：</p>
+<p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605369130375&di=722c9e7cdf6e555ce1bd1cdc4e89e91c&imgtype=0&src=http://file.elecfans.com/web1/M00/BC/8C/pIYBAF67T1uAZUyPAABtB6TAq94163.jpg"></p>
+<p>&emsp;&emsp;按键的一端与io口连接，另一端接地。通过控制io口输出高电平即可检测按键是否按下，当按下时io口会被拉低，松开后io口回到高电平。</p>
+<p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605369468198&di=466d5acd491ae5e475abc7b87bb9782d&imgtype=0&src=http://6.eewimg.cn/news/uploadfile/2020/0225/1582610369554153.jpg"></p>
+<p>&emsp;&emsp;准双向io口： 在准双向io口的管脚处接一个轻触独立按键，另一端接地。当内部输出为1时，经过非门变为0，G与S之间无正电压，场效应管不导通，因为内部有上拉电阻，所以D会被拉到5V，如果按键没有按下，那么此处还是为5V，如果按键按下，线路相当于直接接到地线上，那么会被拉低变为0V，因为电流会往阻抗低的地方流。</p>
+<h4 id="按键特性："><a href="#按键特性：" class="headerlink" title="按键特性："></a>按键特性：</h4><p>&emsp;机械按键在按下或松开时会存在抖动现象。</p>
+<blockquote>
+<p>在编写程序时需要进行消除抖动</p>
+</blockquote>
+<h4 id="矩阵键盘："><a href="#矩阵键盘：" class="headerlink" title="矩阵键盘："></a>矩阵键盘：</h4><p>确定矩阵键盘上哪一个按键被按下可以采用列扫描和行扫描。列扫描时先把接在列上面的所有io口拉高，接在行上面的所有io口置低。（行扫描时先把接在行上面的所有io口拉高，接在列上面的所有io口置低）当其中有一列内任何一个按键按下那么整条列线都会被拉低。</p>
+<h5 id="8×8LED点阵屏："><a href="#8×8LED点阵屏：" class="headerlink" title="8×8LED点阵屏："></a>8×8LED点阵屏：</h5><ul>
+<li>行线为点阵屏LED灯的正极为共阳极点阵屏。</li>
+<li>列线为点阵屏LED灯的正极为共阴极点阵屏。</li>
+</ul>
+<p>&emsp;&emsp;点阵屏动态显示相当于数码管动态显示，是一个一个亮来显示的，但是由于机器运行速度很快，而且人眼的延时效果，所以看着时同时在显示。</p>
+<p>&emsp;&emsp;点阵屏驱动需要很多的io口，设计电路时应该尽可能节省io口的利用，所以驱动点阵屏</p>
+<p>可以利用74HC595芯片通过级联来控制点阵屏。74HC595大大节省了io口的利用。</p>
+<p>74HC595芯片是一种串入并出的芯片，是8位串行输入/输出或者并行输出的移位寄存器。（以压栈的方式进行工作）</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 7heng
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

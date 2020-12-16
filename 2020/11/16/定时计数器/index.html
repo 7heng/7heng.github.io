@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>定时器/计数器 | Hexo</title>
+
+  
+  <meta name="author" content="7heng">
+  
+
+  
+  <meta name="description" content="定时/计数器：">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="定时器/计数器"/>
+
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Hexo</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>定时器/计数器</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/11/16/定时计数器/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-11-16T11:55:51.000Z">
+          2020-11-16
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="定时-计数器："><a href="#定时-计数器：" class="headerlink" title="定时/计数器："></a>定时/计数器：</h2><a id="more"></a>
+
+<p>51单片机有2个16位定时器/计数器：定时器0和定时器1。</p>
+<p>这里所说的16位是指定时/计数器内部分别有16位的计数寄存器。</p>
+<p>当工作在定时模式时，每经过一个机器周期的内部的16位计数寄存器的值就会加1，当这个寄存器装满时溢出。我们可以算出工作在定时模式时最高单次定时时间为65535×1.085μS=时间（单位μS）</p>
+<p>当工作在技术器模式时，T0，T1每来一个脉冲计数寄存器加1。</p>
+<p>65535： 16位的计数寄存器，最大为16个1，也就是65535。</p>
+<p>最大定时： 65535×1.085=71105.475μS≈71.1mS</p>
+<p>时钟周期：以11.0592MHZ为例，假如51单片机的时钟为11.0592MHZ，除以12后得到每秒执行的指令个数为条指令，取倒数将得到执行每条指令所需时间为1.085μS(一个周期)</p>
+<h4 id="定时器作用："><a href="#定时器作用：" class="headerlink" title="定时器作用："></a>定时器作用：</h4><p>定时计数器可以用于精确事件定时，PWM脉宽调制，波形发生，信号时序测量的方面。</p>
+<h4 id="使用51定时-技术器步骤："><a href="#使用51定时-技术器步骤：" class="headerlink" title="使用51定时/技术器步骤："></a>使用51定时/技术器步骤：</h4><ul>
+<li>启动定时/计数器（通过TCON控制器）</li>
+<li>设置定时/计数器（通过TMOD控制器）</li>
+<li>查询定时/计数器是否溢出（读TCON内TF位）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/7heng/BlogPr/master/img/20201205134016.png"></p>
+<p>计数器：每来一个脉冲计数寄存器加1。一个高电平一个低电平形成一个脉冲。</p>
+<p>TMOD控制器中C/T位为功能选择位：为0时为定时器，为1时为计数器。</p>
+<blockquote>
+<p>定时器举例：</p>
+<p>TR0 = 1; &emsp;&emsp;&emsp;&emsp;// 定时器0工作</p>
+<p>TMOD - 0X01;&emsp;&emsp;&emsp;&emsp;// 16位定时器/计数器</p>
+<p>TH0 = 0X4B;   &emsp;&emsp;&emsp;&emsp;// (65535-46082) / 256 &emsp;&emsp; 高位赋值</p>
+<p>TL0 = 0XFD;&emsp;&emsp;&emsp;&emsp;// (65535-46082）% 256&emsp;&emsp;低位赋值</p>
+<p>if(TF0 == 1)&emsp;&emsp;&emsp;&emsp;&emsp;// 加满产生溢出;不用中断响应的情况下要软件清0。”置 ”1“ 为硬件置 “1” “</p>
+</blockquote>
+<p>例如：</p>
+<p> &emsp;定时50毫秒（mS）= 50000 微秒(μS)&emsp;&emsp;//因为执行计数的加1为微秒级</p>
+<p> &emsp;50000÷1.085≈46082；</p>
+<p> &emsp;65535-46082 = 初值；</p>
+<ul>
+<li>如果同时使用定时器计数器，都需要对同一个寄存位赋值时，可以用 |=（或等于）符号，相当于两个值进行求和，这样可以同时利用定时器和计数器。</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 7heng
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

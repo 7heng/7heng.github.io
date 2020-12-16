@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>STC89C51单片机 | Hexo</title>
+
+  
+  <meta name="author" content="7heng">
+  
+
+  
+  <meta name="description" content="初识51单片机">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="STC89C51单片机"/>
+
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Hexo</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>STC89C51单片机</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/11/09/STC89C51单片机/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-11-09T04:22:22.000Z">
+          2020-11-09
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="初识51单片机"><a href="#初识51单片机" class="headerlink" title="初识51单片机"></a>初识51单片机</h2><a id="more"></a>
+<p>例如：AT89S51、STC89C51、STC89C52、STC90C516等等这些单片机内核都为80C51，所以内核为80C51的单片机都属于51单片机。</p>
+<p>单片机是一种数字集成芯片，数字电路中只有两种电平：“高电平和低电平”  </p>
+<ul>
+<li>高电平： 5V  </li>
+<li>低电平： 0V<br>51单片机上电后默认全为高电平<br>51单片机大多数采用TTL电平，是因为通常数据表示采用二进制，”5V“ 等于逻辑 ‘1’，“0V” 等价于逻辑 ‘0’，TTl电平规定高电平输出电压&gt;2.4V,低电平输出电压&lt;0.4V。  </li>
+</ul>
+<p>计算机串口使用的是RS232电平</p>
+<ul>
+<li>高电平：-12V</li>
+<li>低电平：+12V<br>单片机与计算机串口通信时需要使用电平转换芯片将RS232电平转化为TTL电平后单片机才能识别。  </li>
+</ul>
+<p>单片机最小系统能够运行起来的必要条件：</p>
+<ul>
+<li>电源</li>
+<li>晶振</li>
+<li>复位电路</li>
+</ul>
+<p>STC公司单片机命名规则：<br>STC89  XX  XX  35  X  XXXX  XX  </p>
+<ul>
+<li>工作电压：C：5.5V~ 3.8V &nbsp;&nbsp; LE:3.6V~ 3.4V or 3.4V~ 2.4V</li>
+<li>程序空间及RAM空间大小：&nbsp; 51是4K字节程序空间及512字节RAM空间；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;52是8k字节程序空间及512字节RAM空间；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;514是56字节程序空间及1280字节RAM空间；  </li>
+<li>工作频率： 35：工作频率可达到35MHZ。  </li>
+<li>工作温度范围： I: 工业级 -40°~ 85°<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C: 商业级 0°~ 70°</li>
+</ul>
+<h2 id="LED灯："><a href="#LED灯：" class="headerlink" title="LED灯："></a>LED灯：</h2><p>（点亮LED灯只需要控制IO口输出相应电平可以使电流经电路即可）  </p>
+<p>LED灯正负极判断：<br>（直插式LED灯）通常长脚为正极，短脚为负极。<br>（贴片式LED灯） 通常有绿点的一段为负极，另一端为正极。  </p>
+<p>LED工作参数：<br> 普通发光二极管工作压降为： 1.6V~ 2.1V<br> 普通二极管工作压降为： 0.7V<br> 工作电流： 1~ 20 mA<br> (二极管有压降，大约为2V左右)</p>
+<blockquote>
+<p>51点亮第一颗LED灯代码：  </p>
+</blockquote>
+<p> #include&lt;reg52.h&gt;  //引用51头文件</p>
+<p>sbit LED1 = P1^0;</p>
+<p>void main()<br>{<br>    LED1 = 0;<br>} </p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 7heng
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
