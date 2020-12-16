@@ -3,21 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>中断系统 | Heng</title>
+  <title>Heng</title>
 
   
   <meta name="author" content="7heng">
   
 
   
-  <meta name="description" content="复位电路：
-复位电路的两个功能：
-
-上电复位（程序在裕兴期间可能会存在执行到一半突然断电的情况，再上电时必须为零从新开始，否则可能会出现错误，因此需要上电复位）
-手动复位
-
-不运行程序的时候可以测试一下RST，如果处于高电平则是一直处于复位状态，用杜邦线将它接地即可开始运行。
-RST（RESET）是">
+  <meta name="description" content="中断系统：">
   
 
   
@@ -29,7 +22,7 @@ RST（RESET）是">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="中断系统"/>
+  
 
   <meta property="og:site_name" content="Heng"/>
 
@@ -66,7 +59,7 @@ RST（RESET）是">
 
   
     
-    <h3 class="article-title"><span>中断系统</span></h3>
+    <h3 class="article-title"><span></span></h3>
     
   
 
@@ -86,9 +79,9 @@ RST（RESET）是">
   <div class="article-content">
     <div class="entry">
       
-        <a id="more"></a>
+        <h1 id="中断系统："><a href="#中断系统：" class="headerlink" title="中断系统："></a>中断系统：</h1><a id="more"></a>
 
-<h4 id="复位电路："><a href="#复位电路：" class="headerlink" title="复位电路："></a>复位电路：</h4><p><img src="http://www.elecfans.com/uploads/allimg/180105/160R15593-0.jpg"></p>
+<h2 id="复位电路："><a href="#复位电路：" class="headerlink" title="复位电路："></a>复位电路：</h2><p><img src="http://www.elecfans.com/uploads/allimg/180105/160R15593-0.jpg"></p>
 <p>复位电路的两个功能：</p>
 <ul>
 <li>上电复位（程序在裕兴期间可能会存在执行到一半突然断电的情况，再上电时必须为零从新开始，否则可能会出现错误，因此需要上电复位）</li>
@@ -100,7 +93,7 @@ RST（RESET）是">
 <p>ECI：一个10μF的电容，当电容里电流每充满时，相当于断路状态，当电流充满，电流流经R2至地与RST（R2电阻限制流经ECI电容的电流大小，使得充电更为缓慢，当电容满时表现出通交隔直（通交流电隔直流电的状态）。因为电容充满电的状态大于两个时钟周期以上，所以RST会完成复位操作。电容充满电流不再流过，RST会通过R2流至地，变为0V，完成复位，开始正常工作。</p>
 <p>手动复位：</p>
 <p>按下S1按键，VCC经过R1通至RST两个机器周期的高电平，完成复位操作。</p>
-<h4 id="中断："><a href="#中断：" class="headerlink" title="中断："></a>中断：</h4><p>计算机执行某程序时，发生了紧急事件或有特殊请求，CPU暂停某程序的执行，转而去处理上述事件或请求，处理完毕后再重新执行某程序的运行过程叫做中断。</p>
+<h3 id="中断："><a href="#中断：" class="headerlink" title="中断："></a>中断：</h3><p>计算机执行某程序时，发生了紧急事件或有特殊请求，CPU暂停某程序的执行，转而去处理上述事件或请求，处理完毕后再重新执行某程序的运行过程叫做中断。</p>
 <p>中断分为四个步骤：</p>
 <ul>
 <li>中断请求–&gt;中断响应–&gt;中断处理–&gt;中断返回</li>

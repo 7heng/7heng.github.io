@@ -236,7 +236,7 @@
 
   
     
-    <h3 class="article-title"><a href="/2020/11/15/中断系统/"><span>中断系统</span></a></h3>
+    <h3 class="article-title"><a href="/2020/11/15/中断系统/"><span></span></a></h3>
     
   
 
@@ -256,71 +256,8 @@
   <div class="article-content">
     <div class="entry">
       
-        <a id="more"></a>
-
-<h4 id="复位电路："><a href="#复位电路：" class="headerlink" title="复位电路："></a>复位电路：</h4><p><img src="http://www.elecfans.com/uploads/allimg/180105/160R15593-0.jpg"></p>
-<p>复位电路的两个功能：</p>
-<ul>
-<li>上电复位（程序在裕兴期间可能会存在执行到一半突然断电的情况，再上电时必须为零从新开始，否则可能会出现错误，因此需要上电复位）</li>
-<li>手动复位</li>
-</ul>
-<p>不运行程序的时候可以测试一下RST，如果处于高电平则是一直处于复位状态，用杜邦线将它接地即可开始运行。</p>
-<p>RST（RESET）是复位信号输入端，当单片机运行时，在此引脚上持续两个机器周期的高电平时，就可以完成复位操作。</p>
-<p>上电复位：</p>
-<p>ECI：一个10μF的电容，当电容里电流每充满时，相当于断路状态，当电流充满，电流流经R2至地与RST（R2电阻限制流经ECI电容的电流大小，使得充电更为缓慢，当电容满时表现出通交隔直（通交流电隔直流电的状态）。因为电容充满电的状态大于两个时钟周期以上，所以RST会完成复位操作。电容充满电流不再流过，RST会通过R2流至地，变为0V，完成复位，开始正常工作。</p>
-<p>手动复位：</p>
-<p>按下S1按键，VCC经过R1通至RST两个机器周期的高电平，完成复位操作。</p>
-<h4 id="中断："><a href="#中断：" class="headerlink" title="中断："></a>中断：</h4><p>计算机执行某程序时，发生了紧急事件或有特殊请求，CPU暂停某程序的执行，转而去处理上述事件或请求，处理完毕后再重新执行某程序的运行过程叫做中断。</p>
-<p>中断分为四个步骤：</p>
-<ul>
-<li>中断请求–&gt;中断响应–&gt;中断处理–&gt;中断返回</li>
-</ul>
-<p>数据的输出/输出传送方式：</p>
-<ul>
-<li>无条件传送方式：一方对另一方来说总是准备好的。</li>
-<li>查询传输方式（Look up）：传送前一方先查询另一方的状态，若已准备好就传送，否则就继续查询/等待。</li>
-<li>中断传送方式（IRQ）：一方通过申请中断的方式与另一方进行数据传送。</li>
-<li>直接存储器存取方式（DMA）：双方直接通过总线传送数据，不经CPU中转。适用于数量大高速通讯的设备，不占用CPU时间。</li>
-</ul>
-<p>中断系统结构：</p>
-<p><img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1076873358,2154005421&fm=26&gp=0.jpg"></p>
-<h4 id="51子系列允许5个中断源："><a href="#51子系列允许5个中断源：" class="headerlink" title="51子系列允许5个中断源："></a>51子系列允许5个中断源：</h4><p>外部中断源（2个）：</p>
-<ul>
-<li>INTO—-由P3.2端口线引入，低电平或下降沿引起。</li>
-<li>INT1—-由P3.3端口线引入，低电平或下降沿引起。</li>
-</ul>
-<p>这两个外部中断源标志和它们的触发方式控制由特殊功能寄存器TCON的低4位控制。</p>
-<p>内部中断源（3个）：</p>
-<ul>
-<li>T0—-定时器/计数器0中断，由T0回零溢出引起。</li>
-<li>T1—-定时器/计数器1中断，由T1回零溢出引起。</li>
-<li>T1/R1—-串行中断i/O中断，串行端口完成一个帧字符发送/接收后引起。这3个内部中断源的控制分别锁存在特殊功能寄存器TCON和SCON中。</li>
-</ul>
-<h4 id="单片机同优先级中段内部查询顺序："><a href="#单片机同优先级中段内部查询顺序：" class="headerlink" title="单片机同优先级中段内部查询顺序："></a>单片机同优先级中段内部查询顺序：</h4><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;中断源&emsp;&emsp; &emsp;| &emsp;&emsp;中断级别</p>
-<p>&nbsp;&nbsp;外部中断0 &emsp;中断入口0&emsp;&emsp;&emsp;&emsp;&emsp;最高</p>
-<p>&nbsp;&nbsp;T0溢出中断&nbsp;&emsp;中断入口1</p>
-<p>&nbsp;&nbsp;外部中断0&emsp;中断入口2</p>
-<p>&nbsp;&nbsp;T1溢出中断&emsp;&nbsp;中断入口3</p>
-<p>&nbsp;&nbsp;串行口中断&emsp;中断入口4&emsp;&emsp;&emsp;&emsp;&emsp;最低</p>
-<h4 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h4><blockquote>
-<p>开总中断；</p>
-<p>开外部中断；</p>
-<p>中断触发条件（低电平或跳变沿）</p>
-</blockquote>
-<p>中断函数：</p>
-<blockquote>
-<p>void function(&emsp;)&emsp;interrupt 2 &emsp;&emsp;&emsp;//中断处理函数，加关键字interrupt和入口号</p>
-<p>{</p>
-<p>中断处理语句；</p>
-<p>}</p>
-</blockquote>
-<p>中断示例：</p>
-<blockquote>
-<p>//显示函数<br>void display()<br>{<br>    *<strong>****</strong><br>}</p>
-<p>//定时器0初始化<br>void timer0Init()<br>{<br>    EA = 1;  //开总中断<br>    ET0 = 1;  //开定时器0中断<br>    TR0 = 1;   //定时器0工作<br>    TMOD = 0x01;   //16位<br>    TH0 = 0x4b;<br>    TL0 = 0xfd;  //延时时间<br>}<br>//主函数<br>void main()<br>{<br>    timer0Init();<br>    <strong>****</strong><br>}</p>
-<p>//中断函数<br>void timor0() interrupt 1<br>{<br>    TH0 = 0x4b;<br>    TL0 = 0xfd;  //延时时间<br>    display();<br>} </p>
-</blockquote>
-
+        <h1 id="中断系统："><a href="#中断系统：" class="headerlink" title="中断系统："></a>中断系统：</h1>
+        
       
     </div>
 
@@ -606,7 +543,7 @@ delay(100);
 
   
     
-    <h3 class="article-title"><a href="/2020/11/09/STC89C51单片机/"><span>STC89C51</span></a></h3>
+    <h3 class="article-title"><a href="/2020/11/09/STC89C51单片机/"><span>初识51单片机</span></a></h3>
     
   
 
@@ -626,43 +563,8 @@ delay(100);
   <div class="article-content">
     <div class="entry">
       
-        <a id="more"></a>
-<p>例如：AT89S51、STC89C51、STC89C52、STC90C516等等这些单片机内核都为80C51，所以内核为80C51的单片机都属于51单片机。</p>
-<p>单片机是一种数字集成芯片，数字电路中只有两种电平：“高电平和低电平”  </p>
-<ul>
-<li>高电平： 5V  </li>
-<li>低电平： 0V<br>51单片机上电后默认全为高电平<br>51单片机大多数采用TTL电平，是因为通常数据表示采用二进制，”5V“ 等于逻辑 ‘1’，“0V” 等价于逻辑 ‘0’，TTl电平规定高电平输出电压&gt;2.4V,低电平输出电压&lt;0.4V。  </li>
-</ul>
-<p>计算机串口使用的是RS232电平</p>
-<ul>
-<li>高电平：-12V</li>
-<li>低电平：+12V<br>单片机与计算机串口通信时需要使用电平转换芯片将RS232电平转化为TTL电平后单片机才能识别。  </li>
-</ul>
-<p>单片机最小系统能够运行起来的必要条件：</p>
-<ul>
-<li>电源</li>
-<li>晶振</li>
-<li>复位电路</li>
-</ul>
-<p>STC公司单片机命名规则：<br>STC89  XX  XX  35  X  XXXX  XX  </p>
-<ul>
-<li>工作电压：C：5.5V~ 3.8V &nbsp;&nbsp; LE:3.6V~ 3.4V or 3.4V~ 2.4V</li>
-<li>程序空间及RAM空间大小：&nbsp; 51是4K字节程序空间及512字节RAM空间；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;52是8k字节程序空间及512字节RAM空间；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;514是56字节程序空间及1280字节RAM空间；  </li>
-<li>工作频率： 35：工作频率可达到35MHZ。  </li>
-<li>工作温度范围： I: 工业级 -40°~ 85°<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C: 商业级 0°~ 70°</li>
-</ul>
-<h2 id="LED灯："><a href="#LED灯：" class="headerlink" title="LED灯："></a>LED灯：</h2><p>（点亮LED灯只需要控制IO口输出相应电平可以使电流经电路即可）  </p>
-<p>LED灯正负极判断：  </p>
-<p>（直插式LED灯）通常长脚为正极，短脚为负极。<br>（贴片式LED灯） 通常有绿点的一段为负极，另一端为正极。  </p>
-<p>LED工作参数：  </p>
-<p> 普通发光二极管工作压降为： 1.6V~ 2.1V<br> 普通二极管工作压降为： 0.7V<br> 工作电流： 1~ 20 mA<br> (二极管有压降，大约为2V左右)</p>
-<blockquote>
-<p>51点亮第一颗LED灯代码：  </p>
-</blockquote>
-<p> #include&lt;reg52.h&gt;  //引用51头文件</p>
-<p>sbit LED1 = P1^0;</p>
-<p>void main()<br>{<br>    LED1 = 0;<br>} </p>
-
+        <h1 id=""><a href="#" class="headerlink" title=""></a></h1>
+        
       
     </div>
 
