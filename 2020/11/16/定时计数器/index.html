@@ -10,7 +10,9 @@
   
 
   
-  <meta name="description" content="定时/计数器：">
+  <meta name="description" content="51单片机有2个16位定时器/计数器：定时器0和定时器1。
+这里所说的16位是指定时/计数器内部分别有16位的计数寄存器。
+当工作在定时模式时，每经过一个机器周期的内部的16位计数寄存器的值就会加1，当这个寄存器装满时溢出。我们可以算出工作在定时模式时最高单次定时时间为65535×1.085μS=时">
   
 
   
@@ -79,7 +81,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <h2 id="定时-计数器："><a href="#定时-计数器：" class="headerlink" title="定时/计数器："></a>定时/计数器：</h2><a id="more"></a>
+        <a id="more"></a>
 
 <p>51单片机有2个16位定时器/计数器：定时器0和定时器1。</p>
 <p>这里所说的16位是指定时/计数器内部分别有16位的计数寄存器。</p>
@@ -94,7 +96,7 @@
 <li>设置定时/计数器（通过TMOD控制器）</li>
 <li>查询定时/计数器是否溢出（读TCON内TF位）</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/7heng/BlogPr/master/img/20201205134016.png"></p>
+<p><img src="/images/Time/0.png"></p>
 <p>计数器：每来一个脉冲计数寄存器加1。一个高电平一个低电平形成一个脉冲。</p>
 <p>TMOD控制器中C/T位为功能选择位：为0时为定时器，为1时为计数器。</p>
 <blockquote>
