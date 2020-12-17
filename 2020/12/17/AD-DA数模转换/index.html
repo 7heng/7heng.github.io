@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>AD/DA数模转换 | Heng</title>
+
+  
+  <meta name="author" content="7heng">
+  
+
+  
+  <meta name="description" content="">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="AD/DA数模转换"/>
+
+  <meta property="og:site_name" content="Heng"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Heng</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>AD/DA数模转换</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/12/17/AD-DA数模转换/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-12-17T09:30:42.000Z">
+          2020-12-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id=""><a href="#" class="headerlink" title=""></a></h1><a id="more"></a>
+
+<h3 id="1：分辨率"><a href="#1：分辨率" class="headerlink" title="1：分辨率"></a>1：分辨率</h3><p>​    ADC的分辨率是指使输出数字量变化一个相邻数码所需要输入模拟电压的变化量。常用二进制的位数表示。例如12位ADC的分辨率就是12位。或者说，分辨率为满刻度 FS 的  1/2的12次方，一个10V满刻度的12位ADC能分辨输入电压变化最小值是 10V × (1/2的12次方) ≈ 2.4mv</p>
+<p><strong>分辨率越高，价格越贵，适用于精度较高物体，反之亦然</strong>。</p>
+<h3 id="2：量化误差"><a href="#2：量化误差" class="headerlink" title="2：量化误差"></a>2：量化误差</h3><p>​    ADC把模拟量变为数字量，用数字量近似表示模拟量，这个过程称为量化。</p>
+<p>​    <strong>量化误差是ADC的有限位数对模拟量进行量化而引起的误差</strong>。</p>
+<h3 id="3：偏移误差"><a href="#3：偏移误差" class="headerlink" title="3：偏移误差"></a>3：偏移误差</h3><p>​    偏移误差是指输入信号为零时，输出信号不为零的值，所以有时又称为零值误差。假定ADC没有非线性误差，则其转换特性曲线各阶段中点的连线必须是直线，这条直线与横轴相交点所对应的输入电压值就是偏移误差。</p>
+<h3 id="4：满刻度误差"><a href="#4：满刻度误差" class="headerlink" title="4：满刻度误差"></a>4：满刻度误差</h3><p>​    满刻度误差又称为增益误差。ADC的满刻度误差是指满刻度输出数码所对应的实际输入电压与理想输入电压之差。</p>
+<h3 id="5：线性度"><a href="#5：线性度" class="headerlink" title="5：线性度"></a>5：线性度</h3><p>​    线性度有时又称为非线性度，它是指转换器实际的转换特性与理想直线的最大偏差。</p>
+<h3 id="6：绝对精度"><a href="#6：绝对精度" class="headerlink" title="6：绝对精度"></a>6：绝对精度</h3><p>​    在一个转换器中，任何数码所对应的实际模拟量输入与理论模拟输入之差的最大值，称为<strong>绝对精度</strong>。对于ADC而言，可以在一个阶梯的水平中点进行测量，它包括了所有的误差。</p>
+<h3 id="7：转换速率"><a href="#7：转换速率" class="headerlink" title="7：转换速率"></a>7：转换速率</h3><p>​    ADC的转换速率是能够重复进行数据转换的速度，即每秒转换的次数。而完成每一次 A/D 转换所需的时间(包括稳定时间)，则是转换速率的倒数。</p>
+<h2 id="AD的差分输入与单端输入："><a href="#AD的差分输入与单端输入：" class="headerlink" title="AD的差分输入与单端输入："></a>AD的差分输入与单端输入：</h2><p>​    单端输入，输入信号均以共同的地线为基准，这种输入方法主要应用于输入信号电压较高 (高于1V),信号源到模拟输入硬件的导线较短，且所有的输入信号共用一个基准地线，<strong>如果信号达不到这些标准，此时应该用差分输入</strong>。对于差分输入每一个输入信号都有自有的基准地线；由于共模噪声可以被导线所消除，从而减小了噪声误差。</p>
+<p>​    <strong>单端输入时，时判断信号与GND的电压差；差分输入时，是判断两个信号线的电压差</strong>。</p>
+<p>​    信号受干扰时，差分的两线会同时受影响，但电压差变化不大，(抗干扰性较佳) 而单端输入的一线变化时，GND不变，所以电压差变化较大（抗干扰性较差）</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 7heng
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
