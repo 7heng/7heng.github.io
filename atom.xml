@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Heng</title>
+  
+  
+  <link href="https://7heng.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://7heng.github.io/"/>
+  <updated>2021-01-16T11:17:48.626Z</updated>
+  <id>https://7heng.github.io/</id>
+  
+  <author>
+    <name>7heng</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>编码</title>
+    <link href="https://7heng.github.io/2021/01/16/%E7%BC%96%E7%A0%81/"/>
+    <id>https://7heng.github.io/2021/01/16/%E7%BC%96%E7%A0%81/</id>
+    <published>2021-01-16T10:32:15.000Z</published>
+    <updated>2021-01-16T11:17:48.626Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="BCD码："><a href="#BCD码：" class="headerlink" title="BCD码："></a>BCD码：</h1><p>4个二进制位 (4bit) —-&gt; 1个十进制位，又因为4个二进制位有2的4次方种状态，也就是16种状态。</p><p>16种状态足够表示十进制的0~9，并且还有6种冗余。</p><h2 id="8421码："><a href="#8421码：" class="headerlink" title="8421码："></a>8421码：</h2><p>8421码的映射关系：</p><table><thead><tr><th align="center">0</th><th align="center">1</th><th align="center">2</th><th align="center">3</th><th align="center">4</th><th align="center">5</th><th align="center">6</th><th align="center">7</th><th align="center">8</th><th align="center">9</th></tr></thead><tbody><tr><td align="center">0000</td><td align="center">0001</td><td align="center">0010</td><td align="center">0011</td><td align="center">0100</td><td align="center">0101</td><td align="center">0110</td><td align="center">0111</td><td align="center">1000</td><td align="center">1001</td></tr></tbody></table><p>8421码在计算机中进行加法运算：</p><p>​    十进制：    5    +    8    =13</p><p>​    8421码：    0101    +    1000    =1101</p><p>​    因为1101不再映射表里，所以需要加上冗余的6，也就是0110</p><p>​    所以1101+0110=1 0011</p><p>​    0011在映射表里为3，在高位的1前面补0为0001</p><p>​    所以0001 0011在映射表里为13</p><p><strong>注：若相加结果在合法范围内，则无需修正</strong>。（因为8421码的二进制位的权值是固定不变的8421，所以8421码也成为<strong>有权码</strong>）</p><h2 id="余3码："><a href="#余3码：" class="headerlink" title="余3码："></a>余3码：</h2><p>余3码映射表：( 8421码 + 0011 (二进制) )</p><table><thead><tr><th align="center">0</th><th align="center">1</th><th align="center">2</th><th align="center">3</th><th align="center">4</th><th align="center">5</th><th align="center">6</th><th align="center">7</th><th align="center">8</th><th align="center">9</th></tr></thead><tbody><tr><td align="center">0011</td><td align="center">0100</td><td align="center">0101</td><td align="center">0110</td><td align="center">0111</td><td align="center">1000</td><td align="center">1001</td><td align="center">1010</td><td align="center">1011</td><td align="center">1100</td></tr></tbody></table><ul><li>余3码的四个二进制每一个二进制没有固定的权值，所以余3码也成为<strong>无权码</strong></li></ul><h2 id="2421码："><a href="#2421码：" class="headerlink" title="2421码："></a>2421码：</h2><p>2421码映射表：(与8421码不同是改变了权值的定义)</p><table><thead><tr><th align="center">0</th><th align="center">1</th><th align="center">2</th><th align="center">3</th><th align="center">4</th><th align="center">5</th><th align="center">6</th><th align="center">7</th><th align="center">8</th><th align="center">9</th></tr></thead><tbody><tr><td align="center">0000</td><td align="center">0001</td><td align="center">0010</td><td align="center">0011</td><td align="center">0100</td><td align="center">1011</td><td align="center">1100</td><td align="center">1101</td><td align="center">1110</td><td align="center">1111</td></tr></tbody></table><ul><li><p>2421码的二进制权值是固定的2421，也是<strong>有权码</strong></p></li><li><p>对于2421码来说，0<del>4范围内所有数字编码的第一位都为0，5</del>9范围内所有的数字编码的第一位都为1</p></li><li><p>上述的规定第一位是为了避免歧义，例如5可以表示为0101或1011，但规定了数字编码的第一位后就不会存在歧义。</p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;&lt;/h1&gt;&lt;h1 id=&quot;BCD码：&quot;&gt;&lt;a href=&quot;#BCD码：&quot; class=&quot;headerlink&quot; title=&quot;BCD码：&quot;&gt;&lt;/a&gt;BCD码：&lt;/h1&gt;&lt;p</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>AD/DA数模转换</title>
+    <link href="https://7heng.github.io/2020/12/17/AD-DA%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2/"/>
+    <id>https://7heng.github.io/2020/12/17/AD-DA%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2/</id>
+    <published>2020-12-17T09:30:42.000Z</published>
+    <updated>2020-12-17T09:54:46.117Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1><a id="more"></a><h3 id="1：分辨率"><a href="#1：分辨率" class="headerlink" title="1：分辨率"></a>1：分辨率</h3><p>​    ADC的分辨率是指使输出数字量变化一个相邻数码所需要输入模拟电压的变化量。常用二进制的位数表示。例如12位ADC的分辨率就是12位。或者说，分辨率为满刻度 FS 的  1/2的12次方，一个10V满刻度的12位ADC能分辨输入电压变化最小值是 10V × (1/2的12次方) ≈ 2.4mv</p><p><strong>分辨率越高，价格越贵，适用于精度较高物体，反之亦然</strong>。</p><h3 id="2：量化误差"><a href="#2：量化误差" class="headerlink" title="2：量化误差"></a>2：量化误差</h3><p>​    ADC把模拟量变为数字量，用数字量近似表示模拟量，这个过程称为量化。</p><p>​    <strong>量化误差是ADC的有限位数对模拟量进行量化而引起的误差</strong>。</p><h3 id="3：偏移误差"><a href="#3：偏移误差" class="headerlink" title="3：偏移误差"></a>3：偏移误差</h3><p>​    偏移误差是指输入信号为零时，输出信号不为零的值，所以有时又称为零值误差。假定ADC没有非线性误差，则其转换特性曲线各阶段中点的连线必须是直线，这条直线与横轴相交点所对应的输入电压值就是偏移误差。</p><h3 id="4：满刻度误差"><a href="#4：满刻度误差" class="headerlink" title="4：满刻度误差"></a>4：满刻度误差</h3><p>​    满刻度误差又称为增益误差。ADC的满刻度误差是指满刻度输出数码所对应的实际输入电压与理想输入电压之差。</p><h3 id="5：线性度"><a href="#5：线性度" class="headerlink" title="5：线性度"></a>5：线性度</h3><p>​    线性度有时又称为非线性度，它是指转换器实际的转换特性与理想直线的最大偏差。</p><h3 id="6：绝对精度"><a href="#6：绝对精度" class="headerlink" title="6：绝对精度"></a>6：绝对精度</h3><p>​    在一个转换器中，任何数码所对应的实际模拟量输入与理论模拟输入之差的最大值，称为<strong>绝对精度</strong>。对于ADC而言，可以在一个阶梯的水平中点进行测量，它包括了所有的误差。</p><h3 id="7：转换速率"><a href="#7：转换速率" class="headerlink" title="7：转换速率"></a>7：转换速率</h3><p>​    ADC的转换速率是能够重复进行数据转换的速度，即每秒转换的次数。而完成每一次 A/D 转换所需的时间(包括稳定时间)，则是转换速率的倒数。</p><h2 id="AD的差分输入与单端输入："><a href="#AD的差分输入与单端输入：" class="headerlink" title="AD的差分输入与单端输入："></a>AD的差分输入与单端输入：</h2><p>​    单端输入，输入信号均以共同的地线为基准，这种输入方法主要应用于输入信号电压较高 (高于1V),信号源到模拟输入硬件的导线较短，且所有的输入信号共用一个基准地线，<strong>如果信号达不到这些标准，此时应该用差分输入</strong>。对于差分输入每一个输入信号都有自有的基准地线；由于共模噪声可以被导线所消除，从而减小了噪声误差。</p><p>​    <strong>单端输入时，时判断信号与GND的电压差；差分输入时，是判断两个信号线的电压差</strong>。</p><p>​    信号受干扰时，差分的两线会同时受影响，但电压差变化不大，(抗干扰性较佳) 而单端输入的一线变化时，GND不变，所以电压差变化较大（抗干扰性较差）</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;&lt;/h1&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>IIC总线</title>
+    <link href="https://7heng.github.io/2020/12/17/IIC%E6%80%BB%E7%BA%BF/"/>
+    <id>https://7heng.github.io/2020/12/17/IIC%E6%80%BB%E7%BA%BF/</id>
+    <published>2020-12-17T09:27:51.000Z</published>
+    <updated>2020-12-17T09:56:26.008Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1><a id="more"></a><h2 id="常用的串行总线协议："><a href="#常用的串行总线协议：" class="headerlink" title="常用的串行总线协议："></a>常用的串行总线协议：</h2><p>目前常用的微机与外设之间进行数据传输的串行总线主要有：UART、1-Wire、IIC和SPI总线。</p><p>​    UART：是以异步方式进行通信（一条数据输入线，一条数据输出线）</p><p>​    1-wire：即单线总线，又叫单总线（只有一条线）</p><p>​    IIC：同步串行2线方式进行通信（一条时钟线，一条数据线）</p><p>​    SPI：同步串行3线方式进行通信（一条时钟线，一条数据据输入线，一条数据输出线）</p><h3 id="I²C串行总线的组成及工作原理："><a href="#I²C串行总线的组成及工作原理：" class="headerlink" title="I²C串行总线的组成及工作原理："></a>I²C串行总线的组成及工作原理：</h3><p>​    I²C总线是PHLIPS公司推出的一种<strong>串行总线</strong>，它只有<strong>两</strong>根双向信号线。一根是数据线SDA(Serial data I/o口)，另一根是时钟线SCL(Serial clock)</p><p>​    I²C总线上可以挂多个器件，而每个器件都有<strong>唯一的地址</strong>，这样可以标识通信目标。数据的通信的方式采用<strong>主从</strong>方式，主机负责主动联系从机，而从机则被动回应数据(从机无法主动发数据给主机，也无法主动向主机读取数据)</p><p><img src="/images/IIC/8.png"></p><p>在多主机系统中，可能同时有几个主机企图启动总线传送数据。为了避免混乱，I²C总线要通过总线仲裁，以决定由哪一台主机控制总线。</p><p>在80C51单片机应用系统的串行总线扩展中，我们经常遇到的是以80C51单片机为主机，其它接口为从机的主机情况。</p><p>I²C总线通过上拉电阻接正电源。当总线空闲时，两根线均为高电平。连接到总线上的任一器件输出的低电平，都将使总线的信号变低，即各器件的SDA及SCL都是<strong>线“与”关系</strong>。</p><h2 id="I²C总线传输协议："><a href="#I²C总线传输协议：" class="headerlink" title="I²C总线传输协议："></a>I²C总线传输协议：</h2><h3 id="数据位的有效性规定："><a href="#数据位的有效性规定：" class="headerlink" title="数据位的有效性规定："></a>数据位的有效性规定：</h3><p>​    SCL为高电平期间，数据线上的数据必须保持稳定，只有SCL信号为低电平期间，SDA的状态才允许变化。</p><p>​    <strong>I²C的起始信号和终止信号</strong>(起始信号和终止信号不受有效性规定)：</p><p>​    SCL为高电平期间，SDA线由高电平向低电平的变化表示起始信号；SCL为高电平期间，SDA线由低电平向高电平的变化表示终止信号(<strong>起始信号和终止信号由主机进行</strong>)</p><p><strong>当单片机不使用时钟线或数据线的时候，要进行释放，SCL(时钟线)在外同步中始终是由单片机去控制的，SDA(数据线)在不使用时需要进行释放(手动/程序)</strong></p><p>起始和终止信号都是由主机发出的，在起始信号产生后，主机就处于被占用的状态；在终止信号产生后，总线就属于空闲状态。</p><p>连接到I²C总线上的器件，若具有I²C总线的硬件接口，则很容易检测到起始和终止信号。</p><h3 id="从机内部的操作："><a href="#从机内部的操作：" class="headerlink" title="从机内部的操作："></a>从机内部的操作：</h3><p>​    接收器件收到一个完整的数据字节后，有可能需要完成一些其它工作，如处理内部中断服务等，可能无法立刻接收下一字节，这时接收器件可以将SCL线拉成低电平，从而使主机处于等待状态。直到接收器件准备好接收下一个字节时，再释放SCL线使之为高电平，从而使数据传送可以继续进行。</p><p><strong>I²C字节的传送与应答：</strong>每一个字节必须保证是8位长度，数据传送时，先传送最高位(MSB),每一个被传送的字节后面都必须跟随一位应答位(即一帧共有9位)</p><p><strong>应答位的作用：</strong>主机在发送数据时，每次发送一字节数据都需要读取从机应答位，当从机空闲时可以接收该字节数据时，从机会发出应答(一帧数据的第9位为 ‘ 0 ’),当主机正忙于其它工作的处理来不及接收主机发送的数据时，从机会发出非应答(一帧数据的第9位为 ‘ 1 ’)主机则应发出终止信号以结束数据的继续传送，主机通过从机发出的应答来判断从机是否成功接收数据。</p><p>当主机接收数据时，它收到最后一个数据字节后，必须向从机发出一个结束传送的信号，这个信号是由对从机的 “ 非应答 ” 来实现的。然后，从机释放SDA线，以允许主机产生终止信号。</p><h2 id="数据帧格式："><a href="#数据帧格式：" class="headerlink" title="数据帧格式："></a>数据帧格式：</h2><p>​    <strong>I²C总线上传送的数据信号是广义的，即包括地址信号，又包括真正的数据信号</strong>。</p><p>​    在起始信号后必须传送一个从机的地址(7位)，第8位是数据的传送方向位( R/T )，用 ‘ 0 ’ 表示主机发送数据(T)，“ 1 ” 表示主机接收数据(R)，<strong>每次数据传送总是由主机产生的终止信号结束</strong>。但是，**若主机希望继续占用总线进行新的数据传送。则可以不产生终止信号，马上再次发出起始信号对另一从机进行寻址 (多机通信)**。</p><p>在总线的一次数据传送过程中，可以有以下几种组合方式：</p><p>1：主机向从机发送数据，数据传送方向在整个传送过程中不变。<br><img src="/images/IIC/1.png"></p><p>2：主机在第一个字节后，立即从从机读取数据<br><img src="/images/IIC/2.png"></p><p>3：在传送过程中，当需要改变传送方向时，起始信号和从机地址都被重复产生一次，但两次读/写方向位正好反向<br><img src="/images/IIC/3.png"></p><p><strong>总线的寻址</strong>：</p><p>​    I²C总线协议有明确的规定：<strong>采用7位的寻址字节(寻址字节是起始信号后的第一个字节)</strong></p><p>​    (1)<strong>寻址字节的位定义</strong>：</p><p>​    </p><table><thead><tr><th>位</th><th align="center">7   6   5   4   3   2   1</th><th>0</th></tr></thead><tbody><tr><td></td><td align="center">从机地址</td><td>R/W</td></tr></tbody></table><p>D7~D1位组成从机的地址。D0位是数据传送的方向位，为 ‘ 0 ‘ 时表示主机向从机写数据。为 ‘ 1 ’ 时表示主机由从机读数据。</p><p><strong>主机发送</strong>地址时，总线上的每个从机都将这7位地址码与自己的地址进行比较，如果相同，则认为自己正被主机寻址，根据 R/T 位将自己确定为发送器或接收器。</p><p><strong>从机的地址</strong>由固定部分和可编程的部分组成。在一个系统中可能希望接入多个相同的从机主机地址中可编程部分决定了可接入总线该类器件的最大数目。如果一个从机的7位寻址位有4位是固定位，3位是可编程位，这时仅能寻址8个同样的器件，即可以有8个同样的器件介入到该 I²C 总线系统中。</p><p>​    </p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;&lt;/h1&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>串口通信</title>
+    <link href="https://7heng.github.io/2020/11/25/%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/"/>
+    <id>https://7heng.github.io/2020/11/25/%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/</id>
+    <published>2020-11-25T12:42:44.000Z</published>
+    <updated>2020-12-16T12:06:21.828Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1><a id="more"></a><p>通信有串行通信和并行通信两种方式。在多微机系统以及现代测控系统中信息的交换多采用串行通信方式。</p><p><strong>并行通信：</strong>通常是将数据字节的各位用多条数据线同时进行传送。</p><ul><li>优点：控制简单、传输数据快。</li><li>缺点：由于传输线较多，长距离传送时成本高且接收方的各位同时接收存在困难。</li></ul><p><img src="/images/Com/1.png"></p><p><strong>串行通信：</strong>使用一条数据线，将数据一位一位地依次传输，每一位数据占据一个固定的时间长度。只需要少数几条线就可以在系统间交换信息，特别适用于计算机与计算机，计算机与外设直间的远距离通信。</p><ul><li>优点：传输线少，长距离传送时成本低。</li><li>缺点：数据的传送控制比并行通信复杂。</li></ul><p><img src="/images/Com/2.png"></p><p>串行通信又可分为<strong>异步通信</strong>和<strong>同步通信</strong>。</p><p>异步通信是以字符<strong>（构成的帧）</strong>为单位，进行传输，字符与字符之间的间隙<strong>（时间间隔）</strong>是任意的，但每个字符中的各位是以固定的时间传送的，即字符之间不一定有“ 位间隔 ”的整数倍的关系，<strong>但同一字符内的各位之间的距离均为“  位间隔 ”的整数倍。</strong></p><p><img src="/images/Com/3.png"></p><p><strong>异步通信</strong>是一种很常用的通信方式（效率较低），异步通信在发送字符时，发送端可以在任意时刻开始发送字符，因此必须在每一个字符的开始和结束的地方加上标志，即加上开始位和停止位，以便使接收端能够正确地将每一个字符接受下来。所传送地数据以字节为单位。每个字节前加上一位起始位，每个字节后面加上停止位。&emsp;&emsp;优点：异步通信地好处是通信设备简单、便宜，但传输效率较低。</p><p><strong>同步通信：</strong></p><p>同步通信时要建立发送发时钟对接收方时钟地直接控制，使双方达到完全同步。此时，传输数据的位之间的距离均为“ 位间隔  ”的整数倍，同时传送的字符间不留间隙，即<strong>保持同步</strong>关系，也<strong>保持字符同步关系</strong>。发送发对接收方的同步可以通过两种方法实现。</p><h4 id="传输速率："><a href="#传输速率：" class="headerlink" title="传输速率："></a>传输速率：</h4><p>比特率是<strong>每秒钟传输二进制代码的位数</strong>。单位是：位/秒（bps）。如每秒中传送240个字符，而每个字符格式包含10位（1个起始位，1个终止位，8个数据位）这时的比特率为：</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>10位 × 240个/秒 = 2400 bps</strong></p><p><strong>传输距离与传输速率的关系：</strong></p><p>串行接口或终端直接传送串行信息位流的最大距离与传输速率及传输线的<strong>电气特性</strong>有关。当传输线使用每0.3m（约1英尺）有50PF的电容的非平衡屏蔽双绞线时，<strong>传输距离随传输速率的增加而减小</strong>。<strong>当比特率超过1000bps时，最大传输距离迅速下降，如9600bps时最大距离下降到只有76m（约250英尺）</strong>。</p><p><strong>采用RS-232C接口存在的问题（电气特性）：</strong></p><ol><li><p><strong>传输距离短、传输效率低</strong>：</p><p>&emsp;&emsp;RS-232C总线标准受电容允许值的约束，使用时传输距离一般不要超过15米（线路条件好时也不要超过几十米）。最高传送速率为20kpbs。</p><p>&emsp;&emsp;<strong>双绞线会形成分布电容，又叫寄生电容，受电气特性自动产生</strong>，因为在三极管和场效应管会自动产生，所以会影响开通与关断的速度。</p><p>&emsp;&emsp;<strong>电容：两个导体产生，与两个导体间的距离成反比，与导体的面积成正比</strong>。</p></li><li><p><strong>有电平偏移</strong>：</p><p>&emsp;&emsp;RS-232C总线标准要求收发双方共地。通信距离较大时，收发双方的地电位差别较大。在信号地上将有比较大的地电流并产生压降。</p></li><li><p><strong>抗干扰能力差</strong>：</p><p>&emsp;&emsp;RS-232C在电平转换时采用单端输入输出，在传输过程中当干扰和噪声混在正常的信号中，为了提高信噪比，RS-232C总线标准不得不采用比较大的电压和摆幅。</p></li></ol><p><strong>SBUF：</strong></p><p>&emsp;&emsp;在逻辑上，SBUF只有一个，它即表示发送寄存器，又表示接收寄存器，具有同一个单元地址99H。但在物理结构上，则有两个完全独立的SBUF，一个是发送缓冲寄存器SBUF，另一个是接收缓冲寄存器SBUF。如果<strong>CPU写SBUF</strong>，数据就会被送入<strong>发送寄存器</strong>准备发送；如果<strong>CPU读SBUF</strong>，则读入的数据一定<strong>来自接收缓冲器</strong>。即CPU对SBUF的读写，实际上是分别对访问上述两个不同的寄存器。</p><p><strong>（收） a = SBUF;</strong>&emsp;&emsp;&emsp;<strong>（发）SBUF =a;</strong></p><h4 id="串行口工作前需要对相关寄存器进行配置，设定其工作模式："><a href="#串行口工作前需要对相关寄存器进行配置，设定其工作模式：" class="headerlink" title="串行口工作前需要对相关寄存器进行配置，设定其工作模式："></a>串行口工作前需要对相关寄存器进行配置，设定其工作模式：</h4><p><img src="/images/Com/4.png"></p><ol><li>设定T1的<strong>工作方式</strong>（编程TMOD寄存器）；</li><li>计算T1的初值，装载TH1、TL1；</li><li>启动T1（编程TCON中的TR1位）；</li><li>确定<strong>串行口控制</strong>（编程SCON寄存器）；</li><li>如需串行口在中断方式工作时，需进行中断设置编程IE寄存器。</li></ol><p><img src="/images/Com/5.png"></p><p>当T1作为波特率发生器时，最典型的用法是<strong>使T1工作在自动再装入</strong>的<strong>8位定时器方式（即方式2，且TCON的 TR1 = 1，以启动定时器）。</strong>这时溢出率取决于TH1中的计数值。</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>T1 溢出率 = fosc / { 12 × [ 256 - (TH1) ] }</strong></p><p><img src="/images/Com/6.png"></p><p><img src="/images/Com/7.png"></p><p><strong>fosc:外部晶振（11.0595）</strong></p><p><strong>自动再装：TL1、TH1的赋值。 TL1从初值开始加，加到255溢出后，会自动取TH1的初值。</strong></p><p><strong>产生波特率误差要为0，不能有误差！</strong></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;&lt;/h1&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>定时器/计数器</title>
+    <link href="https://7heng.github.io/2020/11/16/%E5%AE%9A%E6%97%B6%E8%AE%A1%E6%95%B0%E5%99%A8/"/>
+    <id>https://7heng.github.io/2020/11/16/%E5%AE%9A%E6%97%B6%E8%AE%A1%E6%95%B0%E5%99%A8/</id>
+    <published>2020-11-16T11:55:51.000Z</published>
+    <updated>2020-12-16T12:06:35.648Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1><a id="more"></a><p>51单片机有2个16位定时器/计数器：定时器0和定时器1。</p><p>这里所说的16位是指定时/计数器内部分别有16位的计数寄存器。</p><p>当工作在定时模式时，每经过一个机器周期的内部的16位计数寄存器的值就会加1，当这个寄存器装满时溢出。我们可以算出工作在定时模式时最高单次定时时间为65535×1.085μS=时间（单位μS）</p><p>当工作在技术器模式时，T0，T1每来一个脉冲计数寄存器加1。</p><p>65535： 16位的计数寄存器，最大为16个1，也就是65535。</p><p>最大定时： 65535×1.085=71105.475μS≈71.1mS</p><p>时钟周期：以11.0592MHZ为例，假如51单片机的时钟为11.0592MHZ，除以12后得到每秒执行的指令个数为条指令，取倒数将得到执行每条指令所需时间为1.085μS(一个周期)</p><h4 id="定时器作用："><a href="#定时器作用：" class="headerlink" title="定时器作用："></a>定时器作用：</h4><p>定时计数器可以用于精确事件定时，PWM脉宽调制，波形发生，信号时序测量的方面。</p><h4 id="使用51定时-技术器步骤："><a href="#使用51定时-技术器步骤：" class="headerlink" title="使用51定时/技术器步骤："></a>使用51定时/技术器步骤：</h4><ul><li>启动定时/计数器（通过TCON控制器）</li><li>设置定时/计数器（通过TMOD控制器）</li><li>查询定时/计数器是否溢出（读TCON内TF位）</li></ul><p><img src="/images/Time/0.png"></p><p>计数器：每来一个脉冲计数寄存器加1。一个高电平一个低电平形成一个脉冲。</p><p>TMOD控制器中C/T位为功能选择位：为0时为定时器，为1时为计数器。</p><blockquote><p>定时器举例：</p><p>TR0 = 1; &emsp;&emsp;&emsp;&emsp;// 定时器0工作</p><p>TMOD - 0X01;&emsp;&emsp;&emsp;&emsp;// 16位定时器/计数器</p><p>TH0 = 0X4B;   &emsp;&emsp;&emsp;&emsp;// (65535-46082) / 256 &emsp;&emsp; 高位赋值</p><p>TL0 = 0XFD;&emsp;&emsp;&emsp;&emsp;// (65535-46082）% 256&emsp;&emsp;低位赋值</p><p>if(TF0 == 1)&emsp;&emsp;&emsp;&emsp;&emsp;// 加满产生溢出;不用中断响应的情况下要软件清0。”置 ”1“ 为硬件置 “1” “</p></blockquote><p>例如：</p><p> &emsp;定时50毫秒（mS）= 50000 微秒(μS)&emsp;&emsp;//因为执行计数的加1为微秒级</p><p> &emsp;50000÷1.085≈46082；</p><p> &emsp;65535-46082 = 初值；</p><ul><li>如果同时使用定时器计数器，都需要对同一个寄存位赋值时，可以用 |=（或等于）符号，相当于两个值进行求和，这样可以同时利用定时器和计数器。</li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;&lt;/h1&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>中断系统</title>
+    <link href="https://7heng.github.io/2020/11/15/%E4%B8%AD%E6%96%AD%E7%B3%BB%E7%BB%9F/"/>
+    <id>https://7heng.github.io/2020/11/15/%E4%B8%AD%E6%96%AD%E7%B3%BB%E7%BB%9F/</id>
+    <published>2020-11-15T12:30:29.000Z</published>
+    <updated>2020-12-16T12:07:44.337Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1><a id="more"></a><h2 id="复位电路："><a href="#复位电路：" class="headerlink" title="复位电路："></a>复位电路：</h2><p><img src="http://www.elecfans.com/uploads/allimg/180105/160R15593-0.jpg"></p><p>复位电路的两个功能：</p><ul><li>上电复位（程序在裕兴期间可能会存在执行到一半突然断电的情况，再上电时必须为零从新开始，否则可能会出现错误，因此需要上电复位）</li><li>手动复位</li></ul><p>不运行程序的时候可以测试一下RST，如果处于高电平则是一直处于复位状态，用杜邦线将它接地即可开始运行。</p><p>RST（RESET）是复位信号输入端，当单片机运行时，在此引脚上持续两个机器周期的高电平时，就可以完成复位操作。</p><p>上电复位：</p><p>ECI：一个10μF的电容，当电容里电流每充满时，相当于断路状态，当电流充满，电流流经R2至地与RST（R2电阻限制流经ECI电容的电流大小，使得充电更为缓慢，当电容满时表现出通交隔直（通交流电隔直流电的状态）。因为电容充满电的状态大于两个时钟周期以上，所以RST会完成复位操作。电容充满电流不再流过，RST会通过R2流至地，变为0V，完成复位，开始正常工作。</p><p>手动复位：</p><p>按下S1按键，VCC经过R1通至RST两个机器周期的高电平，完成复位操作。</p><h3 id="中断："><a href="#中断：" class="headerlink" title="中断："></a>中断：</h3><p>计算机执行某程序时，发生了紧急事件或有特殊请求，CPU暂停某程序的执行，转而去处理上述事件或请求，处理完毕后再重新执行某程序的运行过程叫做中断。</p><p>中断分为四个步骤：</p><ul><li>中断请求–&gt;中断响应–&gt;中断处理–&gt;中断返回</li></ul><p>数据的输出/输出传送方式：</p><ul><li>无条件传送方式：一方对另一方来说总是准备好的。</li><li>查询传输方式（Look up）：传送前一方先查询另一方的状态，若已准备好就传送，否则就继续查询/等待。</li><li>中断传送方式（IRQ）：一方通过申请中断的方式与另一方进行数据传送。</li><li>直接存储器存取方式（DMA）：双方直接通过总线传送数据，不经CPU中转。适用于数量大高速通讯的设备，不占用CPU时间。</li></ul><p>中断系统结构：</p><p><img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1076873358,2154005421&fm=26&gp=0.jpg"></p><h4 id="51子系列允许5个中断源："><a href="#51子系列允许5个中断源：" class="headerlink" title="51子系列允许5个中断源："></a>51子系列允许5个中断源：</h4><p>外部中断源（2个）：</p><ul><li>INTO—-由P3.2端口线引入，低电平或下降沿引起。</li><li>INT1—-由P3.3端口线引入，低电平或下降沿引起。</li></ul><p>这两个外部中断源标志和它们的触发方式控制由特殊功能寄存器TCON的低4位控制。</p><p>内部中断源（3个）：</p><ul><li>T0—-定时器/计数器0中断，由T0回零溢出引起。</li><li>T1—-定时器/计数器1中断，由T1回零溢出引起。</li><li>T1/R1—-串行中断i/O中断，串行端口完成一个帧字符发送/接收后引起。这3个内部中断源的控制分别锁存在特殊功能寄存器TCON和SCON中。</li></ul><h4 id="单片机同优先级中段内部查询顺序："><a href="#单片机同优先级中段内部查询顺序：" class="headerlink" title="单片机同优先级中段内部查询顺序："></a>单片机同优先级中段内部查询顺序：</h4><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;中断源&emsp;&emsp; &emsp;| &emsp;&emsp;中断级别</p><p>&nbsp;&nbsp;外部中断0 &emsp;中断入口0&emsp;&emsp;&emsp;&emsp;&emsp;最高</p><p>&nbsp;&nbsp;T0溢出中断&nbsp;&emsp;中断入口1</p><p>&nbsp;&nbsp;外部中断0&emsp;中断入口2</p><p>&nbsp;&nbsp;T1溢出中断&emsp;&nbsp;中断入口3</p><p>&nbsp;&nbsp;串行口中断&emsp;中断入口4&emsp;&emsp;&emsp;&emsp;&emsp;最低</p><h4 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h4><blockquote><p>开总中断；</p><p>开外部中断；</p><p>中断触发条件（低电平或跳变沿）</p></blockquote><p>中断函数：</p><blockquote><p>void function(&emsp;)&emsp;interrupt 2 &emsp;&emsp;&emsp;//中断处理函数，加关键字interrupt和入口号</p><p>{</p><p>中断处理语句；</p><p>}</p></blockquote><p>中断示例：</p><blockquote><p>//显示函数<br>void display()<br>{<br>    *<strong>****</strong><br>}</p><p>//定时器0初始化<br>void timer0Init()<br>{<br>    EA = 1;  //开总中断<br>    ET0 = 1;  //开定时器0中断<br>    TR0 = 1;   //定时器0工作<br>    TMOD = 0x01;   //16位<br>    TH0 = 0x4b;<br>    TL0 = 0xfd;  //延时时间<br>}<br>//主函数<br>void main()<br>{<br>    timer0Init();<br>    <strong>****</strong><br>}</p><p>//中断函数<br>void timor0() interrupt 1<br>{<br>    TH0 = 0x4b;<br>    TL0 = 0xfd;  //延时时间<br>    display();<br>} </p></blockquote>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;&lt;/h1&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>独立按键与矩阵键盘</title>
+    <link href="https://7heng.github.io/2020/11/14/%E7%8B%AC%E7%AB%8B%E6%8C%89%E9%94%AE%E4%B8%8E%E7%9F%A9%E9%98%B5%E9%94%AE%E7%9B%98/"/>
+    <id>https://7heng.github.io/2020/11/14/%E7%8B%AC%E7%AB%8B%E6%8C%89%E9%94%AE%E4%B8%8E%E7%9F%A9%E9%98%B5%E9%94%AE%E7%9B%98/</id>
+    <published>2020-11-14T12:56:49.000Z</published>
+    <updated>2020-12-16T12:06:51.698Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1><a id="more"></a><p>单片机上使用的大部分都是轻触开关，轻触按键。</p><p>独立键盘：每个按键占用一个io口，当按键数量较多时，io口利用效率不高，但程序简单，适用于所需按键较少的场合。</p><p>矩阵键盘：电路连接复杂，但提高了io口的利用率，软件编程较复杂。适用于使用大量按键的场合。</p><p>独立按键：</p><p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605369130375&di=722c9e7cdf6e555ce1bd1cdc4e89e91c&imgtype=0&src=http://file.elecfans.com/web1/M00/BC/8C/pIYBAF67T1uAZUyPAABtB6TAq94163.jpg"></p><p>&emsp;&emsp;按键的一端与io口连接，另一端接地。通过控制io口输出高电平即可检测按键是否按下，当按下时io口会被拉低，松开后io口回到高电平。</p><p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605369468198&di=466d5acd491ae5e475abc7b87bb9782d&imgtype=0&src=http://6.eewimg.cn/news/uploadfile/2020/0225/1582610369554153.jpg"></p><p>&emsp;&emsp;准双向io口： 在准双向io口的管脚处接一个轻触独立按键，另一端接地。当内部输出为1时，经过非门变为0，G与S之间无正电压，场效应管不导通，因为内部有上拉电阻，所以D会被拉到5V，如果按键没有按下，那么此处还是为5V，如果按键按下，线路相当于直接接到地线上，那么会被拉低变为0V，因为电流会往阻抗低的地方流。</p><h4 id="按键特性："><a href="#按键特性：" class="headerlink" title="按键特性："></a>按键特性：</h4><p>&emsp;机械按键在按下或松开时会存在抖动现象。</p><blockquote><p>在编写程序时需要进行消除抖动</p></blockquote><h4 id="矩阵键盘："><a href="#矩阵键盘：" class="headerlink" title="矩阵键盘："></a>矩阵键盘：</h4><p>确定矩阵键盘上哪一个按键被按下可以采用列扫描和行扫描。列扫描时先把接在列上面的所有io口拉高，接在行上面的所有io口置低。（行扫描时先把接在行上面的所有io口拉高，接在列上面的所有io口置低）当其中有一列内任何一个按键按下那么整条列线都会被拉低。</p><h5 id="8×8LED点阵屏："><a href="#8×8LED点阵屏：" class="headerlink" title="8×8LED点阵屏："></a>8×8LED点阵屏：</h5><ul><li>行线为点阵屏LED灯的正极为共阳极点阵屏。</li><li>列线为点阵屏LED灯的正极为共阴极点阵屏。</li></ul><p>&emsp;&emsp;点阵屏动态显示相当于数码管动态显示，是一个一个亮来显示的，但是由于机器运行速度很快，而且人眼的延时效果，所以看着时同时在显示。</p><p>&emsp;&emsp;点阵屏驱动需要很多的io口，设计电路时应该尽可能节省io口的利用，所以驱动点阵屏</p><p>可以利用74HC595芯片通过级联来控制点阵屏。74HC595大大节省了io口的利用。</p><p>74HC595芯片是一种串入并出的芯片，是8位串行输入/输出或者并行输出的移位寄存器。（以压栈的方式进行工作）</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;&lt;/h1&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>数码管</title>
+    <link href="https://7heng.github.io/2020/11/13/%E6%95%B0%E7%A0%81%E7%AE%A1/"/>
+    <id>https://7heng.github.io/2020/11/13/%E6%95%B0%E7%A0%81%E7%AE%A1/</id>
+    <published>2020-11-13T13:50:38.000Z</published>
+    <updated>2020-12-16T12:07:21.311Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1><a id="more"></a><p>数码管：</p><p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605361170090&di=1e0ea0a40fc5bce489b8d45f8ed82559&imgtype=0&src=http://gss0.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/b999a9014c086e0631bbface01087bf40ad1cb20.jpg"></p><p>数码管根据内部连接的不同分为共阴极和共阳极。八段数码管内部有8颗LED组成，如果想要显示特定字形，只需控制相应的LED亮起，其它LED熄灭即可。</p><h4 id="判断数码管是共阴极还是共阳极"><a href="#判断数码管是共阴极还是共阳极" class="headerlink" title="判断数码管是共阴极还是共阳极:"></a>判断数码管是共阴极还是共阳极:</h4><p> &nbsp; &emsp;&nbsp;如果是共阴极，中间公共脚为GND，如果是共阳极，中间公共脚为VCC。</p><p> &emsp;&nbsp;&nbsp;用万用表黑笔脚接在公共脚上，红笔表假设接在a上，如果a恒亮，代表是一个共阴极数码管。如果a不亮，将黑表笔接在a脚，红表笔接在公共脚上，如果a恒亮，则为共阳极。(指针式万用表在电阻挡，红表笔输出负电压，是负极。黑表笔输出正电压，是正极。 &emsp;一般为红正极黑负极。)</p><h4 id="锁存器："><a href="#锁存器：" class="headerlink" title="锁存器："></a>锁存器：</h4><p><img src="http://www.elecfans.com/article/UploadPic/2008-4/2008411031937957.jpg"></p><p><img src="http://www.elecfans.com/article/UploadPic/2008-4/20084110314262946.jpg"></p><h4 id="上拉电阻的作用"><a href="#上拉电阻的作用" class="headerlink" title="上拉电阻的作用:"></a>上拉电阻的作用:</h4><p>&emsp;&emsp;上拉就是将不确定的信号通过一个电阻钳位在高电平，电阻同时起限流作用。下拉同理，也是将不确定的信号通过一个电阻钳位在低电平。</p><p>&emsp;&emsp;当P0口作为输入/输出口时，上电复位后处于开漏模式。P0口内部无上拉电阻，所以作io口必须外接10k~ 4.7k的上拉电阻。</p><p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605366286862&di=2677112b48636c43f39ae464924c4dd8&imgtype=0&src=http://pics6.baidu.com/feed/8694a4c27d1ed21b878053600e7482c350da3f8f.jpeg?token=dc2d75945facce9c7b435202621b3fc8"></p><h4 id="场效应管"><a href="#场效应管" class="headerlink" title="场效应管:"></a>场效应管:</h4><p><img src="https://dfsimg1.hqewimg.com/group1/M00/12/63/wKhk713mAyaAfEUWAAA_CTEWvaw730.jpg"></p><p>三个电极分别是：</p><ul><li>栅极 G</li><li>源计 S</li><li>漏极 D</li></ul><p>与三极管相比，场效应管具有很高的输入电阻。</p><p>准双向io口可以正常输出高低电平。</p><p>漏极开漏输出：</p><ul><li>可以输出低电频，但不可以输出高电频。（因此要加一个上拉电阻，才可以既能输出高电频又能输出低电频。&lt;源极S接地，G与S之间要有一个正偏，场效应管(D与S之间)才能导通&gt; ）</li></ul><blockquote><p>数码管输入数据时流程：</p><ul><li>打开位选锁存器</li><li>赋予数据</li><li>锁存位选数据，关闭位选锁存器</li><li>打开段选锁存器</li><li>赋予数据</li><li>锁存器段选数据，关闭段选锁存器</li></ul></blockquote>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;&lt;/h1&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>蜂鸣器</title>
+    <link href="https://7heng.github.io/2020/11/10/%E8%9C%82%E9%B8%A3%E5%99%A8/"/>
+    <id>https://7heng.github.io/2020/11/10/%E8%9C%82%E9%B8%A3%E5%99%A8/</id>
+    <published>2020-11-10T13:02:59.000Z</published>
+    <updated>2020-12-16T12:07:08.014Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1><a id="more"></a><p>有源蜂鸣器与无源蜂鸣器区别：  </p><ul><li><p>外形不同：<br>&nbsp;&nbsp;&nbsp;&nbsp;两种蜂鸣器的引脚都朝上放置时，可以看出有绿色电路板的一种是无源蜂鸣器，没有电路板而用黑胶封闭的一种是有源蜂鸣器。  </p></li><li><p>测试声音不同:<br>&nbsp;&nbsp;&nbsp;&nbsp;用黑表笔接蜂鸣器 ‘+’引脚，红表笔在另一引脚上来回碰触，如果发出咔咔声且电阻只有8Ω（或16Ω）的是无源蜂鸣器；如果能发出持续声音的，且电阻在几百欧以上的，是有源蜂鸣器。  </p></li><li><p>振动频率不同：<br>&nbsp;&nbsp;&nbsp;&nbsp;用直流电压输入相应电压（可以由小调到大），频率大概为2.7KHz,可以直接响的为有源电磁式蜂鸣器，不直接响的，需要用2k~ 5k的方波去驱动它。因为无源内部不带震荡源。而有源蜂鸣器往往比无源的贵，就是因为里面有多个震荡电路。  </p><p>扩展：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;蜂鸣器驱动电路一般包含：一个三极管、一个续流二极管、一个滤波电容、一个蜂鸣器。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;蜂鸣器作为发声元件，在其两端施加方波或者电压就可以发声。  </p></li><li><p>续流二极管起到提供续流的作用，否则在蜂鸣器的两端会产生几十伏的尖端电压，有可能将三极管损坏，还有可能干扰整个电路中的其它部分。  </p></li><li><p>滤波电容的作用是滤波，滤出蜂鸣器电流对其它部分的影响，并且起到了改善电源的交流阻抗。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></li></ul><p>^ 单片机不是功率器件，它适合做控制用，不适合驱动功率器件。（直接驱动有可能会损坏单片机)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p><h2 id="三极管工作原理"><a href="#三极管工作原理" class="headerlink" title="三极管工作原理:"></a>三极管工作原理:</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p><p>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://iknow-pic.cdn.bcebos.com/574e9258d109b3de20c00c65c1bf6c81800a4c44?x-bce-process=image/resize,m_lfit,w_600,h_800,limit_1">  </p><ul><li>BASE(基极)  </li><li>COLLECTOR（集电极）  </li><li>EMITTER（发射极）  </li></ul><p>PNP三极管：  </p><ul><li><p>如果IE~ IB流过的电流大于1mA，则导通；  </p></li><li><p>如果IE~ IB没有流过电流，则EC截至，处于中断状态； </p></li><li><p>如果发射极E &gt;0.7V 基极B,也会导通EC； </p><p>NPN三极管：  </p></li><li><p>如果IB~ IE流过的电流大于1mA,则EC导通；</p></li><li><p>如果IB~ IE,没有流过电流，则EC截至，处于中断状态； </p></li><li><p>如果基极B &gt;0.7V 发射机E，也会导通EC；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p><blockquote><p>流水灯蜂鸣器代码：  </p></blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p></li></ul><p>#include &lt;reg52.h&gt;  </p><p>#include&lt;intrins.h&gt;</p><p>#define uint unsigned int  </p><p>#define uchar unsigned char  </p><p>sbit beep = P2^3;</p><p>uchar temp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //LED灯相关变量  </p><p>void delay(uint z) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 毫秒级延时函数<br>{  </p><pre><code>uint x,y;for(x = z; x &gt; 0; x--)    for(y = 144;y &gt; 0; y--);</code></pre><p>}</p><p>void main()<br>{    </p><pre><code>temp = 0xfe;    P1 = temp;    // 1111 1110delay(100);while(1)&#123;temp = _crol_(temp,1);P1 = temp;beep = ~beep;delay(100);&#125;    </code></pre><p>} </p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;&lt;/h1&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>初识51单片机</title>
+    <link href="https://7heng.github.io/2020/11/09/STC89C51%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+    <id>https://7heng.github.io/2020/11/09/STC89C51%E5%8D%95%E7%89%87%E6%9C%BA/</id>
+    <published>2020-11-09T04:22:22.000Z</published>
+    <updated>2020-12-16T12:02:24.196Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1><a id="more"></a><p>例如：AT89S51、STC89C51、STC89C52、STC90C516等等这些单片机内核都为80C51，所以内核为80C51的单片机都属于51单片机。</p><p>单片机是一种数字集成芯片，数字电路中只有两种电平：“高电平和低电平”  </p><ul><li>高电平： 5V  </li><li>低电平： 0V<br>51单片机上电后默认全为高电平<br>51单片机大多数采用TTL电平，是因为通常数据表示采用二进制，”5V“ 等于逻辑 ‘1’，“0V” 等价于逻辑 ‘0’，TTl电平规定高电平输出电压&gt;2.4V,低电平输出电压&lt;0.4V。  </li></ul><p>计算机串口使用的是RS232电平</p><ul><li>高电平：-12V</li><li>低电平：+12V<br>单片机与计算机串口通信时需要使用电平转换芯片将RS232电平转化为TTL电平后单片机才能识别。  </li></ul><p>单片机最小系统能够运行起来的必要条件：</p><ul><li>电源</li><li>晶振</li><li>复位电路</li></ul><p>STC公司单片机命名规则：<br>STC89  XX  XX  35  X  XXXX  XX  </p><ul><li>工作电压：C：5.5V~ 3.8V &nbsp;&nbsp; LE:3.6V~ 3.4V or 3.4V~ 2.4V</li><li>程序空间及RAM空间大小：&nbsp; 51是4K字节程序空间及512字节RAM空间；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;52是8k字节程序空间及512字节RAM空间；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;514是56字节程序空间及1280字节RAM空间；  </li><li>工作频率： 35：工作频率可达到35MHZ。  </li><li>工作温度范围： I: 工业级 -40°~ 85°<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C: 商业级 0°~ 70°</li></ul><h2 id="LED灯："><a href="#LED灯：" class="headerlink" title="LED灯："></a>LED灯：</h2><p>（点亮LED灯只需要控制IO口输出相应电平可以使电流经电路即可）  </p><p>LED灯正负极判断：  </p><p>（直插式LED灯）通常长脚为正极，短脚为负极。<br>（贴片式LED灯） 通常有绿点的一段为负极，另一端为正极。  </p><p>LED工作参数：  </p><p> 普通发光二极管工作压降为： 1.6V~ 2.1V<br> 普通二极管工作压降为： 0.7V<br> 工作电流： 1~ 20 mA<br> (二极管有压降，大约为2V左右)</p><blockquote><p>51点亮第一颗LED灯代码：  </p></blockquote><p> #include&lt;reg52.h&gt;  //引用51头文件</p><p>sbit LED1 = P1^0;</p><p>void main()<br>{<br>    LED1 = 0;<br>} </p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;&lt;/h1&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+</feed>

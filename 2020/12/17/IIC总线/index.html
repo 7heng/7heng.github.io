@@ -1,85 +1,84 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
 <head>
-  <meta charset="utf-8">
-  
-  <title>IIC总线 | Heng</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-  <meta name="author" content="7heng">
-  
+    <!--Description-->
+    
+        <meta name="description" content="">
+    
 
-  
-  <meta name="description" content="">
-  
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
 
-  
-  
-  <meta name="keywords" content="">
-  
+    <!-- Title -->
+    
+    <title>IIC总线 | Heng</title>
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
-  <meta property="og:title" content="IIC总线"/>
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
 
-  <meta property="og:site_name" content="Heng"/>
 
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-<meta name="generator" content="Hexo 5.2.0"></head>
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
 
 <body>
-<div class="blog">
-  <div class="content">
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Heng</a>
-    </h1>
-    <p class="site-description"></p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-    </ul>
-  </nav>
-</header>
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
 
-    <main class="site-main posts-loop">
-    <article>
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                IIC总线
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-  
-    
-    <h3 class="article-title"><span>IIC总线</span></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/12/17/IIC总线/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-12-17T09:27:51.000Z">
-          2020-12-17
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id=""><a href="#" class="headerlink" title=""></a></h1><a id="more"></a>
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h1 id=""><a href="#" class="headerlink" title=""></a></h1><a id="more"></a>
 
 <h2 id="常用的串行总线协议："><a href="#常用的串行总线协议：" class="headerlink" title="常用的串行总线协议："></a>常用的串行总线协议：</h2><p>目前常用的微机与外设之间进行数据传输的串行总线主要有：UART、1-Wire、IIC和SPI总线。</p>
 <p>​    UART：是以异步方式进行通信（一条数据输入线，一条数据输出线）</p>
@@ -131,46 +130,72 @@
 <p><strong>从机的地址</strong>由固定部分和可编程的部分组成。在一个系统中可能希望接入多个相同的从机主机地址中可编程部分决定了可接入总线该类器件的最大数目。如果一个从机的7位寻址位有4位是固定位，3位是可编程位，这时仅能寻址8个同样的器件，即可以有8个同样的器件介入到该 I²C 总线系统中。</p>
 <p>​    </p>
 
-      
-    </div>
 
-  </div>
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2020-12-17
+                                </div>
+                            </div>
+                    </div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
 
     
-
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
   
-
-
-
-
-
-
-    </main>
-
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
+    <!-- Google Analytics -->
     
-    &copy; 2021 7heng
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
     
-  </p>
-</footer>
-    
-    
-  </div>
-</div>
 </body>
+
 </html>
