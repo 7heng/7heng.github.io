@@ -98,32 +98,32 @@ SQL：结构化查询语言，用于和DBMS通信的语言。
 <p>​    net stop 服务名  (停止服务)</p>
 <h2 id="MySQL服务的登录和退出："><a href="#MySQL服务的登录和退出：" class="headerlink" title="MySQL服务的登录和退出："></a>MySQL服务的登录和退出：</h2><p>​    方式一：通过MySQL自带的客户端（只限于root用户）</p>
 <p>​    方式二：通过windows自带的客户端</p>
-<p>​        登录：<strong>mysql [ -h主机名 -p端口号 ] -u用户名 -p密码</strong></p>
-<h2 id="MySQL常用基本命令："><a href="#MySQL常用基本命令：" class="headerlink" title="MySQL常用基本命令："></a>MySQL常用基本命令：</h2><p>​    <code>1：查看当前所有的数据库：    show    databases;</code></p>
-<p>​     <code>2：打开指定的库：    use 库名;</code></p>
-<p>​    <code>3：查看当前库的所有表：    show tables;</code></p>
-<p>​    <code>4：查看其它库的所有表：    show table from 库名;</code></p>
-<p>​    <code>5：创建表：</code></p>
+<p>​        登录：<code>mysql [ -h主机名 -p端口号 ] -u用户名 -p密码</code></p>
+<h2 id="MySQL常用基本命令："><a href="#MySQL常用基本命令：" class="headerlink" title="MySQL常用基本命令："></a>MySQL常用基本命令：</h2><p>​    1：查看当前所有的数据库：    <code>show    databases;</code></p>
+<p>​     2：打开指定的库：    <code>use 库名;</code></p>
+<p>​    3：查看当前库的所有表：    <code>show tables;</code></p>
+<p>​    4：查看其它库的所有表：<code>show table from 库名;</code></p>
+<p>​    5：创建表：</p>
 <p><code>create table 表明（</code></p>
 <p><code>列名 列类型,</code></p>
 <p><code>列名 列类型,</code></p>
 <p><code>...</code>                                </p>
 <p><code>）;</code></p>
-<p>​    <code>6：查看表结构：    desc 表名;</code></p>
+<p>​    6：查看表结构：    <code>desc 表名;</code></p>
 <h3 id="SQL语言的分类："><a href="#SQL语言的分类：" class="headerlink" title="SQL语言的分类："></a>SQL语言的分类：</h3><p>DQL（Data Query Language)：数据查询语言</p>
-<p>​    select</p>
+<p>​    <code>select</code></p>
 <p>DML（Data Manipulate Language)：数据操作语言</p>
-<p>​    insert、update、delete</p>
-<p>DDL（Data Define Languge）：数据定义语言<br>        create、drop、alter<br>    TCL（Transaction Control Language）：事务控制语言<br>        commit、rollback</p>
-<h3 id="SQL的常见命令："><a href="#SQL的常见命令：" class="headerlink" title="SQL的常见命令："></a>SQL的常见命令：</h3><p>show databases;    查看所有的数据库。</p>
+<p>​    <code>insert、update、delete</code></p>
+<p>DDL（Data Define Languge）：数据定义语言<br>        <code>create、drop、alter</code><br>    TCL（Transaction Control Language）：事务控制语言<br>        <code>commit、rollback</code></p>
+<h3 id="SQL的常见命令："><a href="#SQL的常见命令：" class="headerlink" title="SQL的常见命令："></a>SQL的常见命令：</h3><p><code>show databases;</code>    查看所有的数据库。</p>
 <p>use 库名;    打开指定的库。</p>
-<p>show tables from 库名;    显示指定库中的所有表。</p>
-<p>ceeate table 表名(</p>
-<p>​                字段名 字段类型，</p>
-<p>​                字段名 字段类型</p>
-<p>)；    创建表。</p>
-<p>desc 表名;    查看指定表的结构。</p>
-<p>select * from 表名;    显示表中所有数据。</p>
+<p><code>show tables from 库名;</code>    显示指定库中的所有表。</p>
+<p><code>ceeate table 表名(</code></p>
+<p>​                <code>字段名 字段类型，</code></p>
+<p>​                <code>字段名 字段类型</code></p>
+<p><code>)</code>；    创建表。</p>
+<p><code>desc 表名;</code>    查看指定表的结构。</p>
+<p><code>select * from 表名;</code>    显示表中所有数据。</p>
 <p>​        </p>
 <p>​    </p>
 <p>​            </p>
@@ -135,12 +135,6 @@ SQL：结构化查询语言，用于和DBMS通信的语言。
                                 <br>
                                 <div class="post-tags">
                                     
-                                        
-
-<a href="/tags/SQL/">#SQL</a>
-
-
-                                            
                                 </div>
                                 <div class="post-date">
                                     2021-03-23
