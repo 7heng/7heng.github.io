@@ -100,7 +100,7 @@
                 <div class="row">
                     <!-- Post Main Content -->
                     <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                        <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="BCD码："><a href="#BCD码：" class="headerlink" title="BCD码："></a>BCD码：</h1><p>4个二进制位 (4bit) —-&gt; 1个十进制位，又因为4个二进制位有2的4次方种状态，也就是16种状态。</p>
+                        <h1 id="BCD码："><a href="#BCD码：" class="headerlink" title="BCD码："></a>BCD码：</h1><p>4个二进制位 (4bit) —-&gt; 1个十进制位，又因为4个二进制位有2的4次方种状态，也就是16种状态。</p>
 <p>16种状态足够表示十进制的0~9，并且还有6种冗余。</p>
 <h2 id="8421码："><a href="#8421码：" class="headerlink" title="8421码："></a>8421码：</h2><p>8421码的映射关系：</p>
 <table>
@@ -206,7 +206,25 @@
 <li><p>对于2421码来说，0~ 4范围内所有数字编码的第一位都为0，5~ 9范围内所有的数字编码的第一位都为1</p>
 </li>
 <li><p>上述的规定第一位是为了避免歧义，例如5可以表示为0101或1011，但规定了数字编码的第一位后就不会存在歧义。</p>
-</li>
+<h1 id="字符："><a href="#字符：" class="headerlink" title="字符："></a>字符：</h1><h2 id="ASCII码："><a href="#ASCII码：" class="headerlink" title="ASCII码："></a>ASCII码：</h2><p>数字、字母、符号共128个字符—&gt;7位二进制编码</p>
+<p><img src="/images/Char/ASCII.png"></p>
+<p>可印刷字符：32~126</p>
+<p>数字：48(011 0000)~57(011 1001)</p>
+<p>大写字母：65(100 0001)~90(101 1010)</p>
+<p>小写字母：97(110 0001)~122(111 1010)</p>
+<p>例：已知’A’的ASCII码的值为65，字符’H’存放在某存储单元M中，求M中存放的内容。</p>
+<p>​    **注意：M中存放的是‘H’的ASCII码(二进制形式)**。</p>
+<p>一：A是第一个字母，H是第8个字母，则H对应的码值=65+(8-1)=72；72对应二进制为100 1000，故M中存放的内容为0100 1000</p>
+<p>二：A的码值65写成二进制为100 0001，A是第一个字母，H是第八个字母，故对应100 1000，M中存放的内容为0100 1000。</p>
+<p>&emsp;&emsp;<strong>每个存储单元存放的内容为字节(Byte)的整数倍，即8的整数倍，例题假设存放1B</strong>。</p>
+<h2 id="字符串："><a href="#字符串：" class="headerlink" title="字符串："></a>字符串：</h2><p><img src="/images/Char/Big.png"></p>
+<p><img src="/images/Char/Small.png"></p>
+<h2 id="汉字的表示和编码："><a href="#汉字的表示和编码：" class="headerlink" title="汉字的表示和编码："></a>汉字的表示和编码：</h2><p>GB 2312-80：汉字+各种符号共7445个</p>
+<p>区位码：94个区，每区94个位置</p>
+<p>例如：啊，在第16区，01位置。</p>
+<p>将16转换为十六进制为10H，01转换为十六进制为01H，但是为了防止与其它编码冲突，所以在</p>
+<p>16进制的基础上再加上20H，变成30H和21H.这就是国标码，但会与ASCII码冲突，所以再加上80H得到B0H和A1H,这就是汉字计内码，完成汉字在计算机中的存储。</p>
+<h2 id="奇偶校验码："><a href="#奇偶校验码：" class="headerlink" title="奇偶校验码："></a>奇偶校验码：</h2></li>
 </ul>
 
 
