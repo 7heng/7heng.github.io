@@ -224,7 +224,46 @@
 <p>例如：啊，在第16区，01位置。</p>
 <p>将16转换为十六进制为10H，01转换为十六进制为01H，但是为了防止与其它编码冲突，所以在</p>
 <p>16进制的基础上再加上20H，变成30H和21H.这就是国标码，但会与ASCII码冲突，所以再加上80H得到B0H和A1H,这就是汉字计内码，完成汉字在计算机中的存储。</p>
-<h2 id="奇偶校验码："><a href="#奇偶校验码：" class="headerlink" title="奇偶校验码："></a>奇偶校验码：</h2></li>
+<h2 id="奇偶校验码："><a href="#奇偶校验码：" class="headerlink" title="奇偶校验码："></a>奇偶校验码：</h2><table>
+<thead>
+<tr>
+<th align="center">信息</th>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">码字</td>
+<td align="center">00</td>
+<td align="center">01</td>
+<td align="center">码距1</td>
+</tr>
+<tr>
+<td align="center">码字(方案二)</td>
+<td align="center">00</td>
+<td align="center">11</td>
+<td align="center">码距2</td>
+</tr>
+</tbody></table>
+<p><strong>码距</strong>：两个合法码字对应位上数字的不同的个数</p>
+<p>例如：原本A(00)因为跳变发送到B变成了(01),但因为码距为1，所以无法判断原本发的数据是正确还是错误。</p>
+<p>而A(00)因为跳变变成了01，但码距为2，可以知道发生了错误，因为没有01，但却无法确定是哪一位发生了跳变。<strong>所以在整个方案中，有些编码是我们没有用到的，没有用到的编码在发生错误的时候可以帮我们指示错误原因。</strong></p>
+<p><strong>奇校验码：整个校验位(有效信息位和校验位)中1的个数为奇数</strong>。</p>
+<p><strong>偶校验码：整个校验位(有效信息位和校验位)中1的个数为偶数</strong>。</p>
+<table>
+<thead>
+<tr>
+<th align="center">奇偶校验位</th>
+<th align="center">有效信息位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1位</td>
+<td align="center">n位</td>
+</tr>
+</tbody></table>
+<h1 id="海明码："><a href="#海明码：" class="headerlink" title="海明码："></a>海明码：</h1></li>
 </ul>
 
 
