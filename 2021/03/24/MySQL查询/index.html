@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="查询：基础查询：1select 要查询的内容 from 表名;
+
+条件查询：12345select 要查询的字段|表达式|常量值|函数 from 表名where 条件;
+
+模糊查询：1234567891011(LIKE):一般和通配符% _搭配使用。例：查询员工名中包含字符a的员工信息。SELECT">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>MySQL查询 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                MySQL查询
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h2 id="查询："><a href="#查询：" class="headerlink" title="查询："></a>查询：</h2><h6 id="基础查询："><a href="#基础查询：" class="headerlink" title="基础查询："></a>基础查询：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 要查询的内容 from 表名;</span><br></pre></td></tr></table></figure>
+
+<h6 id="条件查询："><a href="#条件查询：" class="headerlink" title="条件查询："></a>条件查询：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select 要查询的字段|表达式|常量值|函数</span><br><span class="line"></span><br><span class="line"> from 表名</span><br><span class="line"></span><br><span class="line">where 条件;</span><br></pre></td></tr></table></figure>
+
+<h6 id="模糊查询："><a href="#模糊查询：" class="headerlink" title="模糊查询："></a>模糊查询：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(LIKE):一般和通配符% _搭配使用。</span><br><span class="line">例：查询员工名中包含字符a的员工信息。</span><br><span class="line">SELECT  *</span><br><span class="line">FROM</span><br><span class="line">	employees</span><br><span class="line">WHERE</span><br><span class="line">	last_name like &#39;%a%&#39;;</span><br><span class="line">查询员工名中第三个字符为e,第五个字符为a的员工名和工资</span><br><span class="line">SELECT last_name,salary</span><br><span class="line">FROM employees</span><br><span class="line">WHERE last_name LIKE &#39;__e_a%&#39;;（%:任意多个字符,包含0个字符。_:任意单个字符）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(BETWEEN AND):包含两个临界值;两个临界值不能调换顺序。</span><br><span class="line">例：查询员工编号在100~200之间的员工信息</span><br><span class="line">SELECT *</span><br><span class="line">FROM employees</span><br><span class="line">WHERE employees_id &gt;&#x3D; 100 AND employees_id &lt;&#x3D;200;</span><br><span class="line">-----------------------------------------------------</span><br><span class="line">SELECT *</span><br><span class="line">FROM employees</span><br><span class="line">WHERE employees_id BETWEEN 100 AND  200;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">(IN):用来判断某字段的值是否属于IN列表中的某一项;IN列表的值类型必须一致或兼容;IN列表中不支持通配符。</span><br><span class="line">例：查询员工的工种编号是IT_PROG、AD_VP、AD_PRES中的一个员工名和工种编号</span><br><span class="line">SELECT last_name,job_id</span><br><span class="line">FROM emplyoees</span><br><span class="line">WHERE job_id &#x3D; &#39;IT_PROG&#39; OR jod_id &#x3D; &#39;AD_VP&#39; OR job_id &#x3D; &#39;AD_PRES&#39;;</span><br><span class="line">------------------------------------------------------------------------</span><br><span class="line">SELECT</span><br><span class="line">	last_name,</span><br><span class="line">	job_id</span><br><span class="line">FROM</span><br><span class="line">	employees</span><br><span class="line">WHERE</span><br><span class="line">	job_id IN( &#39;IT_PROT&#39; ,&#39;AD_VP&#39;,&#39;AD_PRES&#39;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">(IS NULL):&#x3D;或!&#x3D;和&lt;&gt;不能用来判断NULL值，IS NULL或IS NOT NULL可以判断NULL值。</span><br><span class="line">例：查询没有奖金的员工名和奖金率</span><br><span class="line">SELECT</span><br><span class="line">	last_name,</span><br><span class="line">	commission_pct</span><br><span class="line">FROM</span><br><span class="line">	employees</span><br><span class="line">WHERE</span><br><span class="line">	commission_pct IS NULL;</span><br><span class="line">例：查询有奖金的员工和奖金率</span><br><span class="line">SELECT</span><br><span class="line">	last_name,</span><br><span class="line">	commission_pct</span><br><span class="line">FROM</span><br><span class="line">	employees</span><br><span class="line">WHERE</span><br><span class="line">	commission_pct IS NOT NULL;</span><br><span class="line">----------------------------------</span><br><span class="line">SELECT</span><br><span class="line">	last_name,</span><br><span class="line">	commission_pct</span><br><span class="line">FROM</span><br><span class="line">	employees</span><br><span class="line">WHERE </span><br><span class="line">	salary IS 12000;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">安全等于&lt;&#x3D;&gt;</span><br><span class="line">例：查询没有奖金的员工和奖金率</span><br><span class="line">SELECT</span><br><span class="line">	last_name,</span><br><span class="line">	commission_pct</span><br><span class="line">FROM</span><br><span class="line">	employees</span><br><span class="line">WHERE</span><br><span class="line">	commission_pct &lt;&#x3D;&gt;NULL;	</span><br><span class="line">例：查询工资为12000的员工信息</span><br><span class="line">SELECT</span><br><span class="line">	last_name,</span><br><span class="line">	salary</span><br><span class="line">FROM</span><br><span class="line">	employees</span><br><span class="line">WHERE </span><br><span class="line">	salary &lt;&#x3D;&gt; 12000;</span><br></pre></td></tr></table></figure>
+
+<p><strong>IS NULL:仅仅可以判断NULL值，可读性较高(建议使用)。</strong></p>
+<p><strong>&lt;=&gt;:既可以判断NULL值，又可以判断普通的数值，可读性较低。</strong></p>
+<h6 id="排序查询："><a href="#排序查询：" class="headerlink" title="排序查询："></a>排序查询：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select 要查询的内容 from 表</span><br><span class="line"></span><br><span class="line">where 条件</span><br><span class="line"></span><br><span class="line">order by 排序的字段|表达式|函数|别名 asc(默认升序)或desc(降序)</span><br></pre></td></tr></table></figure>
+
+<h6 id="分组查询："><a href="#分组查询：" class="headerlink" title="分组查询："></a>分组查询：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select 要查询的字段,分组函数 from 表</span><br><span class="line"></span><br><span class="line">group by 分组的字段</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数："><a href="#函数：" class="headerlink" title="函数："></a>函数：</h2><h6 id="字符函数："><a href="#字符函数：" class="headerlink" title="字符函数："></a><strong>字符函数：</strong></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">concat 拼接</span><br><span class="line"></span><br><span class="line">substr 截取子串</span><br><span class="line"></span><br><span class="line">upper 转换成大写</span><br><span class="line"></span><br><span class="line">lower 转换成小写</span><br><span class="line"></span><br><span class="line">trim 去掉前后自定的空格和字符</span><br><span class="line"></span><br><span class="line">ltrim 去掉左边空格</span><br><span class="line"></span><br><span class="line">rtrim 去掉右边空格</span><br><span class="line"></span><br><span class="line">replace 替换</span><br><span class="line"></span><br><span class="line">lpad 左填充</span><br><span class="line"></span><br><span class="line">rpad 右填充</span><br><span class="line"></span><br><span class="line">instr 返回子串第一次出现的索引</span><br><span class="line"></span><br><span class="line">length 获取字节个数</span><br></pre></td></tr></table></figure>
+
+<h6 id="数组函数："><a href="#数组函数：" class="headerlink" title="数组函数："></a><strong>数组函数：</strong></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">round 四舍五入</span><br><span class="line"></span><br><span class="line">rand 随机数</span><br><span class="line"></span><br><span class="line">ceil 向上取整</span><br><span class="line"></span><br><span class="line">floor 向下取整</span><br><span class="line"></span><br><span class="line">mod 取余()</span><br><span class="line"></span><br><span class="line">truncate 截断</span><br></pre></td></tr></table></figure>
+
+<h6 id="日期函数："><a href="#日期函数：" class="headerlink" title="日期函数："></a><strong>日期函数：</strong></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">now 当前系统日期+时间</span><br><span class="line"></span><br><span class="line">curdate 当前系统日期</span><br><span class="line"></span><br><span class="line">curtime 当前系统时间</span><br><span class="line"></span><br><span class="line">str_to_date 将字符串转换成日期</span><br><span class="line"></span><br><span class="line">data_format 将日期转换成字符</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-03-24
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>
