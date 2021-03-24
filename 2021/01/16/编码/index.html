@@ -263,9 +263,72 @@
 <td align="center">n位</td>
 </tr>
 </tbody></table>
-<h1 id="海明码："><a href="#海明码：" class="headerlink" title="海明码："></a>海明码：</h1></li>
+<h1 id="海明码："><a href="#海明码：" class="headerlink" title="海明码："></a>海明码：</h1><p><strong>海明码设计思路：</strong><code>分组校验--&gt;多个校验位--&gt;校验位标注出错位置</code>。</p>
+<p>例如：信息位1010</p>
+<p>因为：2的K次方 ≥ n+k+1</p>
+<p>所以：K = 3；</p>
+<p><strong>对于n+k+1：海明码是检验信息中哪一位出错，所以原码n个，检验码k个，出现n+k个位置，k校验码对应2的k次方个状态，如k=3,对应000~ 111八个状态。如果八个状态都为错误状态,就需要一个表示正确状态，所以为n+k+1</strong>。</p>
+<p>1：设信息位D4 D3 D2 D1(1010)共4位，检验位P3 P2 P1,共3位，对应的海明码为H7 H6 H5 H4 H3 H2 H1。</p>
+<p>2：确定校验位的分布</p>
+<table>
+<thead>
+<tr>
+<th align="center">H7</th>
+<th align="center">H6</th>
+<th align="center">H5</th>
+<th align="center">H4</th>
+<th align="center">H3</th>
+<th align="center">H2</th>
+<th align="center">H1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">D4</td>
+<td align="center">D3</td>
+<td align="center">D2</td>
+<td align="center"><strong>P3</strong></td>
+<td align="center">D1</td>
+<td align="center"><strong>P2</strong></td>
+<td align="center"><strong>P1</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+</tbody></table>
+<p><strong>第二行校验位Pi放在海明码为2的(i-1)次方的位置上，信息位按顺序防到其余位置</strong>。</p>
+<p>3：求校验位的值：</p>
+<p>​    H3：3—&gt;0 1 1</p>
+<p>​    H5：5—&gt;1 0 1</p>
+<p>​    H6：6—&gt;1 1 0</p>
+<p>​    H7：7—&gt;1 1 1</p>
+<p>按列看，最左边的列1 1 0 1说明H3 H5 H7不为0，因此用D1 D2 D4进行异或得P1—&gt;0</p>
+<p>第二列1 0 1 1说明H3 H6 H7不为0，因此用D1 D3 D4进行异或得P2—&gt;1</p>
+<p>第三列0 1 1 1说明H5 H6 H7不为0，因此用D2 D3 D4进行异或得P3—&gt;0</p>
+</li>
 </ul>
-
+<p>4：纠错</p>
+<p>校验方程：</p>
+<p>S1=P1⊕D1⊕D2⊕D4</p>
+<p>S2=P2⊕D1⊕D3⊕D4</p>
+<p>S3=P3⊕D2⊕D3⊕D4</p>
+<p>接收到：1010010</p>
+<p>S1=P1⊕D1⊕D2⊕D4 = 0⊕0⊕1⊕1=0</p>
+<p>S2=P2⊕D1⊕D3⊕D4 = 1⊕0⊕0⊕1=0</p>
+<p>S3=P3⊕D2⊕D3⊕D4 = 0⊕1⊕0⊕1=0</p>
+<p>000无错误。</p>
+<p>接收到：1010000</p>
+<p>S1=P1⊕D1⊕D2⊕D4 = 0⊕0⊕1⊕1=0</p>
+<p>S2=P2⊕D1⊕D3⊕D4 = 0⊕0⊕0⊕1=1</p>
+<p>S3=P3⊕D2⊕D3⊕D4 = 0⊕1⊕0⊕1=0</p>
+<p>010转换为二进制为2，则第2位出错,该为1010010</p>
+<p>（格式如果变化，确定校验位得分布摆放位置变化，计算方法不变）</p>
+<h1 id="CRC循环冗余码："><a href="#CRC循环冗余码：" class="headerlink" title="CRC循环冗余码："></a>CRC循环冗余码：</h1>
 
                             <!-- Meta -->
                             <div class="post-meta">
