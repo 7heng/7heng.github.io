@@ -82,9 +82,7 @@ SQL：结构化查询语言，用于和DBMS通信的语言。
                 <div class="row">
                     <!-- Post Main Content -->
                     <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                        <a id="more"></a>
-
-<h1 id="数据库基础："><a href="#数据库基础：" class="headerlink" title="数据库基础："></a>数据库基础：</h1><p><strong>DB：</strong>    数据库，保存一组有组织的的数据的容器。</p>
+                        <h1 id="数据库基础："><a href="#数据库基础：" class="headerlink" title="数据库基础："></a>数据库基础：</h1><p><strong>DB：</strong>    数据库，保存一组有组织的的数据的容器。</p>
 <p><strong>DBMS：</strong>数据库管理系统，又称为数据库软件(产品)，用于管理DB中的数据。</p>
 <p><strong>SQL：</strong>结构化查询语言，用于和DBMS通信的语言。</p>
 <h2 id="数据库存储数据的特点："><a href="#数据库存储数据的特点：" class="headerlink" title="数据库存储数据的特点："></a>数据库存储数据的特点：</h2><p>​    1：将数据放到表中，表再放到库中。</p>
@@ -124,6 +122,24 @@ SQL：结构化查询语言，用于和DBMS通信的语言。
 <p><code>)</code>；    创建表。</p>
 <p><code>desc 表名;</code>    查看指定表的结构。</p>
 <p><code>select * from 表名;</code>    显示表中所有数据。</p>
+<h3 id="起别名"><a href="#起别名" class="headerlink" title="起别名:"></a>起别名:</h3><p><strong>(使用AS)：</strong><code>SELECT 100%98 AS 结果;</code></p>
+<p><code>SELECT last_name AS 姓,first_name 名 FROM 表名;</code></p>
+<p><strong>(使用空格)：</strong><code>SELECT last_name AS 姓,first_name AS 名 FROM 表名;</code></p>
+<h3 id="去重："><a href="#去重：" class="headerlink" title="去重："></a>去重：</h3><p>例：查询员工表中涉及到的所有的部门编号</p>
+<p><code>SELECT DISTINCT department_id FROM 表名;</code></p>
+<h3 id="号："><a href="#号：" class="headerlink" title="+号："></a>+号：</h3><p><strong>java中的+号：</strong></p>
+<p>1：运算符，两个操作数都为数值型。</p>
+<p>2：连接符，只要有一个操作数为字符串。</p>
+<p><strong>MySQL中的+号：</strong></p>
+<p>仅有一个功能，运算符。</p>
+<p><code>select 100+90;</code>两个操作数都为数值型，则做加法运算。</p>
+<p><code>select &#39;123&#39;+90;</code> 只要其中一个为字符型,试图将字符型数值转换成数值型，如果转换成功，则继续做加法运算。</p>
+<p><code>select &#39;heng&#39;+22;</code> 如果转换失败，则将字符型数值转换成0。</p>
+<p><code>select null+10;</code> 只要其中一方为null,结果肯定为null。</p>
+<h3 id="连接："><a href="#连接：" class="headerlink" title="连接："></a>连接：</h3><p>例：查询员工姓名和姓连接成一个字段，并显示为姓名。</p>
+<p><code>SELECT (last_name,first_name) AS 姓名 FROM 表名;</code></p>
+<p><strong>补充一个计算机中取余小知识：</strong></p>
+<p><code>a % b = a - a/b*b;</code></p>
 <p>​        </p>
 <p>​    </p>
 <p>​            </p>
