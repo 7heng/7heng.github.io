@@ -328,7 +328,100 @@
 <p>S3=P3⊕D2⊕D3⊕D4 = 0⊕1⊕0⊕1=0</p>
 <p>010转换为二进制为2，则第2位出错,该为1010010</p>
 <p>（格式如果变化，确定校验位得分布摆放位置变化，计算方法不变）</p>
-<h1 id="CRC循环冗余码："><a href="#CRC循环冗余码：" class="headerlink" title="CRC循环冗余码："></a>CRC循环冗余码：</h1>
+<h1 id="CRC循环冗余码："><a href="#CRC循环冗余码：" class="headerlink" title="CRC循环冗余码："></a>CRC循环冗余码：</h1><table>
+<thead>
+<tr>
+<th align="center">信息位</th>
+<th align="center">校验位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">K位</td>
+<td align="center">R位</td>
+</tr>
+</tbody></table>
+<p>例：设生成多项式为G(X) = x的三次方+X的2次方+1,信息码为101001，求对应的CRC码</p>
+<p>​    1：确定K,R以及生成多项式对应的二进制码。</p>
+<p>​    K = 信息码的长度 = 6，R = 生成多项式最高次幂 = 3 –&gt; 校验码位数N = K+ R =9</p>
+<p>​    生成多项式G(X) = 1·(X^3)+1·(X^2)+0·(X^1)+1·(X^0),对应的二进制码1101</p>
+<p>​    2：移位：</p>
+<p>​    信息码左移R位，低位补0 —–&gt; 1101000</p>
+<p>​    3：相除(模2除)：</p>
+<p>​    对移位后的信息码，用生成多项式进行模2除法，产生余数</p>
+<p>1101000 / 1101</p>
+<p>模2除：看被除数的最高位是1还是0，根据最高位去上位。减法做不带进位的减法，进行异或运算(相同为0，不同为1),最终取得的余数为校验位。对应的CRC码就是信息码+校验位。</p>
+<p><img src="/images/Char/CRC.png"></p>
+<p>4：检错和纠错：</p>
+<p>例：发送：101001001    记为C9C8C7C6C5C4C3C2C1</p>
+<p>​        接收：101001001—–&gt;用1001进行模2除—-&gt;余数000，代表没出错。</p>
+<p>​        接收：101001011—-&gt;用1101进行模2除—-&gt;余数为010，二进制转换为2，C2出错，但不是绝对，因为000只能代表8位，并不能完全表示。</p>
+<table>
+<thead>
+<tr>
+<th align="center">原循环冗余码</th>
+<th align="center">出错一位后的循环冗余码</th>
+<th align="center">出错位</th>
+<th align="center">余数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">101001 001</td>
+<td align="center">101001 000</td>
+<td align="center">1</td>
+<td align="center">001</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">101001 011</td>
+<td align="center">2</td>
+<td align="center">010</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">101001 101</td>
+<td align="center">3</td>
+<td align="center">011</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">101000 001</td>
+<td align="center">4</td>
+<td align="center">100</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">101011 001</td>
+<td align="center">5</td>
+<td align="center">101</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">101101 001</td>
+<td align="center">6</td>
+<td align="center">110</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">100001 001</td>
+<td align="center">7</td>
+<td align="center">111</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">111001 001</td>
+<td align="center">8</td>
+<td align="center">001</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">001001 001</td>
+<td align="center">9</td>
+<td align="center">010</td>
+</tr>
+</tbody></table>
+<p>假设信息位是K，校验位是R，那么CRC的位数就是R + K ，而R的校验位，可以表示的数从0到2R-1，而0用来表示正确的情况，那么一共有2R-1种错误码，其中每个错误码对应一位，因此我们可以得到一个公式，当满足2R - 1 &gt;= K+R的时候，CRC才具有纠错功能。而且我们可以发现余数是每7个一个循环，出错位1和出错位8的余数是一样的，出错位2和出错位9的余数是一样的，所以这也是为什么叫做循环冗余码的原因。</p>
+<p>为什么一般我们不提及CRC的纠错功能，因为CRC一般用在计算机网络中，在以太网的MAC帧中，通常4字节的效验码（FCS）不但用来检验MAC帧的数据部分，还用来检验目的地址、原地址和类型字段（60~1514）字节，信息位远远大于校验位，因此我们一般不提及CRC的纠错功能，但这并不代表没有。</p>
+
 
                             <!-- Meta -->
                             <div class="post-meta">
