@@ -23,7 +23,7 @@
 
     <!-- Title -->
     
-    <title>MySQL查询 | Heng</title>
+    <title>MySQL基础查询 | Heng</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -68,7 +68,7 @@
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                         <div class="post-heading">
                             <h1>
-                                MySQL查询
+                                MySQL基础查询
                             </h1>
                         </div>
                     </div>
@@ -100,13 +100,20 @@
 <p><strong>&lt;=&gt;：既可以判断NULL值，又可以判断普通的数值，可读性较低。</strong></p>
 <h6 id="排序查询："><a href="#排序查询：" class="headerlink" title="排序查询："></a>排序查询：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select 要查询的内容 from 表</span><br><span class="line"></span><br><span class="line">where 条件</span><br><span class="line"></span><br><span class="line">order by 排序的字段|表达式|函数|别名 asc(默认升序)或desc(降序)</span><br></pre></td></tr></table></figure>
 
-<h6 id="分组查询："><a href="#分组查询：" class="headerlink" title="分组查询："></a>分组查询：</h6><p>特点：</p>
+<h6 id="分组查询："><a href="#分组查询：" class="headerlink" title="分组查询："></a>分组查询：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">语法：</span><br><span class="line">select  分组函数，列(要求出现在GROUP BY 后面)</span><br><span class="line">form 表</span><br><span class="line">【where 筛选条件】</span><br><span class="line">group by 分组的列表</span><br><span class="line">【order by 子句】</span><br></pre></td></tr></table></figure>
+
+<p>注意：查询列表必须特殊，要求是分组函数和group by 后出现的字段。</p>
+<p><strong>特点：</strong></p>
 <p>1：和分组函数一同查询的字段必须是group by后出现的字段。</p>
 <p>2：筛选分为两类：分组前筛选和分组后筛选</p>
 <p>分组前筛选：原始表</p>
 <p>分组后筛选：group by后的结果集</p>
 <p>group by 前用关键字where，group by后用关键字 having</p>
 <p>分组筛选不能放在where后面。</p>
+<p>3：分组函数做条件肯定是放在having子句中。</p>
+<p>能用分组前筛选的，优先考虑使用分组前筛选</p>
+<p>4：group by 子句支持单个字段分组，多个字段分组(多个字段之间用逗号隔开没有顺序要求)，表达式或函数(较少使用)。</p>
+<p>5：也可以添加排序（排序放在整个分组查询的最后)。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">select 要查询的字段,分组函数 from 表</span><br><span class="line">where 筛选条件</span><br><span class="line">group by 分组的字段</span><br><span class="line">order by 排序的字段</span><br><span class="line"></span><br><span class="line">查询每个部门的员工个数：</span><br><span class="line">SELECT COUNT(*) FROM employees WHERE department_id &#x3D; 90;</span><br><span class="line">简单的分组：</span><br><span class="line">1：查询每个工种的员工的平均工资</span><br><span class="line">SELECT AVG(salary),job_id</span><br><span class="line">FROM emplyoees</span><br><span class="line">GROUP BY job_id;</span><br><span class="line"></span><br><span class="line">2：查询每个位置的部门个数</span><br><span class="line">SELECT COUNT(*),location_id</span><br><span class="line">FROM department</span><br><span class="line">GROUP BY location_id;</span><br><span class="line"></span><br><span class="line">3：实现分组前的筛选</span><br><span class="line">查询邮箱中包含a字符的每个部门的最高工资</span><br><span class="line">SELECT MAX(salary),manager_id</span><br><span class="line">FROM emplyoees</span><br><span class="line">WHERE commission_pct IS NOT NULL</span><br><span class="line">GROUP BY manager_id;</span><br><span class="line"></span><br><span class="line">分组后筛选</span><br><span class="line">①：查询每个部门的员工个数</span><br><span class="line">SELECT COUNT(*),department_id</span><br><span class="line">FROM emplyoees</span><br><span class="line">GROUP BY departments_id;</span><br><span class="line"></span><br><span class="line">②：筛选①的结果，查询哪个部门的员工个数&gt;5</span><br><span class="line">SELECT COUNT(*),department_id</span><br><span class="line">FROM emplyoees</span><br><span class="line">GROUP BY department_id</span><br><span class="line">HAVING COUNT(*)&gt;5;</span><br><span class="line"></span><br><span class="line">4：每个工种有奖金的员工的最高工资&gt;12000的工种编号和最高工资</span><br><span class="line">SELECT job_id,MAX(salary)</span><br><span class="line">FROM employees</span><br><span class="line">WHERE commission_pct IS NOT NULL</span><br><span class="line">GROUP BY job_id</span><br><span class="line">HAVING MAX(salary)&gt;12000;</span><br><span class="line"></span><br><span class="line">5：领导编号&gt;102的每个领导手下的最低工资大于5000的领导编号和最低工资</span><br><span class="line">manager_id&gt;102</span><br><span class="line">SELECT manager_id,MIN(salary)</span><br><span class="line">FROM employees</span><br><span class="line">GROUP BY manager_id</span><br><span class="line">HAVING MIN(salary)&gt;5000;</span><br><span class="line"></span><br><span class="line">6.添加排序</span><br><span class="line">例：每个工种有奖金的员工的最高工资&gt;6000的工种编号和最高工资,按最高工资升序</span><br><span class="line">SELECT job_id,MAX(salary) m</span><br><span class="line">FROM employees</span><br><span class="line">WHERE commission_pct IS NOT NULL</span><br><span class="line">GROUP BY job_id</span><br><span class="line">HAVING m&gt;6000</span><br><span class="line">ORDER BY m ;</span><br><span class="line"></span><br><span class="line">7.按多个字段分组</span><br><span class="line">例：查询每个工种每个部门的最低工资,并按最低工资降序</span><br><span class="line">SELECT MIN(salary),job_id,department_id</span><br><span class="line">FROM employees</span><br><span class="line">GROUP BY department_id,job_id</span><br><span class="line">ORDER BY MIN(salary) DESC;</span><br></pre></td></tr></table></figure>
 
 

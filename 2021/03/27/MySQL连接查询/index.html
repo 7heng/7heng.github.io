@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="多表连接查询：12笛卡尔乘积，如果连接条件省略或无效则会出现解决办法：添加上连接条件。
+
+传统模式下的连接：等值连接—非等值连接：12341：等值连接的结果 &amp;#x3D; 多个表的交集。2：n表连接，至少需要n-1个连接条件。3：多个表不分主次，没有顺序要求。4：一般为表起别名，提高阅读性和性能。
+">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>MySQL连接查询 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                MySQL连接查询
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h6 id="多表连接查询："><a href="#多表连接查询：" class="headerlink" title="多表连接查询："></a>多表连接查询：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">笛卡尔乘积，如果连接条件省略或无效则会出现</span><br><span class="line">解决办法：添加上连接条件。</span><br></pre></td></tr></table></figure>
+
+<h6 id="传统模式下的连接：等值连接—非等值连接："><a href="#传统模式下的连接：等值连接—非等值连接：" class="headerlink" title="传统模式下的连接：等值连接—非等值连接："></a>传统模式下的连接：等值连接—非等值连接：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1：等值连接的结果 &#x3D; 多个表的交集。</span><br><span class="line">2：n表连接，至少需要n-1个连接条件。</span><br><span class="line">3：多个表不分主次，没有顺序要求。</span><br><span class="line">4：一般为表起别名，提高阅读性和性能。</span><br></pre></td></tr></table></figure>
+
+<h6 id="sql99语法：通过join关键字实现连接。"><a href="#sql99语法：通过join关键字实现连接。" class="headerlink" title="sql99语法：通过join关键字实现连接。"></a>sql99语法：通过join关键字实现连接。</h6><p><em>支持：等值连接、非等值连接、内连接、外连接、交叉连接</em></p>
+<p><em>语法 (好处：语句上，连接条件和筛选条件实现了分离，简洁明了)：</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select 字段···</span><br><span class="line">from 表1</span><br><span class="line">[ inner | left outer | right outer | cross ] join 表2 on 连接条件</span><br><span class="line">[ inner | left outer | right outer | cross ] join 表3 on 连接条件</span><br><span class="line">where 筛选条件</span><br><span class="line">group by 分组字段</span><br><span class="line">having 分组后的筛选条件</span><br><span class="line">order by 排序的字段或表达式</span><br></pre></td></tr></table></figure>
+
+<h6 id="自连接-起别名-："><a href="#自连接-起别名-：" class="headerlink" title="自连接(起别名)："></a>自连接(起别名)：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">例：查询员工和直接上级的名称</span><br><span class="line">sql99：</span><br><span class="line"></span><br><span class="line">SELECT e.last_name,m.last_name</span><br><span class="line">FROM employees e</span><br><span class="line">JOIN employees m ON e.manager_id &#x3D; m.employee_id;</span><br><span class="line"></span><br><span class="line">sql92：</span><br><span class="line"></span><br><span class="line">SELECT e.last_name,m.last_name</span><br><span class="line">FROM employees e,employees m</span><br><span class="line">WHERE e.manager_id &#x3D; m.employee_id;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">例：等值连接</span><br><span class="line">1：查询员工名、部门名</span><br><span class="line">SELECT last_name,department_name</span><br><span class="line">FROM department d</span><br><span class="line">JOIN employees e</span><br><span class="line">ON e.department_id &#x3D; d.dempartment_id;</span><br><span class="line"></span><br><span class="line">2：查询名字中包含e的员工名和工种名(添加筛选)</span><br><span class="line">SELECT last_name,job_title</span><br><span class="line">FROM employees e</span><br><span class="line">INNER JOIN jobs j</span><br><span class="line">ON e.job_id &#x3D; j.job_id</span><br><span class="line">WHERE e.last_name LIKE &#39;%e%&#39;;</span><br><span class="line"></span><br><span class="line">3：查询部门个数&gt;3的城市名和部门个数(添加分组+筛选)</span><br><span class="line">①：查询每个城市的部门个数</span><br><span class="line">②：在①结果上筛选满足条件的</span><br><span class="line">SELECT city,COUNT(*) 部门个数</span><br><span class="line">FROM departments d</span><br><span class="line">INNER JOIN locations l</span><br><span class="line">ON d.location_id &#x3D; l.location_id</span><br><span class="line">GROUP BY city</span><br><span class="line">HAVING COUNT(*)&gt;3;</span><br><span class="line"></span><br><span class="line">4：查询哪个部门的员工个数&gt;3的部门名和员工个数，并按个数降序(添加排序)</span><br><span class="line">①：查询每个部门的员工个数</span><br><span class="line">SELECT COUNT(*),department_name</span><br><span class="line">FROM employees e</span><br><span class="line">INNER JOIN departments d</span><br><span class="line">ON e.department_id &#x3D; d.department_id</span><br><span class="line">GROUP BY departments_name</span><br><span class="line">②：在①结果上筛选员工个数&gt;3的记录，并排序</span><br><span class="line">SELECT COUNT(*) 个数，department_name</span><br><span class="line">FROM empioyees e</span><br><span class="line">INNER JOIN departments d</span><br><span class="line">ON e.department_id &#x3D; d,department_id</span><br><span class="line">GROUP BY department_name</span><br><span class="line">HAVING COUNT(*)&gt;3</span><br><span class="line">ORDER BY COUNT(*) DESC;</span><br><span class="line"></span><br><span class="line">5:查询员工名、部门名、工作名、并按部门名降序(添加三表连接)</span><br><span class="line">SELECT last_name,department_name,job_title</span><br><span class="line">FROM employees e</span><br><span class="line">INNER JOIN departmens d ON e.department_id &#x3D; d.deparment_id</span><br><span class="line">INNER JOIN jobs j ON e.job_id &#x3D; j.job_id	&#x2F;&#x2F;第三个表要与前两个表有联系，否则会出错，顺序可以变。</span><br><span class="line">ORDER BY department_name DESC;</span><br><span class="line"></span><br><span class="line">例：非等值连接</span><br><span class="line">1：查询员工的工资级别</span><br><span class="line">SELECT salary,grade_lever</span><br><span class="line">FROM employees e</span><br><span class="line">JOIN job_grades g</span><br><span class="line">ON e.salary BETWEEN g.lowest_sal AND g.highest_sal;</span><br><span class="line"></span><br><span class="line">2：查询工资级别的个数&gt;20的个数，并且按工资级别降序</span><br><span class="line">SELECT COUNT(*),grade_level</span><br><span class="line">FROM employees e</span><br><span class="line">JOIN job_grades g</span><br><span class="line">ON e.salary BETWEEN g.lowest_sal AND g.highest_sal</span><br><span class="line">GROUP BY grade_leval</span><br><span class="line">HAVING COUNT(*)&gt;20</span><br><span class="line">ORDER BY grade_leval DESC;</span><br><span class="line"></span><br><span class="line">例：自连接</span><br><span class="line">查询员工的名字、上级的名字</span><br><span class="line">SELECT e.last_name,m.last_name</span><br><span class="line">FROM employees e</span><br><span class="line">JOIN employees m</span><br><span class="line">ON e.manager_id &#x3D; m.employee_id</span><br><span class="line">WHERE e.last_name LIKE &#39;%K%&#39;;</span><br></pre></td></tr></table></figure>
+
+<h6 id="外连接："><a href="#外连接：" class="headerlink" title="外连接："></a>外连接：</h6><p><em>应用场景：用于查询一个表中有，另一个表中没有的记录</em></p>
+<p><strong>特点：</strong></p>
+<p>1：外连接的查询结果为主表中的所有记录</p>
+<p>如果从表中有和它匹配的，则显示匹配的值</p>
+<p>如果从表中没有和它匹配的，则显示null</p>
+<p>外连接查询结果=内连接结果+主表中有而从表没有的记录</p>
+<p>2：左外连接：left join左边的是主表</p>
+<p>&emsp; 右外连接：right join右边的是主表</p>
+<p>3：左外和右外交换两个表的顺序，可以实现同样的效果</p>
+<p>4：全外连接=内连接的结果+表1中右但表2中没有的+表2中有但表1中没有的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">例：查询男友不在男神表的女神名</span><br><span class="line">左外连接：</span><br><span class="line">SELECT b.*,bo.*</span><br><span class="line">FROM boys bo</span><br><span class="line">LEFT OUTER JOIN beauty b</span><br><span class="line">ON b.boyfriend_id &#x3D; bo.id</span><br><span class="line">WHERE b.id IS NULL;</span><br><span class="line"></span><br><span class="line">查询哪个部门没有员工</span><br><span class="line">左外连接：</span><br><span class="line">SEKECT d.*,e.employee_id</span><br><span class="line">FROM departments d</span><br><span class="line">LEFT OUTER JOIN employees e</span><br><span class="line">ON d.department_id &#x3D; e.department_id</span><br><span class="line">WHERE e.enployee_id IS NULL;</span><br><span class="line"></span><br><span class="line">右外连接：</span><br><span class="line">SELECT d.*,e.employee_id</span><br><span class="line">FROM employees e</span><br><span class="line">RIGHT OUTER JOIN departments d</span><br><span class="line">ON d.department_id &#x3D; e.department_id</span><br><span class="line">WHERE e.employee_id IS NULL;</span><br><span class="line"></span><br><span class="line">全外连接：（MySQL中不支持全外连接）</span><br><span class="line">USE girls;</span><br><span class="line">SELECT b.*,bo.*</span><br><span class="line">FROM beayty b</span><br><span class="line">FULL OUTER JOIN boys bo</span><br><span class="line">ON b.boyfriend_id &#x3D; bo.id;</span><br><span class="line"></span><br><span class="line">MySQL中可以使用UNION达到全外连接的效果：</span><br><span class="line">UNION 操作符用于合并两个或多个 SELECT 语句的结果集。</span><br><span class="line">注释：默认地，UNION 操作符选取不同的值。如果允许重复的值，请使用 UNION ALL。</span><br><span class="line">故实现全外连接可以使用：</span><br><span class="line">SELECT * FROM emp e LEFT JOIN dept d ON e.deptno&#x3D;d.deptno</span><br><span class="line">UNION</span><br><span class="line">SELECT * FROM emp e RIGHT JOIN dept d ON e.deptno&#x3D;d.deptno;</span><br><span class="line"></span><br><span class="line">交叉连接：</span><br><span class="line">SELECT b.*,bo.*</span><br><span class="line">FROM beauty b</span><br><span class="line">CROSS JOIN boys bo;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-03-27
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>
