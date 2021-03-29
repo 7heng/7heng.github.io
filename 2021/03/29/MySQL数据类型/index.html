@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="123456789101112131415161718192021222324252627282930313233常见的数据类型：数值型: 整形	   小数	     定点数	     浮点数字符型:	较短的文本：char、varchar	较长的文本：text、blob(较长的二进制数据)日期型:整">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>MySQL数据类型 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                MySQL数据类型
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">常见的数据类型：</span><br><span class="line">数值型: 整形</span><br><span class="line">	   小数</span><br><span class="line">	     定点数</span><br><span class="line">	     浮点数</span><br><span class="line">字符型:</span><br><span class="line">	较短的文本：char、varchar</span><br><span class="line">	较长的文本：text、blob(较长的二进制数据)</span><br><span class="line">日期型:</span><br><span class="line"></span><br><span class="line">整形</span><br><span class="line">分类：tinyint(1)、smallint(2)、mediumint(3)、int&#x2F;integer(4)、bigint(8)</span><br><span class="line">特点：①：如果不设置无符号还是有符号，默认是有符号的，如果想设置无符号，需要添加unsigned关键字</span><br><span class="line">②：如果插入的数值超出整型的范围，会报out of range异常，并且插入临界值。</span><br><span class="line">③：如果不设置长度，会有默认的长度。</span><br><span class="line">长度代表了显示的最大宽度，如果不够会用0在左边填充，但必须搭配zerofill使用。</span><br><span class="line"></span><br><span class="line">例：何设置无符号和有符号</span><br><span class="line">DROP TABLE IF EXISTS tab_int;</span><br><span class="line">CREATE TABLE tab_int(</span><br><span class="line">	t1 INT(7) ZEROFILL,</span><br><span class="line">	t2 INT(7) ZEROFILL </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">DESC tab_int;</span><br><span class="line"></span><br><span class="line">INSERT INTO tab_int VALUES(-123456);</span><br><span class="line">INSERT INTO tab_int VALUES(-123456,-123456);</span><br><span class="line">INSERT INTO tab_int VALUES(2147483648,4294967296);</span><br><span class="line"></span><br><span class="line">INSERT INTO tab_int VALUES(123,123);</span><br><span class="line"></span><br><span class="line">SELECT * FROM tab_int;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">小数</span><br><span class="line">分类：</span><br><span class="line">1.浮点型</span><br><span class="line">float(M,D)</span><br><span class="line">double(M,D)</span><br><span class="line">2.定点型</span><br><span class="line">dec(M，D)</span><br><span class="line">decimal(M,D)</span><br><span class="line"></span><br><span class="line">特点：</span><br><span class="line">①</span><br><span class="line">M：整数部位+小数部位</span><br><span class="line">D：小数部位</span><br><span class="line">如果超过范围，则插入临界值</span><br><span class="line">②</span><br><span class="line">M和D都可以省略</span><br><span class="line">如果是decimal，则M默认为10，D默认为0</span><br><span class="line">如果是float和double，则会根据插入的数值的精度来决定精度</span><br><span class="line"></span><br><span class="line">③定点型的精确度较高，如果要求插入数值的精度较高如货币运算等则考虑使用</span><br><span class="line"></span><br><span class="line">测试M和D</span><br><span class="line">DROP TABLE tab_float;</span><br><span class="line">CREATE TABLE tab_float(</span><br><span class="line">	f1 FLOAT,</span><br><span class="line">	f2 DOUBLE,</span><br><span class="line">	f3 DECIMAL</span><br><span class="line">);</span><br><span class="line">SELECT * FROM tab_float;</span><br><span class="line">DESC tab_float;</span><br><span class="line"></span><br><span class="line">INSERT INTO tab_float VALUES(123.4523,123.4523,123.4523);</span><br><span class="line">INSERT INTO tab_float VALUES(123.456,123.456,123.456);</span><br><span class="line">INSERT INTO tab_float VALUES(123.4,123.4,123.4);</span><br><span class="line">INSERT INTO tab_float VALUES(1523.4,1523.4,1523.4);</span><br><span class="line">原则：所选择的类型越简单越好，能保存数值的类型越小越好。</span><br><span class="line"></span><br><span class="line">字符型</span><br><span class="line">较短的文本：</span><br><span class="line">char</span><br><span class="line">varchar</span><br><span class="line"></span><br><span class="line">其他：</span><br><span class="line">binary和varbinary用于保存较短的二进制</span><br><span class="line">enum用于保存枚举</span><br><span class="line">set用于保存集合</span><br><span class="line"></span><br><span class="line">较长的文本：</span><br><span class="line">text</span><br><span class="line">blob(较大的二进制)</span><br><span class="line"></span><br><span class="line">特点：</span><br><span class="line">写法							M的意思				  特点			空间的耗费	效率</span><br><span class="line">char	char(M)		最大的字符数，可以省略，默认为1	固定长度的字符		   比较耗费	    高</span><br><span class="line"></span><br><span class="line">varchar varchar(M)	   最大的字符数，不可以省略		  可变长度的字符		  比较节省	  低</span><br><span class="line"></span><br><span class="line">CREATE TABLE tab_char(</span><br><span class="line">	c1 ENUM(&#39;a&#39;,&#39;b&#39;,&#39;c&#39;)</span><br><span class="line"></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">INSERT INTO tab_char VALUES(&#39;a&#39;);</span><br><span class="line">INSERT INTO tab_char VALUES(&#39;b&#39;);</span><br><span class="line">INSERT INTO tab_char VALUES(&#39;c&#39;);</span><br><span class="line">INSERT INTO tab_char VALUES(&#39;m&#39;);</span><br><span class="line">INSERT INTO tab_char VALUES(&#39;A&#39;);</span><br><span class="line"></span><br><span class="line">SELECT * FROM tab_set;</span><br><span class="line"></span><br><span class="line">CREATE TABLE tab_set(</span><br><span class="line"></span><br><span class="line">	s1 SET(&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;)</span><br><span class="line"></span><br><span class="line">);</span><br><span class="line">INSERT INTO tab_set VALUES(&#39;a&#39;);</span><br><span class="line">INSERT INTO tab_set VALUES(&#39;A,B&#39;);</span><br><span class="line">INSERT INTO tab_set VALUES(&#39;a,c,d&#39;);</span><br><span class="line"></span><br><span class="line">日期型</span><br><span class="line">分类：</span><br><span class="line">date只保存日期</span><br><span class="line">time 只保存时间</span><br><span class="line">year只保存年</span><br><span class="line"></span><br><span class="line">datetime保存日期+时间</span><br><span class="line">timestamp保存日期+时间</span><br><span class="line"></span><br><span class="line">特点：</span><br><span class="line"></span><br><span class="line">			字节		 范围			 时区等的影响</span><br><span class="line">datetime	 8		1000——9999	       不受</span><br><span class="line">timestamp	 4	    1970-2038	        受</span><br><span class="line"></span><br><span class="line">CREATE TABLE tab_date(</span><br><span class="line">	t1 DATETIME,</span><br><span class="line">	t2 TIMESTAMP</span><br><span class="line"></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">INSERT INTO tab_date VALUES(NOW(),NOW());</span><br><span class="line"></span><br><span class="line">SELECT * FROM tab_date;</span><br><span class="line"></span><br><span class="line">SHOW VARIABLES LIKE &#39;time_zone&#39;;</span><br><span class="line"></span><br><span class="line">SET time_zone&#x3D;&#39;+9:00&#39;;</span><br></pre></td></tr></table></figure>
+
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-03-29
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>
