@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="一：Driver接口实现类Driver接口介绍：
+
+java.sql.Driver接口时所有JDBC驱动程序需要实现的接口，这个接口是提供给数据库厂商使用的，不同数据库厂商提供不同的实现。
+
+在程序中不需要直接去访问实现了Driver接口的类，而是由驱动程序管理器类(java.sql.DriverM">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>JDBC获取数据库连接 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                JDBC获取数据库连接
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h6 id="一：Driver接口实现类"><a href="#一：Driver接口实现类" class="headerlink" title="一：Driver接口实现类"></a>一：Driver接口实现类</h6><p><strong>Driver接口介绍：</strong></p>
+<ul>
+<li><p>java.sql.Driver接口时所有JDBC驱动程序需要实现的接口，这个接口是提供给数据库厂商使用的，不同数据库厂商提供不同的实现。</p>
+</li>
+<li><p>在程序中不需要直接去访问实现了Driver接口的类，而是由驱动程序管理器类(java.sql.DriverManager)去调用这些Driver实现。</p>
+<ul>
+<li>Oracle的驱动：Oracle.jdbc.driver.OracleDriver</li>
+<li>mysql的驱动：com.mysql.jdbc.Driver</li>
+</ul>
+</li>
+</ul>
+<h6 id="二：加载与注册JDBC驱动"><a href="#二：加载与注册JDBC驱动" class="headerlink" title="二：加载与注册JDBC驱动"></a>二：加载与注册JDBC驱动</h6><ul>
+<li><p>加载驱动：加载JDBC驱动需要调用Class类的静态方法forName(),向其传递要加载的JDBC驱动的类名</p>
+<ul>
+<li>Class.forName(“com.mysql.jdbc.Driver”);</li>
+</ul>
+</li>
+<li><p>注册驱动：DriverManager类是驱动程序管理器类，负责管理驱动程序</p>
+<ul>
+<li><p><strong>使用DriverManager.registerDriver(com.mysql.jdbc.Driver)来注册驱动</strong></p>
+</li>
+<li><p>通常不用显示调用DriverManager类的registerDriver()方法来注册驱动程序类的实例，因为Driver接口的驱动程序类都包含了静态代码块，在这个静态代码块中，会调用DriverManager.registerDriver()方法来注册自身的一个实例，下图是MySQL的Driver实现类的源码：</p>
+<p><img src="/images/JDBC_1/Driver.png"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="三：URL"><a href="#三：URL" class="headerlink" title="三：URL"></a>三：URL</h6><ul>
+<li>JDBC URL用于标识一个被注册的驱动程序，驱动程序管理器通过这个URL选择正确的驱动程序，从而建立到数据库的连接。</li>
+<li>JDBC URL的标准由三部分组成，各部分间用冒号分隔。<ul>
+<li><strong>jdbc:子协议：子名称</strong></li>
+<li><strong>协议：</strong>JDBC URL中的协议总是jdbc</li>
+<li><strong>子协议：</strong>子协议用于标识一个数据库驱动程序</li>
+<li><strong>子名称：</strong>一种标识数据库的方法。子名称可以依不同的子协议而变化，用子名称的目的是为了<strong>定位数据库</strong>提供足够的信息，包含主机名(对应服务端的ip地址)，<strong>端口号</strong>，<strong>数据库名</strong>。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/JDBC_1/URL.png"></p>
+<ul>
+<li><p>几种常用数据库的JDBC URL</p>
+<p>MySQL的连接URL编写方式：</p>
+<ul>
+<li><p>jdbc:mysql://主机名称:mysql服务端口号/数据库名称？参数=值&amp;参数=值</p>
+</li>
+<li><p>jdbc:mysql://localhost:3306/7heng</p>
+</li>
+<li><p>jdbc:mysql://localhost:3306/7heng?useUnicode=true&amp;characterEncoding=utf8（如果JDBC程序与服务器端的字符集不一致，会导致乱码，那么可以通过参数指定服务器端的字符集）</p>
+</li>
+<li><p>jdbc:mysql://locahost:3306/7heng?user=root&amp;password=7777777</p>
+</li>
+<li><p>Oracle9i的连接URL编写方式：</p>
+<ul>
+<li>jdbc:oracle:thin:@主机名称:oracle服务端口：数据库名称</li>
+<li>jdbc:oracle:thin:@localhost:1521:7heng</li>
+</ul>
+</li>
+<li><p>SQLServer的连接URL编写方式：</p>
+<ul>
+<li>jdbc:sqlserver://主机名称:sqlserver服务端口号:DatabaseName=数据库名称</li>
+<li>jdbc:sqlserver://localhost:1433:DatabaseName=7heng</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="四：用户名和密码："><a href="#四：用户名和密码：" class="headerlink" title="四：用户名和密码："></a>四：用户名和密码：</h6><ul>
+<li>user,password可以用”属性名=属性值”方式告诉数据库。</li>
+<li>可以调用DriverManger类的getConnection()方法建立到数据库的连接。</li>
+</ul>
+<p><strong>数据库连接方式举例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">连接方式一：</span><br><span class="line">@Test</span><br><span class="line">public void testConnectionl()&#123;</span><br><span class="line">	try&#123;</span><br><span class="line">		&#x2F;&#x2F;1：提供java.sql.Driver接口实现类的对象</span><br><span class="line">		Driver driver &#x3D; null;</span><br><span class="line">		driver &#x3D; new com.mysql.jdbc.Driver();</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;2：提供url，指明具体操作的数据</span><br><span class="line">		String url &#x3D; &quot;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test&quot;;</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;3:提供Properties的对象，指明用户名和密码</span><br><span class="line">		Properties info &#x3D; new Properties();</span><br><span class="line">		info.setProperty(&quot;user&quot;,&quot;root&quot;);</span><br><span class="line">		info.setProperty(&quot;password&quot;,&quot;7777777&quot;);</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;4:调用driver的connect(),获取连接</span><br><span class="line">		Connerction conn &#x3D; driver.conner(url.info);</span><br><span class="line">		</span><br><span class="line">		System.out,println(conn);</span><br><span class="line">	&#125;catch(SQLException e)&#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">说明：上述代码中显示出现了第三方数据的API</span><br></pre></td></tr></table></figure>
+
+<p>连接方式二：</p>
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-04-03
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>
