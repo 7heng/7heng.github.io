@@ -9,6 +9,14 @@
 
     <!--Description-->
     
+        <meta name="description" content="使用PreparedStatement实现CRUD操作：操作和访问数据库：
+
+数据库连接被用于向数据库服务器发送命令和sql语句，并接受数据库服务器返回的结果。其实一个数据库连接就是一个Socket连接。
+
+在java.sql包中有3个接口分别定义了对数据库的调用的不同方式：
+
+Statement：">
+    
 
     <!--Author-->
     
@@ -76,7 +84,20 @@
                 <div class="row">
                     <!-- Post Main Content -->
                     <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                        
+                        <h4 id="使用PreparedStatement实现CRUD操作："><a href="#使用PreparedStatement实现CRUD操作：" class="headerlink" title="使用PreparedStatement实现CRUD操作："></a>使用PreparedStatement实现CRUD操作：</h4><p><strong>操作和访问数据库：</strong></p>
+<ul>
+<li><p>数据库连接被用于向数据库服务器发送命令和sql语句，并接受数据库服务器返回的结果。其实一个数据库连接就是一个Socket连接。</p>
+</li>
+<li><p>在java.sql包中有3个接口分别定义了对数据库的调用的不同方式：</p>
+<ul>
+<li>Statement：用于执行静态sql语句并返回它所生成结果的对象。</li>
+<li>PrepartedStatement：SQL语句被预编译并存储在此对象中，可以使用此对象多次高效地执行该语句。</li>
+<li>CallbleStatement：用于执行SQL存储过程。</li>
+</ul>
+<p><img src="/images/JDBC_1/Curd.png"></p>
+</li>
+</ul>
+
 
                             <!-- Meta -->
                             <div class="post-meta">
