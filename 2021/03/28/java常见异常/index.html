@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="java异常体系结构：1234567891011121314java.lang.Throwable    |-----java.lang.Error:一般不编写针对性的代码进行处理。    |-----java.lang.Exception:可以进行异常的处理       |------编译时异常(">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>java常见异常 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                java常见异常
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h6 id="java异常体系结构："><a href="#java异常体系结构：" class="headerlink" title="java异常体系结构："></a>java异常体系结构：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Throwable</span><br><span class="line">    |-----java.lang.Error:一般不编写针对性的代码进行处理。</span><br><span class="line">    |-----java.lang.Exception:可以进行异常的处理</span><br><span class="line">       |------编译时异常(checked)</span><br><span class="line">             |-----IOException</span><br><span class="line">                |-----FileNotFoundException</span><br><span class="line">             |-----ClassNotFoundException</span><br><span class="line">       |------运行时异常(unchecked,RuntimeException)</span><br><span class="line">             |-----NullPointerException</span><br><span class="line">             |-----ArrayIndexOutOfBoundsException</span><br><span class="line">             |-----ClassCastException</span><br><span class="line">             |-----NumberFormatException</span><br><span class="line">             |-----InputMismatchException</span><br><span class="line">             |-----ArithmeticException</span><br></pre></td></tr></table></figure>
+
+<h6 id="java常见异常举例："><a href="#java常见异常举例：" class="headerlink" title="java常见异常举例："></a>java常见异常举例：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">import java.io.File;</span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">下例为编译时异常：</span><br><span class="line">public void test7()&#123;</span><br><span class="line">    File file &#x3D; new File(&quot;hello.txt&quot;);</span><br><span class="line">    FileInputStream fis &#x3D; new FileInputStream(file);</span><br><span class="line">    </span><br><span class="line">    int data &#x3D; fis.read();</span><br><span class="line">    while(data !&#x3D; -1)&#123;</span><br><span class="line">       System.out.print((char)data);</span><br><span class="line">       data &#x3D; fis.read();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    fis.close();</span><br><span class="line">      </span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">下例运行时异常：</span><br><span class="line">1：AirthmeticExctption	算数异常：</span><br><span class="line"></span><br><span class="line">public void test6()&#123;</span><br><span class="line">	int a &#x3D; 10;</span><br><span class="line">	int b &#x3D; 0;</span><br><span class="line">	System.out.println(a &#x2F; b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2：InputMismatchException	输入类型不匹配异常：</span><br><span class="line"></span><br><span class="line">public void test5()&#123;</span><br><span class="line">	Scanner scanner &#x3D; new Scanner(System.in);</span><br><span class="line">	int score &#x3D; scanner.nextInt();</span><br><span class="line">	System.out.println(score);</span><br><span class="line">		</span><br><span class="line">	scanner.close();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3：NumberFormatException		数字格式异常：		</span><br><span class="line"></span><br><span class="line">public void test4()&#123;</span><br><span class="line">    </span><br><span class="line">	String str &#x3D; &quot;123&quot;;</span><br><span class="line">	str &#x3D; &quot;abc&quot;;</span><br><span class="line">	int num &#x3D; Integer.parseInt(str);			</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">4：ClassCastException		类型转换异常：</span><br><span class="line"></span><br><span class="line">public void test3()&#123;</span><br><span class="line">	Object obj &#x3D; new Date();</span><br><span class="line">	String str &#x3D; (String)obj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">5：IndexOutOfBoundsException		数组下标越界异常：</span><br><span class="line"></span><br><span class="line">public void test2()&#123;</span><br><span class="line">&#x2F;&#x2F;  ArrayIndexOutOfBoundsException</span><br><span class="line">&#x2F;&#x2F;	int[] arr &#x3D; new int[10];</span><br><span class="line">&#x2F;&#x2F;	System.out.println(arr[10]);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;  StringIndexOutOfBoundsException</span><br><span class="line">	String str &#x3D; &quot;abc&quot;;</span><br><span class="line">	System.out.println(str.charAt(3));	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">6：NullPointerException		空指针异常：</span><br><span class="line"></span><br><span class="line">public void test1()&#123;</span><br><span class="line">		</span><br><span class="line">&#x2F;&#x2F;	int[] arr &#x3D; null;</span><br><span class="line">&#x2F;&#x2F;	System.out.println(arr[3]);</span><br><span class="line">		</span><br><span class="line">	String str &#x3D; &quot;abc&quot;;</span><br><span class="line">	str &#x3D; null;</span><br><span class="line">	System.out.println(str.charAt(0));</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-03-28
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>
