@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="MySQL BLOB类型：
+MySQL中，BLOB是一个二进制大型对象，是一个可以存储大量数据的容器，它能容纳不同大小的数据。
+插入BLOB类型的数据必须使用PrepareStatement，因为BLOB类型的数据无法使用字符串拼写。
+MySQL的四种BLOB类型(除了在存储的最大信息量上不同外，他">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>JDBC操作Blob类型 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                JDBC操作Blob类型
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h3 id="MySQL-BLOB类型："><a href="#MySQL-BLOB类型：" class="headerlink" title="MySQL BLOB类型："></a>MySQL BLOB类型：</h3><ul>
+<li>MySQL中，BLOB是一个二进制大型对象，是一个可以存储大量数据的容器，它能容纳不同大小的数据。</li>
+<li>插入BLOB类型的数据必须使用PrepareStatement，因为BLOB类型的数据无法使用字符串拼写。</li>
+<li>MySQL的四种BLOB类型(除了在存储的最大信息量上不同外，他们是等同的)</li>
+</ul>
+<p><img src="/images/JDBC_1/Blob_1.png"></p>
+<ul>
+<li>实际使用中根据需要存入的数据大小定义不同的Blob类型。</li>
+<li>需要注意的是：如果存储的文件过大，数据库的性能会下降。</li>
+<li>如果在指定了相关的Blob类型以后，还报错：xxx too large，那么在mysql的安装目录下，找my.ini文件加上如下的配置参数：<strong>max_allowed_packet=16M</strong>。同时注意：修改了my.ini文件之后，需要重新启动Mysql服务。</li>
+</ul>
+<h3 id="向数据表中插入大数据类型："><a href="#向数据表中插入大数据类型：" class="headerlink" title="向数据表中插入大数据类型："></a>向数据表中插入大数据类型：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 获取连接</span><br><span class="line">Connection conn &#x3D; JDBCUtils.getConnection();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; sql插入语句，值用占位符替代</span><br><span class="line">String sql &#x3D; &quot;insert into customer(name,emial,birth,photo)values(?,?,?,?)&quot;;</span><br><span class="line">PreparedStatement ps &#x3D; conn.prepareStaement(sql);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 填充占位符</span><br><span class="line">ps.setString(1,&quot;路飞&quot;);</span><br><span class="line">ps.setString(2,&quot;Cy7heng@163.com&quot;);</span><br><span class="line">ps.setData(3,new Data(new java.util.Data.getTime()));</span><br><span class="line">&#x2F;&#x2F;操作Bolb类型的变量</span><br><span class="line">FileInputStream fis &#x3D; new FileInputStream(&quot;Suolong.PNG&quot;);</span><br><span class="line">ps.setBlob(4,fis);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;执行</span><br><span class="line">ps.execute();</span><br><span class="line">&#x2F;&#x2F;关闭</span><br><span class="line">fis.close();</span><br><span class="line">JDBCUtils.CloseResource(conn,ps);</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改数据表中的Blob类型字段："><a href="#修改数据表中的Blob类型字段：" class="headerlink" title="修改数据表中的Blob类型字段："></a>修改数据表中的Blob类型字段：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 获取连接</span><br><span class="line">Connection conn &#x3D; JDBCUtils.getConnection();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; sql更新语句，值用占位符替代 </span><br><span class="line">String sql &#x3D; &quot;update customer set photo &#x3D; ? where id &#x3D; ?&quot;;</span><br><span class="line">PreparedStatement ps &#x3D; conn.prepareStatement(sql);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 填充占位符</span><br><span class="line">&#x2F;&#x2F; 操作Blob类型的变量</span><br><span class="line">FileInputStream fis &#x3D; new FileInputStream(&quot;luobin.png&quot;);</span><br><span class="line">ps.setBlob(1,fis);</span><br><span class="line">ps.setInt(2,25);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 执行</span><br><span class="line">ps.execute();</span><br><span class="line">&#x2F;&#x2F; 关闭</span><br><span class="line">fis.close();</span><br><span class="line">JDBCUtils.closeResource(conn,ps);</span><br></pre></td></tr></table></figure>
+
+<h3 id="从数据表读取大量数据类型："><a href="#从数据表读取大量数据类型：" class="headerlink" title="从数据表读取大量数据类型："></a>从数据表读取大量数据类型：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">String sql &#x3D; &quot;SELECT id, name, email, birth, photo From customer WHERE id &#x3D; ?&quot;;</span><br><span class="line">conn &#x3D; getConnection();</span><br><span class="line">ps &#x3D; conn.prepareStatement(sql);</span><br><span class="line">ps setInt(1,8);</span><br><span class="line">rs &#x3D; ps.executeQuery();</span><br><span class="line">if(rs.next())&#123;</span><br><span class="line">	Integer id &#x3D; rs.getInt(1);</span><br><span class="line">    String name &#x3D; rs.getString(2);</span><br><span class="line">	String email &#x3D; rs.getString(3);</span><br><span class="line">    Date birth &#x3D; rs.getDate(4);</span><br><span class="line">	Customer cust &#x3D; new Customer(id, name, email, birth);</span><br><span class="line">    System.out.println(cust);</span><br><span class="line">    &#x2F;&#x2F; 读取Blob类型的字段</span><br><span class="line">    Blob photo &#x3D; rs.getBlob(5);</span><br><span class="line">	InputStream is &#x3D; photo.getBinaryStream();</span><br><span class="line">	OutputStream os &#x3D; new FileOutputStream(&quot;c.jpg&quot;);</span><br><span class="line">    byte [] buffer &#x3D; new bytr[1024];</span><br><span class="line">    int len &#x3D; 0;</span><br><span class="line">    while((len &#x3D; is.read(buffer)) !&#x3D; -1)&#123;</span><br><span class="line">    	os.write(buffer,0,len);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 关闭</span><br><span class="line">    JDBCUtils.closeResource(conn,ps,rs);</span><br><span class="line">    </span><br><span class="line">    if(is !&#x3D; null)&#123;</span><br><span class="line">    	is.close();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if(os !&#x3D; null)&#123;</span><br><span class="line">    	os.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-04-08
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>

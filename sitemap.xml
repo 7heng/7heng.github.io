@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://7heng.github.io/2021/04/08/JBDC%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5/</loc>
+    
+    <lastmod>2021-04-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://7heng.github.io/2021/04/08/JDBC%E6%93%8D%E4%BD%9CBlob%E7%B1%BB%E5%9E%8B/</loc>
+    
+    <lastmod>2021-04-08</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://7heng.github.io/2021/04/07/TCP%E5%8D%8F%E8%AE%AE/</loc>
     
     <lastmod>2021-04-07</lastmod>
@@ -228,7 +242,7 @@
 
   <url>
     <loc>https://7heng.github.io/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
