@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="线性表的查找：一：顺序查找(线性查找)：理解：顺序查找一个数据，找到该元素就返回其在数组中的下标，没找到则返回空。
+优点：算法简单，逻辑次序无要求，且不同存储结构均适用。
+缺点：ASL(平均查找长度)太长，时间效率低。
+Demo：
+1234567891011121314151617181920212">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>算法之查找 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                算法之查找
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h2 id="线性表的查找："><a href="#线性表的查找：" class="headerlink" title="线性表的查找："></a>线性表的查找：</h2><h3 id="一：顺序查找-线性查找-："><a href="#一：顺序查找-线性查找-：" class="headerlink" title="一：顺序查找(线性查找)："></a>一：顺序查找(线性查找)：</h3><p><strong>理解：</strong>顺序查找一个数据，找到该元素就返回其在数组中的下标，没找到则返回空。</p>
+<p><strong>优点：</strong>算法简单，逻辑次序无要求，且不同存储结构均适用。</p>
+<p><strong>缺点：</strong>ASL(平均查找长度)太长，时间效率低。</p>
+<p><strong>Demo：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line">public class TestSequentialSearch &#123;</span><br><span class="line">	 	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		int a[]&#x3D;&#123;49,38,65,97,76,13,27,49,78,34,12,64,5,4,62,&#125;;</span><br><span class="line">		System.out.println(&quot;请输入要查询的数字：&quot;);</span><br><span class="line">	 	Scanner input&#x3D;new Scanner(System.in);	</span><br><span class="line">	 	int input1&#x3D;input.nextInt();	</span><br><span class="line">	 	SequentialSearch(a,input1);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	public static void SequentialSearch(int[] arr,int input)&#123;</span><br><span class="line">		</span><br><span class="line">	 	for(int i&#x3D;0;i&lt;arr.length;i++)&#123;</span><br><span class="line">	 		if(arr[i]&#x3D;&#x3D;input)&#123;</span><br><span class="line">	 			System.out.println(input+&quot;的位置为：&quot;+i);	</span><br><span class="line">	 			break;</span><br><span class="line">	 			&#125;</span><br><span class="line">	 		if(i&#x3D;&#x3D;arr.length-1)</span><br><span class="line">	 			System.out.println(&quot;No Result!&quot;);</span><br><span class="line">	 		&#125;</span><br><span class="line">	 	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>时间复杂度：</strong>O(n)</p>
+<p><strong>空间复杂度：</strong>O(1)</p>
+<p><strong>小Tips：</strong>可以添设”哨兵“，来加快速度。</p>
+<h3 id="二：折半查找-二分或对分查找-："><a href="#二：折半查找-二分或对分查找-：" class="headerlink" title="二：折半查找(二分或对分查找)："></a>二：折半查找(二分或对分查找)：</h3><p><strong>理解：</strong>得到首元素的索引head，并求出数组长度length-1得到尾元素的索引end。利用首尾元素求出中间元素middle， [ (head + end) / 2 ] ,利用middle值与target值进行比较，如果相同，则返回。如果不同,middle&gt;target，则进行尾元素索引的更改,变为end=middle-1；如果middle&lt;target，则进行首元素索引的更改,变为head=middle+1；</p>
+<p><strong>优点：</strong>效率比顺序查找高。</p>
+<p><strong>缺点：</strong>只适用于有序表，且限于顺序存储结构(对线性表无效)。</p>
+<p><strong>Demo：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public class SearchUtils &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SearchUtils su &#x3D; new SearchUtils();</span><br><span class="line">        int[] arr &#x3D; &#123;1,3,6,9,12,23,33,44,45,67,78,98,100&#125;;</span><br><span class="line">        int res &#x3D; su.binarySearch(arr, 44);</span><br><span class="line">        System.out.println(&quot;res&#x3D;&quot; + res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int binarySearch(int[] arr, int target) &#123;</span><br><span class="line">        int head &#x3D; 0;</span><br><span class="line">        int end &#x3D; arr.length - 1;</span><br><span class="line">        int middle;</span><br><span class="line">        while (head &lt;&#x3D; end) &#123;</span><br><span class="line">            middle &#x3D; (head + end) &#x2F; 2;</span><br><span class="line">            &#x2F;&#x2F;如果要查找的元素target小于中间位置的元素middle，指向数组的较大端的end索引重新指向中间索引middle的左边（middle-1）</span><br><span class="line">            if (target &lt; arr[middle]) &#123;</span><br><span class="line">                end &#x3D; middle - 1;</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;如果要查找的元素target大于中间位置的元素middle，指向数组的较小端的head索引重新指向中间索引middle的右边（middle+1）</span><br><span class="line">            if (target &gt; arr[middle]) &#123;</span><br><span class="line">                head &#x3D; middle + 1;</span><br><span class="line">            &#125;</span><br><span class="line">            if (arr[middle] &#x3D;&#x3D; target) &#123;</span><br><span class="line">                return middle;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度：O(lg2^n)</p>
+<h3 id="三：分块查找-索引顺序表的查找-："><a href="#三：分块查找-索引顺序表的查找-：" class="headerlink" title="三：分块查找(索引顺序表的查找)："></a>三：分块查找(索引顺序表的查找)：</h3><p><strong>理解：</strong>先将所有元素按大小进行分块，然后在块内进行查找。在分块时，块内的元素不一定是有序的，只要一个块内的元素在同一区间就行。用标准的语言描述是：算法的思想是将n个数据元素”按块有序”划分为m块,(m ≤ n)。每块中的关键字（元素）不一定有序，但前一块中的最大关键字必须小于后一块的最小关键字，即要求表示“分块有序”的。</p>
+<p><strong>思想：</strong>首先查找索引表，因为索引表为有序表，所以可以利用顺序或折半查找，再在块内进行查找，因为块内可以无序，所以利用顺序查找，在块内查找到则显示查询成功，否则查找失败。</p>
+<p><strong>e.g：索引表：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">14</th>
+<th align="center">34</th>
+<th align="center">66</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">5</td>
+<td align="center">10</td>
+</tr>
+</tbody></table>
+<p><strong>元素表：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">索引</th>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+<th align="center">9</th>
+<th align="center">10</th>
+<th align="center">11</th>
+<th align="center">12</th>
+<th align="center">13</th>
+<th align="center">14</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">值</td>
+<td align="center">8</td>
+<td align="center">14</td>
+<td align="center">6</td>
+<td align="center">9</td>
+<td align="center">10</td>
+<td align="center">22</td>
+<td align="center">34</td>
+<td align="center">18</td>
+<td align="center">19</td>
+<td align="center">31</td>
+<td align="center">40</td>
+<td align="center">38</td>
+<td align="center">54</td>
+<td align="center">66</td>
+<td align="center">46</td>
+</tr>
+</tbody></table>
+<p><strong>查找过程：</strong>先确定待查记录所在块(顺序或折半查找),再在块内查找(顺序查找)。</p>
+<p><strong>查找效率：</strong>ASL=Lb（对索引表查找的ASL）+Lw（对块内查找的ASL）</p>
+<p><strong>优点：</strong>插入删除比较容易，无需进行大量移动。</p>
+<p><strong>缺点：</strong>要增加一个索引表的存储空间并对初始化索引表并对初始索引表进行排序运算。</p>
+<p><strong>适用情况：</strong>如果线性表既要快速查找又经常动态变化，则可采用分块查找。</p>
+<p><strong>Demo：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">public class SSTable &#123;</span><br><span class="line"></span><br><span class="line">    private int data[];</span><br><span class="line">    private int length;</span><br><span class="line">    public int searchIndex(IndexTable it, int m, SSTable st, int n, int k) &#123;</span><br><span class="line">        int low &#x3D; 0, high &#x3D; m -1, mid, i;</span><br><span class="line">        int b &#x3D; n&#x2F;m;</span><br><span class="line">        while (low &lt;&#x3D; high) &#123;</span><br><span class="line">            mid&#x3D;(low + high) &#x2F; 2;</span><br><span class="line">            if (it.elem[mid].key &gt;&#x3D; k) &#123;</span><br><span class="line">                high &#x3D; mid - 1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                low &#x3D; mid + 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (low &lt; m) &#123;</span><br><span class="line">            i &#x3D; it.elem[low].start;</span><br><span class="line">            while (i &lt;&#x3D; it.elem[low].start + b -1 &amp;&amp; st.data[i] !&#x3D; k) &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            if (i &lt;&#x3D; it.elem[low].start + b -1)&#123;</span><br><span class="line">                return i;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void  createSSTable(int[] a)&#123;</span><br><span class="line">        this.data &#x3D; new int[a.length];</span><br><span class="line">        for (int i &#x3D; 0; i &lt; a.length; i++) &#123;</span><br><span class="line">            this.data[i] &#x3D; a[i];</span><br><span class="line">            this.length++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;* 索引表结点 *&#x2F;</span><br><span class="line">    public class IndexItem &#123;</span><br><span class="line">        public  int key;</span><br><span class="line">        public  int start;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;* 索引表 *&#x2F;</span><br><span class="line">    public class IndexTable&#123;</span><br><span class="line">        public  IndexItem[] elem;</span><br><span class="line">        public int length &#x3D; 0;</span><br><span class="line">        public void createIndexTable(int[][] b)&#123;</span><br><span class="line">            this.elem &#x3D; new IndexItem[b.length];</span><br><span class="line">            int i;</span><br><span class="line">            for (i &#x3D; 0; i &lt; b.length; i++)&#123;</span><br><span class="line">                elem[i] &#x3D; new IndexItem();</span><br><span class="line">                elem[i].key &#x3D; b[i][0];</span><br><span class="line">                elem[i].start &#x3D; b[i][1];</span><br><span class="line">                this.length++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int[] a &#x3D; &#123;8, 14, 6, 9, 10, 22, 34, 18, 19, 31, 40, 38, 54, 66, 46&#125;;</span><br><span class="line">        int[][] b &#x3D; &#123;&#123;14, 0&#125;,&#123;34, 5&#125;,&#123;66, 10&#125;&#125;;</span><br><span class="line">        SSTable st &#x3D; new SSTable();</span><br><span class="line">        IndexTable it &#x3D; st.new IndexTable();</span><br><span class="line">        st.createSSTable(a);</span><br><span class="line">        it.createIndexTable(b);</span><br><span class="line">        int x &#x3D; st.searchIndex(it, b.length, st, a.length, 10);</span><br><span class="line">        if (x &lt; 0) &#123;</span><br><span class="line">            System.out.println(&quot;要查找的元素不存在&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            System.out.println(&quot;查找成功，该元素在表中的位置为：&quot; + (x + 1));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="数表的查找："><a href="#数表的查找：" class="headerlink" title="数表的查找："></a>数表的查找：</h2><ul>
+<li>当表插入、删除等操作频繁时，为维护表的有序性，需要移动表中很多记录。</li>
+</ul>
+<p>改用动态查找表—几种特殊的树</p>
+<ul>
+<li><p>表结构在<strong>查找过程中动态生成</strong>。</p>
+</li>
+<li><p>对于给定值key，若表中存在，则成功返回；否则，插入关键字等于key的记录。</p>
+</li>
+</ul>
+<h4 id="1：二叉排序树："><a href="#1：二叉排序树：" class="headerlink" title="1：二叉排序树："></a>1：二叉排序树：</h4><ul>
+<li>又称二叉搜索树，二叉查找树。</li>
+</ul>
+<p><strong>定义：</strong></p>
+<p>二叉排序树或是空树，或是满足如下性质的二叉树：</p>
+<ol>
+<li>若其<strong>左子树非空</strong>，则左子树上所有结点的值均<strong>小于根结点</strong>的值;</li>
+<li>若其<strong>右子树非空</strong>，则右子树上所有节点的值均<strong>大于根节点</strong>的值;</li>
+<li>其<strong>左右子树本身又各是一颗二叉排序树</strong>;</li>
+</ol>
+<p><strong>中序遍历非空的二叉排序树所得到的数据元素序列是一个按关键字排列的递增有序序列</strong>。</p>
+<h5 id="查找："><a href="#查找：" class="headerlink" title="查找："></a>查找：</h5><ul>
+<li>若查找的关键字等于根节点，成功。</li>
+<li>否则<ul>
+<li>若小于根节点，查其左子树。</li>
+<li>若大于根结点，查其右子树。</li>
+</ul>
+</li>
+<li>在左右子数上的操作类似。</li>
+</ul>
+<p><strong>进阶思想：二叉排序树的递归查找</strong></p>
+<ol>
+<li>若二叉排序树为空，则查找失败，返回空指针。</li>
+<li>若二叉树排序树非空，则给定值key与根节点的关键字。</li>
+</ol>
+<ul>
+<li>若key等于根结点，则查找成功，返回根节点地址。</li>
+<li>若key小于根结点，则进一步查找左子树。</li>
+<li>若key大于根节点，则进一步查找右子树。</li>
+</ul>
+<p><strong>二叉树排序树的查找分析：</strong></p>
+<p>二叉排序树上查找某关键字等于给定值的结点过程，其实就是走了一条从根到该结点的路径。</p>
+<ul>
+<li><p><strong>比较的关键字次数=此节点所在层次数</strong> </p>
+</li>
+<li><p><strong>最多的比较次数=树的深度</strong></p>
+</li>
+<li><p>含有n个结点的二叉排序树的<strong>平均查找长度</strong>和树的<strong>形态</strong>有关。</p>
+</li>
+<li><p>尽量让二叉树的形态均衡，提高二叉排序树的查找效率。</p>
+</li>
+</ul>
+<h5 id="插入："><a href="#插入：" class="headerlink" title="插入："></a>插入：</h5>
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-04-09
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>
