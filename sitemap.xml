@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://7heng.github.io/2021/04/11/JDBC%E4%B9%8BDAO/</loc>
+    
+    <lastmod>2021-04-11</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://7heng.github.io/2021/04/10/java%E6%9E%9A%E4%B8%BE%E4%B8%8E%E6%B3%A8%E8%A7%A3/</loc>
     
     <lastmod>2021-04-10</lastmod>
@@ -263,7 +270,7 @@
 
   <url>
     <loc>https://7heng.github.io/</loc>
-    <lastmod>2021-04-10</lastmod>
+    <lastmod>2021-04-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
