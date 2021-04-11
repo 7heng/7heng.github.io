@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="数据库连接池1：JDBC数据库连接池的必要性
+在使用开发基于数据库的web程序时，传统的模式基本是按以下步骤：
+在主程序（如servlet、beans）中建立数据库连接。
+进行sql操作。
+断开数据库连接。
+
+
+这种模式开发，存在的问题：
+普通的 JDBC 数据库连接使用DriverManager ">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>JDBC数据库连接池 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                JDBC数据库连接池
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h2 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h2><h3 id="1：JDBC数据库连接池的必要性"><a href="#1：JDBC数据库连接池的必要性" class="headerlink" title="1：JDBC数据库连接池的必要性"></a>1：JDBC数据库连接池的必要性</h3><ul>
+<li>在使用开发基于数据库的web程序时，传统的模式基本是按以下步骤：<ul>
+<li><strong>在主程序（如servlet、beans）中建立数据库连接。</strong></li>
+<li><strong>进行sql操作。</strong></li>
+<li><strong>断开数据库连接。</strong></li>
+</ul>
+</li>
+<li>这种模式开发，存在的问题：<ul>
+<li>普通的 JDBC 数据库连接使用DriverManager 来获取，每次向数据库建立连接的时候都要将 Connection 加载到内存中，再验证用户名和密码 (花费0.05s ~ 1s的时间)。需要数据库连接的候，就向数据库要求一个，执行完成后再断开连接。这样的方式将会消耗大量的资源和时间。<strong>数据库的连接资源并没有得到很好的重复利用。</strong>若同时有几百人甚至几千人在线，频繁的进行数据库连接操作将占用很多的系统资源，严重的甚至会造成服务器的崩溃。</li>
+<li><strong>对于每一次的数据库连接，使用完后都要断开。</strong>否则，如果程序出现异常而未能关闭，将会导致数据库系统中的内存泄露，最终将导致重启数据库。</li>
+<li>这种开发不能控制被创建的连接对象数，系统资源会被毫无顾及的分配出去，如连接过多，也可能导致内存泄漏，服务器崩溃。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2：数据库连接池技术"><a href="#2：数据库连接池技术" class="headerlink" title="2：数据库连接池技术"></a>2：数据库连接池技术</h3><ul>
+<li>为解决传统开发中的数据库连接问题，可以采用数据库连接池技术。</li>
+<li><strong>数据库连接池的基本思想：</strong>就是为数据库连接建立一个“缓冲池”。预先在缓冲池中放入一定数量的连接，当需要建立数据库连接时，只需从”缓冲池”中取出一个，使用完毕之后再放回去。</li>
+<li><strong>数据库连接池</strong>负责分配、管理和释放数据库连接，它<strong>允许应用重复使用一个现有的数据库连接，而不是重新建立一个。</strong></li>
+<li>数据库连接池在初始化时将创建一定数量的数据库连接放到连接池中，这些数据库连接的数量是由<strong>最小数据库连接数来设定</strong>的。无论这些数据库连接是否被使用，连接池都将一直保证至少拥有这么多的连接数量。连接池的最大数据库连接数量限定了这个连接池能占有的最大连接数，当应用程序向连接池请求的连接超过最大连接数量时，这些请求将被加入到等待队列中。</li>
+</ul>
+<p><img src="/images/JDBC_1/Pool_1.png"></p>
+<ul>
+<li><strong>工作原理：</strong></li>
+</ul>
+<p><img src="/images/JDBC_1/Pool_1.png"></p>
+<ul>
+<li><strong>数据库连接池技术的优点</strong></li>
+</ul>
+<p><strong>1：资源重用：</strong></p>
+<p>由于数据库连接得以重用，避免了频繁创建，释放接引起的大量性能开销。在减少系统消耗的基础上，另一方面也增加了系统运行环境的平稳性。</p>
+<p><strong>2：更快的系统反应速度：</strong></p>
+<p>数据库连接池在初始化过程中，往往已经创建了若干数据库连接置于连接池中备用。此时连接的初始化工作均已完成。对于业务请求处理而言，直接利用现有可用连接，避免了数据库连接初始化和释放过程的时间开销，从而减少了系统的响应时间。</p>
+<p><strong>3：新的资源分配手段：</strong></p>
+<p>对于多应用共享同一数据库的系统而言，可在应用层通过数据库连接池的配置，实现某一应用最大可用数据库连接数的限制，避免某一应用独占所有的数据库资源。</p>
+<p><strong>4：统一的连接管理，避免数据库连接泄漏：</strong></p>
+<p>在较为完善的数据库连接池实现中，可根据预先的占用超时设定，强制回收被占用连接，从而避免了常规数据库连接操作中可能出现的资源泄露。</p>
+<h3 id="3：多种开源的数据库连接池"><a href="#3：多种开源的数据库连接池" class="headerlink" title="3：多种开源的数据库连接池"></a>3：多种开源的数据库连接池</h3><ul>
+<li>JDBC 的数据库连接池使用 javax.sql.DataSource 来表示，DataSource 只是一个接口，该接口通常由服务器(Weblogic, WebSphere, Tomcat)提供实现，也有一些开源组织提供实现：<ul>
+<li><strong>DBCP</strong> 是Apache提供的数据库连接池。tomcat 服务器自带dbcp数据库连接池。<strong>速度相对c3p0较快</strong>，但因自身存在BUG，Hibernate3已不再提供支持。</li>
+<li><strong>C3P0</strong> 是一个开源组织提供的一个数据库连接池，<strong>速度相对较慢，稳定性还可以。</strong>hibernate官方推荐使用</li>
+<li><strong>Proxool</strong> 是sourceforge下的一个开源项目数据库连接池，有监控连接池状态的功能，<strong>稳定性较c3p0差一点</strong></li>
+<li><strong>BoneCP</strong> 是一个开源组织提供的数据库连接池，速度快</li>
+<li><strong>Druid</strong> 是阿里提供的数据库连接池，据说是集DBCP 、C3P0 、Proxool 优点于一身的数据库连接池，但是速度不确定是否有BoneCP快</li>
+</ul>
+</li>
+<li>DataSource 通常被称为数据源，它包含连接池和连接池管理两个部分，习惯上也经常把 DataSource 称为连接池。</li>
+<li><strong>DataSource用来取代DriverManager来获取Connection，获取速度快，同时可以大幅度提高数据库访问速度。</strong></li>
+<li>特别注意：<ul>
+<li>数据源和数据库连接不同，数据源无需创建多个，它是产生数据库连接的工厂，因此<strong>整个应用只需要一个数据源即可。</strong></li>
+<li>当数据库访问结束后，程序还是像以前一样关闭数据库连接：conn.close(); 但conn.close()并没有关闭数据库的物理连接，它仅仅把数据库连接释放，归还给了数据库连接池。</li>
+</ul>
+</li>
+</ul>
+<p><strong>Demo：</strong></p>
+<h4 id="一：C3p0数据库连接池"><a href="#一：C3p0数据库连接池" class="headerlink" title="一：C3p0数据库连接池"></a>一：C3p0数据库连接池</h4><ul>
+<li>获取连接方式一：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;使用C3P0数据库连接池的方式，获取数据库的连接：不推荐</span><br><span class="line">public static Connection getConnection1() throws Exception&#123;</span><br><span class="line">	ComboPooledDataSource cpds &#x3D; new ComboPooledDataSource();</span><br><span class="line">	cpds.setDriverClass(&quot;com.mysql.jdbc.Driver&quot;); </span><br><span class="line">	cpds.setJdbcUrl(&quot;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test&quot;);</span><br><span class="line">	cpds.setUser(&quot;root&quot;);</span><br><span class="line">	cpds.setPassword(&quot;abc123&quot;);</span><br><span class="line">		</span><br><span class="line">&#x2F;&#x2F;	cpds.setMaxPoolSize(100);</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	Connection conn &#x3D; cpds.getConnection();</span><br><span class="line">	return conn;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取连接方式二：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;使用C3P0数据库连接池的配置文件方式，获取数据库的连接：推荐</span><br><span class="line">private static DataSource cpds &#x3D; new ComboPooledDataSource(&quot;helloc3p0&quot;);</span><br><span class="line">public static Connection getConnection2() throws SQLException&#123;</span><br><span class="line">	Connection conn &#x3D; cpds.getConnection();</span><br><span class="line">	return conn;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，src下的配置文件为：【c3p0-config.xml】</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;c3p0-config&gt;</span><br><span class="line">	&lt;named-config name&#x3D;&quot;helloc3p0&quot;&gt;</span><br><span class="line">		&lt;!-- 获取连接的4个基本信息 --&gt;</span><br><span class="line">		&lt;property name&#x3D;&quot;user&quot;&gt;root&lt;&#x2F;property&gt;</span><br><span class="line">		&lt;property name&#x3D;&quot;password&quot;&gt;abc123&lt;&#x2F;property&gt;</span><br><span class="line">		&lt;property name&#x3D;&quot;jdbcUrl&quot;&gt;jdbc:mysql:&#x2F;&#x2F;&#x2F;test&lt;&#x2F;property&gt;</span><br><span class="line">		&lt;property name&#x3D;&quot;driverClass&quot;&gt;com.mysql.jdbc.Driver&lt;&#x2F;property&gt;</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		&lt;!-- 涉及到数据库连接池的管理的相关属性的设置 --&gt;</span><br><span class="line">		&lt;!-- 若数据库中连接数不足时, 一次向数据库服务器申请多少个连接 --&gt;</span><br><span class="line">		&lt;property name&#x3D;&quot;acquireIncrement&quot;&gt;5&lt;&#x2F;property&gt;</span><br><span class="line">		&lt;!-- 初始化数据库连接池时连接的数量 --&gt;</span><br><span class="line">		&lt;property name&#x3D;&quot;initialPoolSize&quot;&gt;5&lt;&#x2F;property&gt;</span><br><span class="line">		&lt;!-- 数据库连接池中的最小的数据库连接数 --&gt;</span><br><span class="line">		&lt;property name&#x3D;&quot;minPoolSize&quot;&gt;5&lt;&#x2F;property&gt;</span><br><span class="line">		&lt;!-- 数据库连接池中的最大的数据库连接数 --&gt;</span><br><span class="line">		&lt;property name&#x3D;&quot;maxPoolSize&quot;&gt;10&lt;&#x2F;property&gt;</span><br><span class="line">		&lt;!-- C3P0 数据库连接池可以维护的 Statement 的个数 --&gt;</span><br><span class="line">		&lt;property name&#x3D;&quot;maxStatements&quot;&gt;20&lt;&#x2F;property&gt;</span><br><span class="line">		&lt;!-- 每个连接同时可以使用的 Statement 对象的个数 --&gt;</span><br><span class="line">		&lt;property name&#x3D;&quot;maxStatementsPerConnection&quot;&gt;5&lt;&#x2F;property&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;&#x2F;named-config&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;c3p0-config&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="二：DBCP数据库连接池"><a href="#二：DBCP数据库连接池" class="headerlink" title="二：DBCP数据库连接池"></a>二：DBCP数据库连接池</h4><ul>
+<li>DBCP 是 Apache 软件基金组织下的开源连接池实现，该连接池依赖该组织下的另一个开源系统：Common-pool。如需使用该连接池实现，应在系统中增加如下两个 jar 文件：<ul>
+<li>Commons-dbcp.jar：连接池的实现</li>
+<li>Commons-pool.jar：连接池实现的依赖库</li>
+</ul>
+</li>
+<li><strong>Tomcat 的连接池正是采用该连接池来实现的。</strong>该数据库连接池既可以与应用服务器整合使用，也可由应用程序独立使用。</li>
+<li>数据源和数据库连接不同，数据源无需创建多个，它是产生数据库连接的工厂，因此整个应用只需要一个数据源即可。</li>
+<li>当数据库访问结束后，程序还是像以前一样关闭数据库连接：conn.close(); 但上面的代码并没有关闭数据库的物理连接，它仅仅把数据库连接释放，归还给了数据库连接池。</li>
+<li>配置属性说明</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>initialSize</td>
+<td>0</td>
+<td>连接池启动时创建的初始化连接数量</td>
+</tr>
+<tr>
+<td>maxActive</td>
+<td>8</td>
+<td>连接池中可同时连接的最大的连接数</td>
+</tr>
+<tr>
+<td>maxIdle</td>
+<td>8</td>
+<td>连接池中最大的空闲的连接数，超过的空闲连接将被释放，如果设置为负数表示不限制</td>
+</tr>
+<tr>
+<td>minIdle</td>
+<td>0</td>
+<td>连接池中最小的空闲的连接数，低于这个数量会被创建新的连接。该参数越接近maxIdle，性能越好，因为连接的创建和销毁，都是需要消耗资源的；但是不能太大。</td>
+</tr>
+<tr>
+<td>maxWait</td>
+<td>无限制</td>
+<td>最大等待时间，当没有可用连接时，连接池等待连接释放的最大时间，超过该时间限制会抛出异常，如果设置-1表示无限等待</td>
+</tr>
+<tr>
+<td>poolPreparedStatements</td>
+<td>false</td>
+<td>开启池的Statement是否prepared</td>
+</tr>
+<tr>
+<td>maxOpenPreparedStatements</td>
+<td>无限制</td>
+<td>开启池的prepared 后的同时最大连接数</td>
+</tr>
+<tr>
+<td>minEvictableIdleTimeMillis</td>
+<td></td>
+<td>连接池中连接，在时间段内一直空闲， 被逐出连接池的时间</td>
+</tr>
+<tr>
+<td>removeAbandonedTimeout</td>
+<td>300</td>
+<td>超过时间限制，回收没有用(废弃)的连接</td>
+</tr>
+<tr>
+<td>removeAbandoned</td>
+<td>false</td>
+<td>超过removeAbandonedTimeout时间后，是否进 行没用连接（废弃）的回收</td>
+</tr>
+</tbody></table>
+<ul>
+<li>获取连接方式一：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public static Connection getConnection3() throws Exception &#123;</span><br><span class="line">	BasicDataSource source &#x3D; new BasicDataSource();</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">	source.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);</span><br><span class="line">	source.setUrl(&quot;jdbc:mysql:&#x2F;&#x2F;&#x2F;test&quot;);</span><br><span class="line">	source.setUsername(&quot;root&quot;);</span><br><span class="line">	source.setPassword(&quot;abc123&quot;);</span><br><span class="line">		</span><br><span class="line">	&#x2F;&#x2F;</span><br><span class="line">	source.setInitialSize(10);</span><br><span class="line">		</span><br><span class="line">	Connection conn &#x3D; source.getConnection();</span><br><span class="line">	return conn;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取连接方式二：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;使用dbcp数据库连接池的配置文件方式，获取数据库的连接：推荐</span><br><span class="line">private static DataSource source &#x3D; null;</span><br><span class="line">static&#123;</span><br><span class="line">	try &#123;</span><br><span class="line">		Properties pros &#x3D; new Properties();</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		InputStream is &#x3D; DBCPTest.class.getClassLoader().getResourceAsStream(&quot;dbcp.properties&quot;);</span><br><span class="line">			</span><br><span class="line">		pros.load(is);</span><br><span class="line">		&#x2F;&#x2F;根据提供的BasicDataSourceFactory创建对应的DataSource对象</span><br><span class="line">		source &#x3D; BasicDataSourceFactory.createDataSource(pros);</span><br><span class="line">	&#125; catch (Exception e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">public static Connection getConnection4() throws Exception &#123;</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">	Connection conn &#x3D; source.getConnection();</span><br><span class="line">	</span><br><span class="line">	return conn;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，src下的配置文件为：【dbcp.properties】</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">driverClassName&#x3D;com.mysql.jdbc.Driver</span><br><span class="line">url&#x3D;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?rewriteBatchedStatements&#x3D;true&amp;useServerPrepStmts&#x3D;false</span><br><span class="line">username&#x3D;root</span><br><span class="line">password&#x3D;abc123</span><br><span class="line"></span><br><span class="line">initialSize&#x3D;10</span><br><span class="line">#...</span><br></pre></td></tr></table></figure>
+
+<h4 id="三：Druid（德鲁伊）数据库连接池"><a href="#三：Druid（德鲁伊）数据库连接池" class="headerlink" title="三：Druid（德鲁伊）数据库连接池"></a>三：Druid（德鲁伊）数据库连接池</h4><p>Druid是阿里巴巴开源平台上一个数据库连接池实现，它结合了C3P0、DBCP、Proxool等DB池的优点，同时加入了日志监控，可以很好的监控DB池连接和SQL的执行情况，可以说是针对监控而生的DB连接池，<strong>可以说是目前最好的连接池之一。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package com.atguigu.druid;</span><br><span class="line"></span><br><span class="line">import java.sql.Connection;</span><br><span class="line">import java.util.Properties;</span><br><span class="line"></span><br><span class="line">import javax.sql.DataSource;</span><br><span class="line"></span><br><span class="line">import com.alibaba.druid.pool.DruidDataSourceFactory;</span><br><span class="line"></span><br><span class="line">public class TestDruid &#123;</span><br><span class="line">	public static void main(String[] args) throws Exception &#123;</span><br><span class="line">		Properties pro &#x3D; new Properties();		 pro.load(TestDruid.class.getClassLoader().getResourceAsStream(&quot;druid.properties&quot;));</span><br><span class="line">		DataSource ds &#x3D; DruidDataSourceFactory.createDataSource(pro);</span><br><span class="line">		Connection conn &#x3D; ds.getConnection();</span><br><span class="line">		System.out.println(conn);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，src下的配置文件为：【druid.properties】</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">url&#x3D;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?rewriteBatchedStatements&#x3D;true</span><br><span class="line">username&#x3D;root</span><br><span class="line">password&#x3D;123456</span><br><span class="line">driverClassName&#x3D;com.mysql.jdbc.Driver</span><br><span class="line"></span><br><span class="line">initialSize&#x3D;10</span><br><span class="line">maxActive&#x3D;20</span><br><span class="line">maxWait&#x3D;1000</span><br><span class="line">filters&#x3D;wall</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>详细配置参数：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>配置</strong></th>
+<th><strong>缺省</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>name</td>
+<td></td>
+<td>配置这个属性的意义在于，如果存在多个数据源，监控的时候可以通过名字来区分开来。   如果没有配置，将会生成一个名字，格式是：”DataSource-” +   System.identityHashCode(this)</td>
+</tr>
+<tr>
+<td>url</td>
+<td></td>
+<td>连接数据库的url，不同数据库不一样。例如：mysql :   jdbc:mysql://10.20.153.104:3306/druid2      oracle :   jdbc:oracle:thin:@10.20.149.85:1521:ocnauto</td>
+</tr>
+<tr>
+<td>username</td>
+<td></td>
+<td>连接数据库的用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td></td>
+<td>连接数据库的密码。如果你不希望密码直接写在配置文件中，可以使用ConfigFilter。详细看这里：<a target="_blank" rel="noopener" href="https://github.com/alibaba/druid/wiki/%E4%BD%BF%E7%94%A8ConfigFilter">https://github.com/alibaba/druid/wiki/%E4%BD%BF%E7%94%A8ConfigFilter</a></td>
+</tr>
+<tr>
+<td>driverClassName</td>
+<td></td>
+<td>根据url自动识别   这一项可配可不配，如果不配置druid会根据url自动识别dbType，然后选择相应的driverClassName(建议配置下)</td>
+</tr>
+<tr>
+<td>initialSize</td>
+<td>0</td>
+<td>初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时</td>
+</tr>
+<tr>
+<td>maxActive</td>
+<td>8</td>
+<td>最大连接池数量</td>
+</tr>
+<tr>
+<td>maxIdle</td>
+<td>8</td>
+<td>已经不再使用，配置了也没效果</td>
+</tr>
+<tr>
+<td>minIdle</td>
+<td></td>
+<td>最小连接池数量</td>
+</tr>
+<tr>
+<td>maxWait</td>
+<td></td>
+<td>获取连接时最大等待时间，单位毫秒。配置了maxWait之后，缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置useUnfairLock属性为true使用非公平锁。</td>
+</tr>
+<tr>
+<td>poolPreparedStatements</td>
+<td>false</td>
+<td>是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。</td>
+</tr>
+<tr>
+<td>maxOpenPreparedStatements</td>
+<td>-1</td>
+<td>要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100</td>
+</tr>
+<tr>
+<td>validationQuery</td>
+<td></td>
+<td>用来检测连接是否有效的sql，要求是一个查询语句。如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会其作用。</td>
+</tr>
+<tr>
+<td>testOnBorrow</td>
+<td>true</td>
+<td>申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。</td>
+</tr>
+<tr>
+<td>testOnReturn</td>
+<td>false</td>
+<td>归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能</td>
+</tr>
+<tr>
+<td>testWhileIdle</td>
+<td>false</td>
+<td>建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。</td>
+</tr>
+<tr>
+<td>timeBetweenEvictionRunsMillis</td>
+<td></td>
+<td>有两个含义： 1)Destroy线程会检测连接的间隔时间2)testWhileIdle的判断依据，详细看testWhileIdle属性的说明</td>
+</tr>
+<tr>
+<td>numTestsPerEvictionRun</td>
+<td></td>
+<td>不再使用，一个DruidDataSource只支持一个EvictionRun</td>
+</tr>
+<tr>
+<td>minEvictableIdleTimeMillis</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>connectionInitSqls</td>
+<td></td>
+<td>物理连接初始化的时候执行的sql</td>
+</tr>
+<tr>
+<td>exceptionSorter</td>
+<td></td>
+<td>根据dbType自动识别   当数据库抛出一些不可恢复的异常时，抛弃连接</td>
+</tr>
+<tr>
+<td>filters</td>
+<td></td>
+<td>属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有：   监控统计用的filter:stat日志用的filter:log4j防御sql注入的filter:wall</td>
+</tr>
+<tr>
+<td>proxyFilters</td>
+<td></td>
+<td>类型是List，如果同时配置了filters和proxyFilters，是组合关系，并非替换关系</td>
+</tr>
+</tbody></table>
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-04-11
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>
