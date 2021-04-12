@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="Apache-DBUtils实现CRUD操作Apache-DBUtils简介：
+commons-dbutils 是 Apache 组织提供的一个开源的 JDBC 工具类，它是对JDBC的简单封装，学习成本极低，并且使用debutils能极大简化jdbc编码的工作量，同时也不会影响程序的性能。
+API">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>JDBC之Apache | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                JDBC之Apache
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h2 id="Apache-DBUtils实现CRUD操作"><a href="#Apache-DBUtils实现CRUD操作" class="headerlink" title="Apache-DBUtils实现CRUD操作"></a>Apache-DBUtils实现CRUD操作</h2><h4 id="Apache-DBUtils简介："><a href="#Apache-DBUtils简介：" class="headerlink" title="Apache-DBUtils简介："></a>Apache-DBUtils简介：</h4><ul>
+<li>commons-dbutils 是 Apache 组织提供的一个开源的 JDBC 工具类，它是对JDBC的简单封装，学习成本极低，并且使用debutils能极大简化jdbc编码的工作量，同时也不会影响程序的性能。</li>
+<li>API介绍：<ul>
+<li>org.apache.commons.dbutils.QueryRunner</li>
+<li>org.apache.commons.dbutils.ResultSetHandler</li>
+<li>工具类：org.apache.commons.dbutils.DbUtils   </li>
+</ul>
+</li>
+</ul>
+<h4 id="主要API的使用："><a href="#主要API的使用：" class="headerlink" title="主要API的使用："></a>主要API的使用：</h4><p><strong>DbUtils</strong></p>
+<ul>
+<li>Dbutils：提供如关闭连接、装载JDBC驱动程序等常规工作的工具类，里面的所有方法都是静态的。主要方法如下：<ul>
+<li><strong>public static void close(…) throws java.sql.SQLEeception：</strong>DbUtils类提供了三个重载的方法。这些方法检查所提供的参数是不是NULL，如果不是的话，它们就关闭Connection、Statement和ResultSet。</li>
+<li>public static void commitAndClose(Connection conn)throws SQLException)：用来提交连接的事务，然后关闭连接。</li>
+<li>public static void commitAndCloseQuietly(Connection conn)： 用来提交连接，然后关闭连接，并且在关闭连接时不抛出SQL异常。 </li>
+<li>public static void rollback(Connection conn)throws SQLException：允许conn为null，因为方法内部做了判断。</li>
+<li>public static void rollbackAndClose(Connection conn)throws SQLException</li>
+<li>rollbackAndCloseQuietly(Connection)</li>
+<li>public static boolean loadDriver(java.lang.String driverClassName)：这一方装载并注册JDBC驱动程序，如果成功就返回true。使用该方法，你不需要捕捉这个异常ClassNotFoundException。</li>
+</ul>
+</li>
+</ul>
+<p><strong>QueryRunner类：</strong></p>
+<ul>
+<li>该类简化了SQL查询，它与ResultSetHandler组合在一起使用可以完成大部分的数据库操作，能够大大减少编码量。</li>
+<li>QueryRunner类提供了两个构造器：<ul>
+<li>默认的构造器。</li>
+<li>需要一个javax.sql.DataSource 来作参数的构造器。</li>
+</ul>
+</li>
+<li>QueryRunner类的主要方法：<ul>
+<li><strong>更新</strong><ul>
+<li>public int upadate(Connection conn, String sql, Object… params) throws SQLException:用来执行一个更新（插入、更新或删除）操作。</li>
+<li>……</li>
+</ul>
+</li>
+<li><strong>插入</strong><ul>
+<li>public <T> T insert(Connection conn,String sql,ResultSetHandler<T> rsh, Object… params) throws SQLException：只支持INSERT语句，其中 rsh - The handler used to create the result object from the ResultSet of auto-generated keys.  返回值: An object generated by the handler.即自动生成的键值。</li>
+<li>……</li>
+</ul>
+</li>
+<li><strong>批处理</strong><ul>
+<li>public int[] batch(Connection conn,String sql,Object[][] params)throws SQLException： INSERT, UPDATE, or DELETE语句。</li>
+<li>public <T> T insertBatch(Connection conn,String sql,ResultSetHandler<T> rsh,Object[][] params)throws SQLException：只支持INSERT语句</li>
+<li>……</li>
+</ul>
+</li>
+<li><strong>查询</strong><ul>
+<li>public Object query(Connection conn, String sql, ResultSetHandler rsh,Object… params) throws SQLException：执行一个查询操作，在这个查询中，对象数组中的每个元素值被用来作为查询语句的置换参数。该方法会自行处理 PreparedStatement 和 ResultSet 的创建和关闭。</li>
+<li>……</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Demo：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 测试添加</span><br><span class="line">@Test</span><br><span class="line">public void testInsert() throws Exception &#123;</span><br><span class="line">	QueryRunner runner &#x3D; new QueryRunner();</span><br><span class="line">	Connection conn &#x3D; JDBCUtils.getConnection3();</span><br><span class="line">	String sql &#x3D; &quot;insert into customers(name,email,birth)values(?,?,?)&quot;;</span><br><span class="line">	int count &#x3D; runner.update(conn, sql, &quot;柯南&quot;, &quot;Xinyi@qq.com&quot;, &quot;1999-09-09&quot;);</span><br><span class="line"></span><br><span class="line">	System.out.println(&quot;添加了&quot; + count + &quot;条记录&quot;);</span><br><span class="line">		</span><br><span class="line">	JDBCUtils.closeResource(conn, null);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 测试删除</span><br><span class="line">@Test</span><br><span class="line">public void testDelete() throws Exception &#123;</span><br><span class="line">	QueryRunner runner &#x3D; new QueryRunner();</span><br><span class="line">	Connection conn &#x3D; JDBCUtils.getConnection3();</span><br><span class="line">	String sql &#x3D; &quot;delete from customers where id &lt; ?&quot;;</span><br><span class="line">	int count &#x3D; runner.update(conn, sql,3);</span><br><span class="line"></span><br><span class="line">	System.out.println(&quot;删除了&quot; + count + &quot;条记录&quot;);</span><br><span class="line">		</span><br><span class="line">	JDBCUtils.closeResource(conn, null);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ResuleSetHandler接口及实现类："><a href="#ResuleSetHandler接口及实现类：" class="headerlink" title="ResuleSetHandler接口及实现类："></a>ResuleSetHandler接口及实现类：</h4><ul>
+<li>该接口用于处理 java.sql.ResultSet，将数据按要求转换为另一种形式。</li>
+<li>ResultSetHandler 接口提供了一个单独的方法：Object handle (java.sql.ResultSet .rs)。</li>
+<li>接口的主要实现类：<ul>
+<li>ArrayHandler：把结果集中的第一行数据转成对象数组。</li>
+<li>ArrayListHandler：把结果集中的每一行数据都转成一个数组，再存放到List中。</li>
+<li><strong>BeanHandler：</strong>将结果集中的第一行数据封装到一个对应的JavaBean实例中。</li>
+<li><strong>BeanListHandler：</strong>将结果集中的每一行数据都封装到一个对应的JavaBean实例中，存放到List里。</li>
+<li>ColumnListHandler：将结果集中某一列的数据存放到List中。</li>
+<li>KeyedHandler(name)：将结果集中的每一行数据都封装到一个Map里，再把这些map再存到一个map里，其key为指定的key。</li>
+<li><strong>MapHandler：</strong>将结果集中的第一行数据封装到一个Map里，key是列名，value就是对应的值。</li>
+<li><strong>MapListHandler：</strong>将结果集中的每一行数据都封装到一个Map里，然后再存放到List。</li>
+<li><strong>ScalarHandler：</strong>查询单个值对象</li>
+</ul>
+</li>
+</ul>
+<p><strong>Demo：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line"></span><br><span class="line"> * 测试查询:查询一条记录</span><br><span class="line"></span><br><span class="line"> * </span><br><span class="line"></span><br><span class="line"> * 使用ResultSetHandler的实现类：BeanHandler</span><br><span class="line">   *&#x2F;</span><br><span class="line">   @Test</span><br><span class="line">   public void testQueryInstance() throws Exception&#123;</span><br><span class="line">   QueryRunner runner &#x3D; new QueryRunner();</span><br><span class="line"></span><br><span class="line">   Connection conn &#x3D; JDBCUtils.getConnection3();</span><br><span class="line">   	</span><br><span class="line">   String sql &#x3D; &quot;select id,name,email,birth from customers where id &#x3D; ?&quot;;</span><br><span class="line">   	</span><br><span class="line">   &#x2F;&#x2F;</span><br><span class="line">   BeanHandler&lt;Customer&gt; handler &#x3D; new BeanHandler&lt;&gt;(Customer.class);</span><br><span class="line">   Customer customer &#x3D; runner.query(conn, sql, handler, 23);</span><br><span class="line">   System.out.println(customer);	</span><br><span class="line">   JDBCUtils.closeResource(conn, null);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line"></span><br><span class="line"> * 测试查询:查询多条记录构成的集合</span><br><span class="line"></span><br><span class="line"> * </span><br><span class="line"></span><br><span class="line"> * 使用ResultSetHandler的实现类：BeanListHandler</span><br><span class="line">   *&#x2F;</span><br><span class="line">   @Test</span><br><span class="line">   public void testQueryList() throws Exception&#123;</span><br><span class="line">   QueryRunner runner &#x3D; new QueryRunner();</span><br><span class="line"></span><br><span class="line">   Connection conn &#x3D; JDBCUtils.getConnection3();</span><br><span class="line">   	</span><br><span class="line">   String sql &#x3D; &quot;select id,name,email,birth from customers where id &lt; ?&quot;;</span><br><span class="line">   	</span><br><span class="line">   &#x2F;&#x2F;</span><br><span class="line">   BeanListHandler&lt;Customer&gt; handler &#x3D; new BeanListHandler&lt;&gt;(Customer.class);</span><br><span class="line">   List&lt;Customer&gt; list &#x3D; runner.query(conn, sql, handler, 23);</span><br><span class="line">   list.forEach(System.out::println);</span><br><span class="line">   	</span><br><span class="line">   JDBCUtils.closeResource(conn, null);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line"></span><br><span class="line"> * 自定义ResultSetHandler的实现类</span><br><span class="line">   *&#x2F;</span><br><span class="line">   @Test</span><br><span class="line">   public void testQueryInstance1() throws Exception&#123;</span><br><span class="line">   QueryRunner runner &#x3D; new QueryRunner();</span><br><span class="line"></span><br><span class="line">   Connection conn &#x3D; JDBCUtils.getConnection3();</span><br><span class="line">   	</span><br><span class="line">   String sql &#x3D; &quot;select id,name,email,birth from customers where id &#x3D; ?&quot;;</span><br><span class="line">   	</span><br><span class="line">   ResultSetHandler&lt;Customer&gt; handler &#x3D; new ResultSetHandler&lt;Customer&gt;() &#123;</span><br><span class="line"></span><br><span class="line">   	@Override</span><br><span class="line">   	public Customer handle(ResultSet rs) throws SQLException &#123;</span><br><span class="line">   		System.out.println(&quot;handle&quot;);</span><br><span class="line"></span><br><span class="line">   &#x2F;&#x2F;			return new Customer(1,&quot;Tom&quot;,&quot;tom@126.com&quot;,new Date(123323432L));</span><br><span class="line">   			</span><br><span class="line"></span><br><span class="line">   		if(rs.next())&#123;</span><br><span class="line">   			int id &#x3D; rs.getInt(&quot;id&quot;);</span><br><span class="line">   			String name &#x3D; rs.getString(&quot;name&quot;);</span><br><span class="line">   			String email &#x3D; rs.getString(&quot;email&quot;);</span><br><span class="line">   			Date birth &#x3D; rs.getDate(&quot;birth&quot;);</span><br><span class="line">   				</span><br><span class="line">   			return new Customer(id, name, email, birth);</span><br><span class="line">   		&#125;</span><br><span class="line">   		return null;</span><br><span class="line">   			</span><br><span class="line">   	&#125;</span><br><span class="line"></span><br><span class="line">   &#125;;</span><br><span class="line">   	</span><br><span class="line">   Customer customer &#x3D; runner.query(conn, sql, handler, 23);</span><br><span class="line">   	</span><br><span class="line">   System.out.println(customer);</span><br><span class="line">   	</span><br><span class="line">   JDBCUtils.closeResource(conn, null);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line"></span><br><span class="line"> * 如何查询类似于最大的，最小的，平均的，总和，个数相关的数据，</span><br><span class="line"></span><br><span class="line"> * 使用ScalarHandler</span><br><span class="line"></span><br><span class="line"> * *&#x2F;</span><br><span class="line">   @Test</span><br><span class="line">   public void testQueryValue() throws Exception&#123;</span><br><span class="line">   QueryRunner runner &#x3D; new QueryRunner();</span><br><span class="line"></span><br><span class="line">   Connection conn &#x3D; JDBCUtils.getConnection3();</span><br><span class="line">   	</span><br><span class="line">   &#x2F;&#x2F;测试一：</span><br><span class="line">   &#x2F;&#x2F;	String sql &#x3D; &quot;select count(*) from customers where id &lt; ?&quot;;</span><br><span class="line">   &#x2F;&#x2F;	ScalarHandler handler &#x3D; new ScalarHandler();</span><br><span class="line">   &#x2F;&#x2F;	long count &#x3D; (long) runner.query(conn, sql, handler, 20);</span><br><span class="line">   &#x2F;&#x2F;	System.out.println(count);</span><br><span class="line">   	</span><br><span class="line">   &#x2F;&#x2F;测试二：</span><br><span class="line">   String sql &#x3D; &quot;select max(birth) from customers&quot;;</span><br><span class="line">   ScalarHandler handler &#x3D; new ScalarHandler();</span><br><span class="line">   Date birth &#x3D; (Date) runner.query(conn, sql, handler);</span><br><span class="line">   System.out.println(birth);</span><br><span class="line">   	</span><br><span class="line">   JDBCUtils.closeResource(conn, null);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-04-12
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>
