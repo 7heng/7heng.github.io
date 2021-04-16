@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="一：集合框架的概述1：集合、数组都是对多个数据进行存储操作的结构，简称java容器。
+说明：此时的存储，主要指的是内存层面的存储，不涉及到持久化的存储（.txt，.jpg，.avi，数据库中）
+2：数组在存储多个数据方面的特点：
+
+一旦初始化以后，其长度就确定了。
+数组一旦定义好，其元素的类型也就确">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>java集合 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                java集合
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h3 id="一：集合框架的概述"><a href="#一：集合框架的概述" class="headerlink" title="一：集合框架的概述"></a>一：集合框架的概述</h3><p>1：集合、数组都是对多个数据进行存储操作的结构，简称java容器。</p>
+<p>说明：此时的存储，主要指的是内存层面的存储，不涉及到持久化的存储（.txt，.jpg，.avi，数据库中）</p>
+<p>2：<strong>数组在存储多个数据方面的特点：</strong></p>
+<ul>
+<li>一旦初始化以后，其长度就确定了。</li>
+<li>数组一旦定义好，其元素的类型也就确定了，我们也只能操作指定类型的数据了。<ul>
+<li>比如：String[] arr;int[] arr1;object[] arr2;</li>
+</ul>
+</li>
+</ul>
+<p><strong>数组在存储多个数据方面的缺点：</strong></p>
+<ul>
+<li>一旦初始化以后，其长度就不可修改。</li>
+<li>数组中提供的方法非常有限，对于添加、删除、插入数据等操作，非常不便，同时效率不高。</li>
+<li>获取数组中实际元素的个数的需求，数组没有现成的属性或方法可用。</li>
+<li>数组存储数据的特点：有序、可重复。对于无序、不可重复的需求，不能满足。</li>
+</ul>
+<p><strong>Collection接口继承树：</strong></p>
+<p><img src="/images/Collection/Collection_1.png"></p>
+<h3 id="二：集合框架"><a href="#二：集合框架" class="headerlink" title="二：集合框架"></a>二：集合框架</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">|----Collection接口：单列集合，用来存储一个一个的对象</span><br><span class="line">	|----List接口：存储有序的、可重复的数据。  --&gt;“动态”数组</span><br><span class="line">		|----ArrayList、LinkedList、Vector</span><br><span class="line"></span><br><span class="line">	|----Set接口：存储无序的、不可重复的数据   --&gt;高中讲的“集合”</span><br><span class="line">		|----HashSet、LinkedHashSet、TreeSet</span><br><span class="line"></span><br><span class="line">	|----Map接口：双列集合，用来存储一对(key - value)一对的数据   --&gt;高中函数：y &#x3D; f(x)</span><br><span class="line">		|----HashMap、LinkedHashMap、TreeMap、Hashtable、Properties</span><br></pre></td></tr></table></figure>
+
+<h3 id="三：Collection接口中的方法的使用"><a href="#三：Collection接口中的方法的使用" class="headerlink" title="三：Collection接口中的方法的使用"></a>三：Collection接口中的方法的使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collection;</span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">public class CollectionTest &#123;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void test1()&#123;</span><br><span class="line">        Collection coll &#x3D; new ArrayList();</span><br><span class="line">    </span><br><span class="line">        &#x2F;&#x2F;add(Object e):将元素e添加到集合coll中</span><br><span class="line">        coll.add(&quot;AA&quot;);</span><br><span class="line">        coll.add(&quot;BB&quot;);</span><br><span class="line">        coll.add(123);&#x2F;&#x2F;自动装箱</span><br><span class="line">        coll.add(new Date());</span><br><span class="line">    </span><br><span class="line">        &#x2F;&#x2F;size():获取添加的元素的个数</span><br><span class="line">        System.out.println(coll.size());&#x2F;&#x2F;4</span><br><span class="line">    </span><br><span class="line">        &#x2F;&#x2F;addAll(Collection coll1):将coll1集合中的元素添加到当前的集合中</span><br><span class="line">        Collection coll1 &#x3D; new ArrayList();</span><br><span class="line">        coll1.add(456);</span><br><span class="line">        coll1.add(&quot;CC&quot;);</span><br><span class="line">        coll.addAll(coll1);</span><br><span class="line">    </span><br><span class="line">        System.out.println(coll.size());&#x2F;&#x2F;6</span><br><span class="line">        System.out.println(coll);</span><br><span class="line">    </span><br><span class="line">        &#x2F;&#x2F;clear():清空集合元素</span><br><span class="line">        coll.clear();</span><br><span class="line">    </span><br><span class="line">        &#x2F;&#x2F;isEmpty():判断当前集合是否为空</span><br><span class="line">        System.out.println(coll.isEmpty());</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="四：集合和数组之间的转换"><a href="#四：集合和数组之间的转换" class="headerlink" title="四：集合和数组之间的转换"></a>四：集合和数组之间的转换</h3><p><strong>集合—&gt;数组：toArray()</strong></p>
+<p><strong>数组—&gt;集合：调用Arrays类的静态方法：asList()</strong></p>
+<pre><code>public void test4()&#123;
+    Collection coll = new ArrayList();
+    coll.add(123);
+    coll.add(456);
+    coll.add(new Person(&quot;Jerry&quot;,20));
+    coll.add(new String(&quot;Tom&quot;));
+    coll.add(false);
+
+    //7.hashCode():返回当前对象的哈希值
+    System.out.println(coll.hashCode());
+
+    //8.集合 ---&gt;数组：toArray()
+    Object[] arr = coll.toArray();
+    for(int i = 0;i &lt; arr.length;i++)&#123;
+        System.out.println(arr[i]);
+    &#125;
+
+    //拓展：数组 ---&gt;集合:调用Arrays类的静态方法asList()
+    List&lt;String&gt; list = Arrays.asList(new String[]&#123;&quot;AA&quot;, &quot;BB&quot;, &quot;CC&quot;&#125;);
+    System.out.println(list);
+
+    List arr1 = Arrays.asList(new int[]&#123;123, 456&#125;);
+    System.out.println(arr1.size());// 1    注意：这里是new了一个数组，但数组在列表中是一个元素，在数组中是有两个元素。</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">  Collection接口中声明的方法的测试</span><br><span class="line"> </span><br><span class="line">  结论：</span><br><span class="line"> 向Collection接口的实现类的对象中添加数据obj时，要求obj所在类要重写equals().</span><br><span class="line"> </span><br><span class="line">public class CollectionTest &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void test1()&#123;</span><br><span class="line">        Collection coll &#x3D; new ArrayList();</span><br><span class="line">        coll.add(123);</span><br><span class="line">        coll.add(456);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;        Person p &#x3D; new Person(&quot;Jerry&quot;,20);</span><br><span class="line">&#x2F;&#x2F;        coll.add(p);</span><br><span class="line">        coll.add(new Person(&quot;Jerry&quot;,20));</span><br><span class="line">        coll.add(new String(&quot;Tom&quot;));</span><br><span class="line">        coll.add(false);</span><br><span class="line">        &#x2F;&#x2F;1.contains(Object obj):判断当前集合中是否包含obj</span><br><span class="line">        &#x2F;&#x2F;我们在判断时会调用obj对象所在类的equals()。</span><br><span class="line">        boolean contains &#x3D; coll.contains(123);</span><br><span class="line">        System.out.println(contains);</span><br><span class="line">        System.out.println(coll.contains(new String(&quot;Tom&quot;)));</span><br><span class="line">&#x2F;&#x2F;        System.out.println(coll.contains(p));&#x2F;&#x2F;true</span><br><span class="line">        System.out.println(coll.contains(new Person(&quot;Jerry&quot;,20)));&#x2F;&#x2F;false --&gt;true</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;2.containsAll(Collection coll1):判断形参coll1中的所有元素是否都存在于当前集合中。</span><br><span class="line">        Collection coll1 &#x3D; Arrays.asList(123,4567);</span><br><span class="line">        System.out.println(coll.containsAll(coll1));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Test</span><br><span class="line">    public void test2()&#123;</span><br><span class="line">        &#x2F;&#x2F;3.remove(Object obj):从当前集合中移除obj元素。</span><br><span class="line">        Collection coll &#x3D; new ArrayList();</span><br><span class="line">        coll.add(123);</span><br><span class="line">        coll.add(456);</span><br><span class="line">        coll.add(new Person(&quot;Jerry&quot;,20));</span><br><span class="line">        coll.add(new String(&quot;Tom&quot;));</span><br><span class="line">        coll.add(false);</span><br><span class="line">    </span><br><span class="line">        coll.remove(1234);</span><br><span class="line">        System.out.println(coll);</span><br><span class="line">    </span><br><span class="line">        coll.remove(new Person(&quot;Jerry&quot;,20));</span><br><span class="line">        System.out.println(coll);</span><br><span class="line">    </span><br><span class="line">        &#x2F;&#x2F;4. removeAll(Collection coll1):差集：从当前集合中移除coll1中所有的元素。</span><br><span class="line">        Collection coll1 &#x3D; Arrays.asList(123,456);</span><br><span class="line">        coll.removeAll(coll1);</span><br><span class="line">        System.out.println(coll);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Test</span><br><span class="line">    public void test3()&#123;</span><br><span class="line">        Collection coll &#x3D; new ArrayList();</span><br><span class="line">        coll.add(123);</span><br><span class="line">        coll.add(456);</span><br><span class="line">        coll.add(new Person(&quot;Jerry&quot;,20));</span><br><span class="line">        coll.add(new String(&quot;Tom&quot;));</span><br><span class="line">        coll.add(false);</span><br><span class="line">    </span><br><span class="line">        &#x2F;&#x2F;5.retainAll(Collection coll1):交集：获取当前集合和coll1集合的交集，并返回给当前集合</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;        Collection coll1 &#x3D; Arrays.asList(123,456,789);</span><br><span class="line">&#x2F;&#x2F;        coll.retainAll(coll1);</span><br><span class="line">&#x2F;&#x2F;        System.out.println(coll);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;6.equals(Object obj):要想返回true，需要当前集合和形参集合的元素都相同。</span><br><span class="line">        Collection coll1 &#x3D; new ArrayList();</span><br><span class="line">        coll1.add(456);</span><br><span class="line">        coll1.add(123);</span><br><span class="line">        coll1.add(new Person(&quot;Jerry&quot;,20));</span><br><span class="line">        coll1.add(new String(&quot;Tom&quot;));</span><br><span class="line">        coll1.add(false);</span><br><span class="line">    </span><br><span class="line">        System.out.println(coll.equals(coll1));		&#x2F;&#x2F; false</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="五：Iterator"><a href="#五：Iterator" class="headerlink" title="五：Iterator()"></a>五：Iterator()</h3><p><strong>集合元素的遍历操作，使用迭代器Iterator接口</strong></p>
+<ol>
+<li>内部的方法：hasNext()和next()。</li>
+<li>集合对象每次调用iterator()方法都得到一个全新的迭代器对象，默认游标都在集合的第一个元素之前。</li>
+<li>内部定义了remove()，可以在遍历的时候，删除集合中的元素。此方法不同于集合直接调用remove()</li>
+<li>如果还未调用next()或在上一次调用 next 方法之后已经调用了 remove 方法，再调用remove都会报IllegalStateException异常。</li>
+</ol>
+<p><strong>Iterator迭代器的执行原理</strong></p>
+<p><img src="/images/Collection/Collection_2.png"></p>
+<p><strong>Demo</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">public class IteratorTest &#123;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void test1()&#123;</span><br><span class="line">        Collection coll &#x3D; new ArrayList();</span><br><span class="line">        coll.add(123);</span><br><span class="line">        coll.add(456);</span><br><span class="line">        coll.add(new Person(&quot;Jerry&quot;,20));</span><br><span class="line">        coll.add(new String(&quot;Tom&quot;));</span><br><span class="line">        coll.add(false);</span><br><span class="line">    </span><br><span class="line">        Iterator iterator &#x3D; coll.iterator();</span><br><span class="line">        &#x2F;&#x2F;方式一：</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;        System.out.println(iterator.next());</span><br><span class="line">&#x2F;&#x2F;        System.out.println(iterator.next());</span><br><span class="line">&#x2F;&#x2F;        System.out.println(iterator.next());</span><br><span class="line">&#x2F;&#x2F;        System.out.println(iterator.next());</span><br><span class="line">&#x2F;&#x2F;        System.out.println(iterator.next());</span><br><span class="line">&#x2F;&#x2F;        &#x2F;&#x2F;报异常：NoSuchElementException</span><br><span class="line">&#x2F;&#x2F;        System.out.println(iterator.next());</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;方式二：不推荐</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;        for(int i &#x3D; 0;i &lt; coll.size();i++)&#123;</span><br><span class="line">&#x2F;&#x2F;            System.out.println(iterator.next());</span><br><span class="line">&#x2F;&#x2F;        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;方式三：推荐</span><br><span class="line">        &#x2F;&#x2F;&#x2F;&#x2F;hasNext():判断是否还有下一个元素</span><br><span class="line">        while(iterator.hasNext())&#123;</span><br><span class="line">            &#x2F;&#x2F;next():①指针下移 ②将下移以后集合位置上的元素返回</span><br><span class="line">            System.out.println(iterator.next());</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Test</span><br><span class="line">    public void test2()&#123;</span><br><span class="line">    </span><br><span class="line">        Collection coll &#x3D; new ArrayList();</span><br><span class="line">        coll.add(123);</span><br><span class="line">        coll.add(456);</span><br><span class="line">        coll.add(new Person(&quot;Jerry&quot;,20));</span><br><span class="line">        coll.add(new String(&quot;Tom&quot;));</span><br><span class="line">        coll.add(false);</span><br><span class="line">    </span><br><span class="line">        &#x2F;&#x2F;错误方式一：</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;        Iterator iterator &#x3D; coll.iterator();</span><br><span class="line">&#x2F;&#x2F;        while((iterator.next()) !&#x3D; null)&#123;</span><br><span class="line">&#x2F;&#x2F;            System.out.println(iterator.next());</span><br><span class="line">&#x2F;&#x2F;        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;错误方式二：</span><br><span class="line">        &#x2F;&#x2F;集合对象每次调用iterator()方法都得到一个全新的迭代器对象，默认游标都在集合的第一个元素之前。</span><br><span class="line">        while (coll.iterator().hasNext())&#123;</span><br><span class="line">            System.out.println(coll.iterator().next());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F;测试Iterator中的remove()</span><br><span class="line">    &#x2F;&#x2F;如果还未调用next()或在上一次调用 next 方法之后已经调用了 remove 方法，</span><br><span class="line">    &#x2F;&#x2F; 再调用remove都会报IllegalStateException。</span><br><span class="line">    @Test</span><br><span class="line">    public void test3()&#123;</span><br><span class="line">        Collection coll &#x3D; new ArrayList();</span><br><span class="line">        coll.add(123);</span><br><span class="line">        coll.add(456);</span><br><span class="line">        coll.add(new Person(&quot;Jerry&quot;,20));</span><br><span class="line">        coll.add(new String(&quot;Tom&quot;));</span><br><span class="line">        coll.add(false);</span><br><span class="line">    </span><br><span class="line">        &#x2F;&#x2F;删除集合中&quot;Tom&quot;</span><br><span class="line">        Iterator iterator &#x3D; coll.iterator();</span><br><span class="line">        while (iterator.hasNext())&#123;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;            iterator.remove();</span><br><span class="line">            Object obj &#x3D; iterator.next();</span><br><span class="line">            if(&quot;Tom&quot;.equals(obj))&#123;</span><br><span class="line">                iterator.remove();</span><br><span class="line">&#x2F;&#x2F;                iterator.remove();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;遍历集合</span><br><span class="line">        iterator &#x3D; coll.iterator();</span><br><span class="line">        while (iterator.hasNext())&#123;</span><br><span class="line">            System.out.println(iterator.next());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="六：foreach"><a href="#六：foreach" class="headerlink" title="六：foreach"></a>六：foreach</h3><p><strong>Demo：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">import org.junit.Test;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collection;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"></span><br><span class="line">	jdk 5.0 新增了foreach循环，用于遍历集合、数组</span><br><span class="line"></span><br><span class="line">*&#x2F;</span><br><span class="line">   public class ForTest &#123;</span><br><span class="line"></span><br><span class="line">   @Test</span><br><span class="line">   public void test1()&#123;</span><br><span class="line">       Collection coll &#x3D; new ArrayList();</span><br><span class="line">       coll.add(123);</span><br><span class="line">       coll.add(456);</span><br><span class="line">       coll.add(new Person(&quot;Jerry&quot;,20));</span><br><span class="line">       coll.add(new String(&quot;Tom&quot;));</span><br><span class="line">       coll.add(false);</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F;for(集合元素的类型 局部变量 : 集合对象)</span><br><span class="line">       &#x2F;&#x2F;内部仍然调用了迭代器。</span><br><span class="line">       for(Object obj : coll)&#123;</span><br><span class="line">           System.out.println(obj);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   @Test</span><br><span class="line">   public void test2()&#123;</span><br><span class="line">       int[] arr &#x3D; new int[]&#123;1,2,3,4,5,6&#125;;</span><br><span class="line">       &#x2F;&#x2F;for(数组元素的类型 局部变量 : 数组对象)</span><br><span class="line">       for(int i : arr)&#123;</span><br><span class="line">           System.out.println(i);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   &#x2F;&#x2F;练习题</span><br><span class="line">   @Test</span><br><span class="line">   public void test3()&#123;</span><br><span class="line"></span><br><span class="line">       String[] arr &#x3D; new String[]&#123;&quot;MM&quot;,&quot;MM&quot;,&quot;MM&quot;&#125;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;        &#x2F;&#x2F;方式一：普通for赋值</span><br><span class="line">&#x2F;&#x2F;        for(int i &#x3D; 0;i &lt; arr.length;i++)&#123;</span><br><span class="line">&#x2F;&#x2F;            arr[i] &#x3D; &quot;GG&quot;;</span><br><span class="line">&#x2F;&#x2F;        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;方式二：增强for循环</span><br><span class="line">        for(String s : arr)&#123;</span><br><span class="line">            s &#x3D; &quot;GG&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        for(int i &#x3D; 0;i &lt; arr.length;i++)&#123;</span><br><span class="line">            System.out.println(arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-04-16
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>
