@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="java中的对象，正常情况下，只能进行比较：== 或 != ，是不能使用 &amp;gt; 或 &amp;lt; 的，但是在开发场景中，我们需要多个对象进行排序，言外之意，就需要比较对象的大小。如何实现？使用两个接口中的任何一个：Comperable 或 Compartor。
+Comparable接口与Compar">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>java比较器 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                java比较器
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <p>java中的对象，正常情况下，只能进行比较：== 或 != ，是不能使用 &gt; 或 &lt; 的，但是在开发场景中，我们需要多个对象进行排序，言外之意，就需要比较对象的大小。如何实现？使用两个接口中的任何一个：Comperable 或 Compartor。</p>
+<p><strong>Comparable接口与Compartor的使用的对比：</strong></p>
+<ul>
+<li>Comparable接口的方式一旦一定：保证Comparable接口实现类的对象在任何位置都可以比较大小。</li>
+<li>Compartor属于临时性的比较。</li>
+</ul>
+<p><strong>为何要重写Comparable接口：</strong></p>
+<ol>
+<li>基本数据类型和String类型数据，它们彼此的比较标准java语言本身已经提供好了。</li>
+<li>用户自定义类对象之间比较的标准java语言本身是没有提供的。</li>
+<li>所以如果一个容器中包含用户自定义类型的数据，并且我们需要对容器中元素进行排序或者查找某一元素时，我们就必须得到定制容器中元素与元素之间的标准。</li>
+<li>凡是需要进行对象比较/排序的场合均可考虑实现Comparable接口。</li>
+</ol>
+<p><strong>Comparable接口的使用举例：</strong></p>
+<pre><code>自然排序：
+
+1.像String、包装类等实现了Comparable接口，重写了compareTo(obj)方法，给出了比较两个对象大小的方式。
+2.像String、包装类重写compareTo()方法以后，进行了从小到大的排列
+3. 重写compareTo(obj)的规则：
+    如果当前对象this大于形参对象obj，则返回正整数，
+    如果当前对象this小于形参对象obj，则返回负整数，
+    如果当前对象this等于形参对象obj，则返回零。
+4. 对于自定义类来说，如果需要排序，我们可以让自定义类实现Comparable接口，重写compareTo(obj)方法。
+   在compareTo(obj)方法中指明如何排序
+---------------------------------------------------------------------------   
+    @Test
+    public void test1()&#123;
+        String[] arr = new String[]&#123;&quot;AA&quot;,&quot;CC&quot;,&quot;KK&quot;,&quot;MM&quot;,&quot;GG&quot;,&quot;JJ&quot;,&quot;DD&quot;&#125;;
+        //
+        Arrays.sort(arr);
+
+        System.out.println(Arrays.toString(arr));
+
+    &#125;
+
+    @Test
+    public void test2()&#123;
+        Goods[] arr = new Goods[5];
+        arr[0] = new Goods(&quot;lenovoMouse&quot;,34);
+        arr[1] = new Goods(&quot;dellMouse&quot;,43);
+        arr[2] = new Goods(&quot;xiaomiMouse&quot;,12);
+        arr[3] = new Goods(&quot;huaweiMouse&quot;,65);
+        arr[4] = new Goods(&quot;microsoftMouse&quot;,43);
+
+        Arrays.sort(arr); // 数组的排序方法，但因为是自定义类，所以需要自己重写ComparaTo(Obj)方法
+
+        System.out.println(Arrays.toString(arr));
+    &#125;   
+
+---------------------------------------------------------------------------
+public class Goods implements  Comparable&#123;        // 实现Comparable接口
+
+    private String name;
+    private double price;
+
+    public Goods() &#123;
+    &#125;
+
+    public Goods(String name, double price) &#123;
+        this.name = name;
+        this.price = price;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+
+    public double getPrice() &#123;
+        return price;
+    &#125;
+
+    public void setPrice(double price) &#123;
+        this.price = price;
+    &#125;
+
+    @Override
+    public String toString() &#123;
+        return &quot;Goods&#123;&quot; +
+                &quot;name=&#39;&quot; + name + &#39;\&#39;&#39; +
+                &quot;, price=&quot; + price +
+                &#39;&#125;&#39;;
+    &#125;
+
+    //指明商品比较大小的方式:按照价格从低到高排序,再按照产品名称从高到低排序
+    @Override
+    public int compareTo(Object o) &#123;
+//        System.out.println(&quot;**************&quot;);
+        if(o instanceof Goods)&#123;
+            Goods goods = (Goods)o;
+            //方式一：
+            if(this.price &gt; goods.price)&#123;
+                return 1;
+            &#125;else if(this.price &lt; goods.price)&#123;
+                return -1;
+            &#125;else&#123;
+//                return 0;
+               return -this.name.compareTo(goods.name);
+            &#125;
+            //方式二：
+//           return Double.compare(this.price,goods.price);
+        &#125;
+//        return 0;
+        throw new RuntimeException(&quot;传入的数据类型不一致！&quot;);
+    &#125;
+&#125;</code></pre>
+<p><strong>Comparatot接口的使用举例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">定制排序：</span><br><span class="line"></span><br><span class="line">1.背景：</span><br><span class="line">当元素的类型没有实现java.lang.Comparable接口而又不方便修改代码，</span><br><span class="line">或者实现了java.lang.Comparable接口的排序规则不适合当前的操作，</span><br><span class="line">那么可以考虑使用 Comparator 的对象来排序</span><br><span class="line">2.重写compare(Object o1,Object o2)方法，比较o1和o2的大小：</span><br><span class="line">如果方法返回正整数，则表示o1大于o2；</span><br><span class="line">如果返回0，表示相等；</span><br><span class="line">返回负整数，表示o1小于o2。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void test3()&#123;</span><br><span class="line">    String[] arr &#x3D; new String[]&#123;&quot;AA&quot;,&quot;CC&quot;,&quot;KK&quot;,&quot;MM&quot;,&quot;GG&quot;,&quot;JJ&quot;,&quot;DD&quot;&#125;;</span><br><span class="line">    Arrays.sort(arr,new Comparator()&#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;按照字符串从大到小的顺序排列</span><br><span class="line">        @Override</span><br><span class="line">        public int compare(Object o1, Object o2) &#123;</span><br><span class="line">            if(o1 instanceof String &amp;&amp; o2 instanceof  String)&#123;</span><br><span class="line">                String s1 &#x3D; (String) o1;</span><br><span class="line">                String s2 &#x3D; (String) o2;</span><br><span class="line">                return -s1.compareTo(s2);	&#x2F;&#x2F; 默认是重小到大排序，加-号改变排序方式。</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;                return 0;</span><br><span class="line">                throw new RuntimeException(&quot;输入的数据类型不一致&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        System.out.println(Arrays.toString(arr));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void test4()&#123;</span><br><span class="line">    Goods[] arr &#x3D; new Goods[6];</span><br><span class="line">    arr[0] &#x3D; new Goods(&quot;lenovoMouse&quot;,34);</span><br><span class="line">    arr[1] &#x3D; new Goods(&quot;dellMouse&quot;,43);</span><br><span class="line">    arr[2] &#x3D; new Goods(&quot;xiaomiMouse&quot;,12);</span><br><span class="line">    arr[3] &#x3D; new Goods(&quot;huaweiMouse&quot;,65);</span><br><span class="line">    arr[4] &#x3D; new Goods(&quot;huaweiMouse&quot;,224);</span><br><span class="line">    arr[5] &#x3D; new Goods(&quot;microsoftMouse&quot;,43);</span><br><span class="line"></span><br><span class="line">    Arrays.sort(arr, new Comparator() &#123;</span><br><span class="line">        &#x2F;&#x2F;指明商品比较大小的方式:按照产品名称从低到高排序,再按照价格从高到低排序</span><br><span class="line">        @Override</span><br><span class="line">        public int compare(Object o1, Object o2) &#123;</span><br><span class="line">            if(o1 instanceof Goods &amp;&amp; o2 instanceof Goods)&#123;</span><br><span class="line">                Goods g1 &#x3D; (Goods)o1;</span><br><span class="line">                Goods g2 &#x3D; (Goods)o2;</span><br><span class="line">                if(g1.getName().equals(g2.getName()))&#123;</span><br><span class="line">                    return -Double.compare(g1.getPrice(),g2.getPrice());</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    return g1.getName().compareTo(g2.getName());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            throw new RuntimeException(&quot;输入的数据类型不一致&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    System.out.println(Arrays.toString(arr));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-04-17
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>

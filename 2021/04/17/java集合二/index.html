@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="Collection子接口之一：List接口List接口概述：
+鉴于java中数组用来存储数据的局限性，我们通常使用List替代数组。
+List集合类中元素有序、且可重复，集合中的每个元素都有其对应的顺序索引。
+List容器中的元素对应一个整数型的序号记载其在容器中的位置，可以根据序号存取容器中的元">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>java集合二 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                java集合二
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h2 id="Collection子接口之一：List接口"><a href="#Collection子接口之一：List接口" class="headerlink" title="Collection子接口之一：List接口"></a>Collection子接口之一：List接口</h2><h3 id="List接口概述："><a href="#List接口概述：" class="headerlink" title="List接口概述："></a>List接口概述：</h3><ul>
+<li>鉴于java中数组用来存储数据的局限性，我们通常使用List替代数组。</li>
+<li>List集合类中元素有序、且可重复，集合中的每个元素都有其对应的顺序索引。</li>
+<li>List容器中的元素对应一个整数型的序号记载其在容器中的位置，可以根据序号存取容器中的元素。</li>
+<li>JDK API中List接口的实现类常用的有：ArrayList、LinkedList和Vector。</li>
+</ul>
+<h3 id="List接口框架"><a href="#List接口框架" class="headerlink" title="List接口框架"></a>List接口框架</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">|----Collection接口：单列集合，用来存储一个一个的对象</span><br><span class="line">	|----List接口：存储有序的、可重复的数据。  --&gt;“动态”数组,替换原有的数组</span><br><span class="line">		|----ArrayList：作为List接口的主要实现类；线程不安全的，效率高；底层使用Object[] elementData存储</span><br><span class="line">		|----LinkedList：对于频繁的插入、删除操作，使用此类效率比ArrayList高；底层使用双向链表存储</span><br><span class="line">		|----Vector：作为List接口的古老实现类；线程安全的，效率低；底层使用Object[] elementData存储</span><br><span class="line">		</span><br><span class="line"> -------------------------------------------------------------------------------------------------</span><br><span class="line">2. ArrayList的源码分析：</span><br><span class="line"></span><br><span class="line">2.1 jdk 7情况下：</span><br><span class="line"></span><br><span class="line">ArrayList list &#x3D; new ArrayList();	&#x2F;&#x2F;底层创建了长度是10的Object[]数组elementData</span><br><span class="line"></span><br><span class="line">list.add(123);&#x2F;&#x2F;elementData[0] &#x3D; new Integer(123);</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">list.add(11);&#x2F;&#x2F;如果此次的添加导致底层elementData数组容量不够，则扩容。</span><br><span class="line"></span><br><span class="line">默认情况下，扩容为原来的容量的1.5倍，同时需要将原有数组中的数据复制到新的数组中。</span><br><span class="line"> *</span><br><span class="line">结论：建议开发中使用带参的构造器：ArrayList list &#x3D; new ArrayList(int capacity)</span><br><span class="line">--------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">2.2 jdk 8中ArrayList的变化：</span><br><span class="line"></span><br><span class="line">ArrayList list &#x3D; new ArrayList();&#x2F;&#x2F;底层Object[] elementData初始化为&#123;&#125;.并没有创建长度为10的数组</span><br><span class="line"> *</span><br><span class="line"></span><br><span class="line">list.add(123);&#x2F;&#x2F;第一次调用add()时，底层才创建了长度10的数组，并将数据123添加到elementData[0]</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">后续的添加和扩容操作与jdk 7 无异。</span><br><span class="line"></span><br><span class="line">2.3 小结：jdk7中的ArrayList的对象的创建类似于单例的饿汉式，而jdk8中的ArrayList的对象</span><br><span class="line"></span><br><span class="line">的创建类似于单例的懒汉式，延迟了数组的创建，节省内存。</span><br><span class="line">----------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">3. LinkedList的源码分析：</span><br><span class="line"></span><br><span class="line">LinkedList list &#x3D; new LinkedList(); 内部声明了Node类型的first和last属性，默认值为null</span><br><span class="line"></span><br><span class="line">list.add(123);&#x2F;&#x2F;将123封装到Node中，创建了Node对象。</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">其中，Node定义为：体现了LinkedList的双向链表的说法</span><br><span class="line"></span><br><span class="line">private static class Node&lt;E&gt; &#123;</span><br><span class="line">     E item;</span><br><span class="line">     Node&lt;E&gt; next;</span><br><span class="line">     Node&lt;E&gt; prev;</span><br><span class="line"></span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line"> Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</span><br><span class="line"> this.item &#x3D; element;</span><br><span class="line"> this.next &#x3D; next;</span><br><span class="line"> this.prev &#x3D; prev;</span><br><span class="line"> &#125;</span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"> ----------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">4. Vector的源码分析：jdk7和jdk8中通过Vector()构造器创建对象时，底层都创建了长度为10的数组。</span><br><span class="line"></span><br><span class="line">在扩容方面，默认扩容为原来的数组长度的2倍。</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">面试题：ArrayList、LinkedList、Vector三者的异同？</span><br><span class="line"></span><br><span class="line">相同：三个类都是实现了List接口，存储数据的特点相同：存储有序的、可重复的数据。</span><br><span class="line"></span><br><span class="line">不同：请阅读上文。</span><br></pre></td></tr></table></figure>
+
+<h3 id="List接口中常用方法："><a href="#List接口中常用方法：" class="headerlink" title="List接口中常用方法："></a>List接口中常用方法：</h3><ul>
+<li>void add(int index, Object ele):在index位置插入ele元素</li>
+<li>boolean addAll(int index, Collection eles):从index位置开始将eles中的所有元素添加进来</li>
+<li>Object get(int index):获取指定index位置的元素</li>
+<li>int indexOf(Object obj):返回obj在集合中首次出现的位置</li>
+<li>int lastIndexOf(Object obj):返回obj在当前集合中末次出现的位置</li>
+<li>Object remove(int index):移除指定index位置的元素，并返回此元素</li>
+<li>Object set(int index, Object ele):设置指定index位置的元素为ele</li>
+<li>List subList(int fromIndex, int toIndex):返回从fromIndex到toIndex位置的子集合</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class ListTest &#123;</span><br><span class="line">    public void test2()&#123;</span><br><span class="line">        ArrayList list &#x3D; new ArrayList();</span><br><span class="line">        list.add(123);</span><br><span class="line">        list.add(456);</span><br><span class="line">        list.add(&quot;AA&quot;);</span><br><span class="line">        list.add(new Person(&quot;Tom&quot;,12));</span><br><span class="line">        list.add(456);</span><br><span class="line">        	&#x2F;&#x2F;int indexOf(Object obj):返回obj在集合中首次出现的位置。如果不存在，返回-1.</span><br><span class="line">        int index &#x3D; list.indexOf(4567);</span><br><span class="line">        System.out.println(index);</span><br><span class="line">    </span><br><span class="line">        	&#x2F;&#x2F;int lastIndexOf(Object obj):返回obj在当前集合中末次出现的位置。如果不存在，返回-1.</span><br><span class="line">        System.out.println(list.lastIndexOf(456));</span><br><span class="line">    </span><br><span class="line">        	&#x2F;&#x2F;Object remove(int index):移除指定index位置的元素，并返回此元素</span><br><span class="line">        Object obj &#x3D; list.remove(0);</span><br><span class="line">        System.out.println(obj);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    </span><br><span class="line">        	&#x2F;&#x2F;Object set(int index, Object ele):设置指定index位置的元素为ele</span><br><span class="line">        list.set(1,&quot;CC&quot;);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    </span><br><span class="line">        	&#x2F;&#x2F;List subList(int fromIndex, int toIndex):返回从fromIndex到toIndex位置的左闭右开区间的子集合</span><br><span class="line">        List subList &#x3D; list.subList(2, 4);</span><br><span class="line">        System.out.println(subList);</span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void test1()&#123;</span><br><span class="line">        ArrayList list &#x3D; new ArrayList();</span><br><span class="line">        list.add(123);</span><br><span class="line">        list.add(456);</span><br><span class="line">        list.add(&quot;AA&quot;);</span><br><span class="line">        list.add(new Person(&quot;Tom&quot;,12));</span><br><span class="line">        list.add(456);</span><br><span class="line">    </span><br><span class="line">        System.out.println(list);</span><br><span class="line">    </span><br><span class="line">        	&#x2F;&#x2F;void add(int index, Object ele):在index位置插入ele元素</span><br><span class="line">        list.add(1,&quot;BB&quot;);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    </span><br><span class="line">        	&#x2F;&#x2F;boolean addAll(int index, Collection eles):从index位置开始将eles中的所有元素添加进来</span><br><span class="line">        List list1 &#x3D; Arrays.asList(1, 2, 3);</span><br><span class="line">        list.addAll(list1);</span><br><span class="line"></span><br><span class="line">			&#x2F;&#x2F;list.add(list1);</span><br><span class="line">        System.out.println(list.size());&#x2F;&#x2F;9</span><br><span class="line"></span><br><span class="line">        	&#x2F;&#x2F;Object get(int index):获取指定index位置的元素</span><br><span class="line">        System.out.println(list.get(0));</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">总结：常用方法</span><br><span class="line">增：add(Object obj)</span><br><span class="line">删：remove(int index) &#x2F; remove(Object obj)</span><br><span class="line">改：set(int index, Object ele)</span><br><span class="line">查：get(int index)</span><br><span class="line">插：add(int index, Object ele)</span><br><span class="line">长度：size()</span><br></pre></td></tr></table></figure>
+
+<h3 id="List遍历："><a href="#List遍历：" class="headerlink" title="List遍历："></a>List遍历：</h3><ul>
+<li> Iterator迭代器方式</li>
+<li>增强for循环</li>
+<li>普通的循环</li>
+</ul>
+<pre><code>@Test
+public void test3()&#123;
+    ArrayList list = new ArrayList();
+    list.add(123);
+    list.add(456);
+    list.add(&quot;AA&quot;);
+
+        //方式一：Iterator迭代器方式
+    Iterator iterator = list.iterator();
+    while(iterator.hasNext())&#123;
+        System.out.println(iterator.next());
+    &#125;
+
+    System.out.println(&quot;***************&quot;);
+
+        //方式二：增强for循环
+    for(Object obj : list)&#123;
+        System.out.println(obj);
+    &#125;
+
+    System.out.println(&quot;***************&quot;);
+
+        //方式三：普通for循环
+    for(int i = 0;i &lt; list.size();i++)&#123;
+        System.out.println(list.get(i));
+    &#125;
+&#125;</code></pre>
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-04-17
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>
