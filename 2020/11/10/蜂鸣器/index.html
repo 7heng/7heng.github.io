@@ -126,29 +126,9 @@
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
 </li>
 </ul>
-<p>#include &lt;reg52.h&gt;  </p>
-<p>#include&lt;intrins.h&gt;</p>
-<p>#define uint unsigned int  </p>
-<p>#define uchar unsigned char  </p>
-<p>sbit beep = P2^3;</p>
-<p>uchar temp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //LED灯相关变量  </p>
-<p>void delay(uint z) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 毫秒级延时函数<br>{  </p>
-<pre><code>uint x,y;
-for(x = z; x &gt; 0; x--)
-    for(y = 144;y &gt; 0; y--);</code></pre>
-<p>}</p>
-<p>void main()<br>{    </p>
-<pre><code>temp = 0xfe;    
-P1 = temp;    // 1111 1110
-delay(100);
-while(1)
-&#123;
-temp = _crol_(temp,1);
-P1 = temp;
-beep = ~beep;
-delay(100);
-&#125;    </code></pre>
-<p>} </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;reg52.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;intrins.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uint unsigned int  </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uchar unsigned char  </span></span><br><span class="line"></span><br><span class="line">sbit beep = P2^<span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">uchar temp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <span class="comment">//LED灯相关变量  </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">delay</span><span class="params">(uint z)</span> &amp;nbsp</span>;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <span class="comment">// 毫秒级延时函数</span></span><br><span class="line">&#123;  </span><br><span class="line"></span><br><span class="line">	uint x,y;</span><br><span class="line">	<span class="keyword">for</span>(x = z; x &gt; <span class="number">0</span>; x--)</span><br><span class="line">		<span class="keyword">for</span>(y = <span class="number">144</span>;y &gt; <span class="number">0</span>; y--);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;    </span><br><span class="line"></span><br><span class="line">	temp = <span class="number">0xfe</span>;    </span><br><span class="line">	P1 = temp;    <span class="comment">// 1111 1110</span></span><br><span class="line">	delay(<span class="number">100</span>);</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">	temp = _crol_(temp,<span class="number">1</span>);</span><br><span class="line">	P1 = temp;</span><br><span class="line">	beep = ~beep;</span><br><span class="line">	delay(<span class="number">100</span>);</span><br><span class="line">	&#125;	</span><br><span class="line"></span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
 
 
                             <!-- Meta -->
