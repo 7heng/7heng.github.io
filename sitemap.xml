@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://7heng.github.io/2021/04/19/java%E6%B3%9B%E5%9E%8B/</loc>
+    
+    <lastmod>2021-04-19</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://7heng.github.io/2021/03/24/MySQL%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2/</loc>
     
     <lastmod>2021-04-18</lastmod>
@@ -347,7 +354,7 @@
 
   <url>
     <loc>https://7heng.github.io/</loc>
-    <lastmod>2021-04-18</lastmod>
+    <lastmod>2021-04-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
