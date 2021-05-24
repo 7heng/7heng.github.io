@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="Maven项目构建
+创建maven web项目
+配置pom.xml文件
+实现spring+mybatis整合
+创建pojo类
+持久层DAO接口编写
+Mapper映射文件编写
+业务层Service编写
+spring配置文件applicationContext-dao,xml编写
+spring配置文件a">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>Maven整合SSM框架 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                Maven整合SSM框架
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h2 id="Maven项目构建"><a href="#Maven项目构建" class="headerlink" title="Maven项目构建"></a>Maven项目构建</h2><ul>
+<li>创建maven web项目</li>
+<li>配置pom.xml文件</li>
+<li>实现spring+mybatis整合<ul>
+<li>创建pojo类</li>
+<li>持久层DAO接口编写</li>
+<li>Mapper映射文件编写</li>
+<li>业务层Service编写</li>
+<li>spring配置文件applicationContext-dao,xml编写</li>
+<li>spring配置文件applicationContext-sevice.xml编写</li>
+</ul>
+</li>
+<li>加入Springmvc相关配置<ul>
+<li>表现层Controller编写</li>
+<li>springmvc.xml文件编写</li>
+<li>jsp页面编写</li>
+<li>配置web.xml文件</li>
+</ul>
+</li>
+</ul>
+<h2 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h2><p><strong>①：创建POJO类</strong>（实体类）与数据库的表进行对应。</p>
+<p><img src="/images/SSM/SSM_1.png"></p>
+<p><strong>②：持久层DAO接口编写</strong>—-&gt;对数据库的方法操作，不用定义实现类，在xml文件中配置。</p>
+<p><img src="/images/SSM/SSM_2.png"></p>
+<p><strong>③：Mapper映射文件编写</strong>—-&gt;resources文件下面，namespace 对应接口全类名，id 与方法名保持一致，参数类型parameterType 与方法参数类型保持一致。返回值类型resultType 与方法类型保持一致。</p>
+<p><img src="/images/SSM/SSM_3.png"></p>
+<p><strong>④：业务层：Service编写</strong>—-&gt;①：编写一个对数据库查询操作的方法接口。②：编写实现类去调用DAO层接口实现mapper映射文件中对数据库的操作。</p>
+<p><img src="/images/SSM/SSM_4.png"></p>
+<p><img src="/images/SSM/SSM_5.png"></p>
+<p><strong>⑤：Spring配置文件applicationContext-dao.xml文件编写</strong></p>
+<p><img src="/images/SSM/SSM_6.png"></p>
+<p><strong>⑥：Spring配置文件applicationContext-service.xml文件编写</strong>—-&gt;①：配置扫描器，扫描Service。②：事务管理器。③：事务注解驱动。</p>
+<p><img src="/images/SSM/SSM_7.png"></p>
+<p><strong>⑦：表现层Controller编写</strong>—-&gt;编写类Service层对象，调用方法得到返回对象，注入到模块中，再由后续视图解析器解析跳转页面。</p>
+<p><img src="/images/SSM/SSM_8.png"></p>
+<p><strong>⑧：SpringMVC.xml文件编写</strong>—-&gt;①：配置扫描器，扫描Controller。②：配置视图解析器</p>
+<p><img src="/images/SSM/SSM_9.png"></p>
+<p>⑨：jsp页面编写</p>
+<p><strong>⑩：配置web.xml文件</strong>—-&gt;①：配置Spring框架启动时使用的监听器。②：指定Spring配置文件。③：配置Spring-mvc前端控制器。</p>
+<p><img src="/images/SSM/SSM_10.png"></p>
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-05-24
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>
