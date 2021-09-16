@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://7heng.github.io/tags/index.html</loc>
+    
+    <lastmod>2021-09-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://7heng.github.io/2021/06/30/Spring%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
+    
+    <lastmod>2021-06-30</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://7heng.github.io/2021/04/19/java%E6%B3%9B%E5%9E%8B/</loc>
     
     <lastmod>2021-06-03</lastmod>
@@ -403,7 +417,7 @@
 
   <url>
     <loc>https://7heng.github.io/</loc>
-    <lastmod>2021-06-03</lastmod>
+    <lastmod>2021-09-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
