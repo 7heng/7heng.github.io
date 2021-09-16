@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="java提供了8种基本数据类型对应的包装类，使得基本数据类型的变量具有类的特性。
+
+
+Demo:
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>java包装类 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                java包装类
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <ul>
+<li>java提供了8种基本数据类型对应的包装类，使得基本数据类型的变量具有类的特性。</li>
+</ul>
+<p><img src="/images/java_Wrap/Wrap_1.png"></p>
+<p><strong>Demo:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WrapperTest</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="comment">//String类型 ---&gt;基本数据类型、包装类：调用包装类的parseXxx(String s)</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span></span>&#123;</span><br><span class="line">		String str1 = <span class="string">&quot;123&quot;</span>;</span><br><span class="line">		<span class="comment">//错误的情况：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//		int num1 = (int)str1;</span></span><br><span class="line"><span class="comment">//		Integer in1 = (Integer)str1;</span></span><br><span class="line">		<span class="comment">//可能会报NumberFormatException</span></span><br><span class="line">		<span class="keyword">int</span> num2 = Integer.parseInt(str1);</span><br><span class="line">		System.out.println(num2 + <span class="number">1</span>);</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		String str2 = <span class="string">&quot;true1&quot;</span>;</span><br><span class="line">		<span class="keyword">boolean</span> b1 = Boolean.parseBoolean(str2);</span><br><span class="line">		System.out.println(b1);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//基本数据类型、包装类---&gt;String类型：调用String重载的valueOf(Xxx xxx)</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> num1 = <span class="number">10</span>;</span><br><span class="line">		<span class="comment">//方式1：连接运算</span></span><br><span class="line">		String str1 = num1 + <span class="string">&quot;&quot;</span>;</span><br><span class="line">		<span class="comment">//方式2：调用String的valueOf(Xxx xxx)</span></span><br><span class="line">		<span class="keyword">float</span> f1 = <span class="number">12.3f</span>;</span><br><span class="line">		String str2 = String.valueOf(f1);<span class="comment">//&quot;12.3&quot;</span></span><br><span class="line">		</span><br><span class="line">		Double d1 = <span class="keyword">new</span> Double(<span class="number">12.4</span>);</span><br><span class="line">		String str3 = String.valueOf(d1);</span><br><span class="line">		System.out.println(str2);</span><br><span class="line">		System.out.println(str3);<span class="comment">//&quot;12.4&quot;</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * JDK 5.0 新特性：自动装箱 与自动拆箱</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//		int num1 = 10;</span></span><br><span class="line"><span class="comment">//		//基本数据类型--&gt;包装类的对象</span></span><br><span class="line"><span class="comment">//		method(num1);</span></span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		<span class="comment">//自动装箱：基本数据类型 ---&gt;包装类</span></span><br><span class="line">		<span class="keyword">int</span> num2 = <span class="number">10</span>;</span><br><span class="line">		Integer in1 = num2;<span class="comment">//自动装箱</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">boolean</span> b1 = <span class="keyword">true</span>;</span><br><span class="line">		Boolean b2 = b1;<span class="comment">//自动装箱</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//自动拆箱：包装类---&gt;基本数据类型</span></span><br><span class="line">		System.out.println(in1.toString());</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> num3 = in1;<span class="comment">//自动拆箱</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//包装类---&gt;基本数据类型:调用包装类Xxx的xxxValue()</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span>&#123;</span><br><span class="line">		Integer in1 = <span class="keyword">new</span> Integer(<span class="number">12</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> i1 = in1.intValue();</span><br><span class="line">		System.out.println(i1 + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		Float f1 = <span class="keyword">new</span> Float(<span class="number">12.3</span>);</span><br><span class="line">		<span class="keyword">float</span> f2 = f1.floatValue();</span><br><span class="line">		System.out.println(f2 + <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//基本数据类型 ---&gt;包装类：调用包装类的构造器</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> num1 = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//		System.out.println(num1.toString());</span></span><br><span class="line">		Integer in1 = <span class="keyword">new</span> Integer(num1);</span><br><span class="line">		System.out.println(in1.toString());</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		Integer in2 = <span class="keyword">new</span> Integer(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">		System.out.println(in2.toString());</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//报异常</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//		Integer in3 = new Integer(&quot;123abc&quot;);</span></span><br><span class="line"><span class="comment">//		System.out.println(in3.toString());</span></span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		Float f1 = <span class="keyword">new</span> Float(<span class="number">12.3f</span>);</span><br><span class="line">		Float f2 = <span class="keyword">new</span> Float(<span class="string">&quot;12.3&quot;</span>);</span><br><span class="line">		System.out.println(f1);</span><br><span class="line">		System.out.println(f2);</span><br><span class="line">		</span><br><span class="line">		Boolean b1 = <span class="keyword">new</span> Boolean(<span class="keyword">true</span>);</span><br><span class="line">		Boolean b2 = <span class="keyword">new</span> Boolean(<span class="string">&quot;TrUe&quot;</span>);</span><br><span class="line">		System.out.println(b2);</span><br><span class="line">		Boolean b3 = <span class="keyword">new</span> Boolean(<span class="string">&quot;true123&quot;</span>);</span><br><span class="line">		System.out.println(b3);<span class="comment">//false</span></span><br><span class="line"></span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		Order order = <span class="keyword">new</span> Order();</span><br><span class="line">		System.out.println(order.isMale);<span class="comment">//false</span></span><br><span class="line">		System.out.println(order.isFemale);<span class="comment">//null</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Order</span></span>&#123;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">boolean</span> isMale;</span><br><span class="line">	Boolean isFemale;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-04-14
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>

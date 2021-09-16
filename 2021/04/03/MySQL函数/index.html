@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="函数：含义：一组预先编译好的sql语句的集合，理解成批处理语句
+1：提高代码的重用性
+2：简化操作
+3：减少了编译次数并且减少了和数据库服务器的连接次数，提高了效率。
+函数和存储过程的区别：存储过程：可以有0个返回，也可以有多个返回，适合做批量插入、批量更新。
+函数：有且仅有1个返回，适合做处理数据">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>MySQL函数 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                MySQL函数
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h2 id="函数："><a href="#函数：" class="headerlink" title="函数："></a>函数：</h2><p>含义：一组预先编译好的sql语句的集合，理解成批处理语句</p>
+<p>1：提高代码的重用性</p>
+<p>2：简化操作</p>
+<p>3：减少了编译次数并且减少了和数据库服务器的连接次数，提高了效率。</p>
+<h6 id="函数和存储过程的区别："><a href="#函数和存储过程的区别：" class="headerlink" title="函数和存储过程的区别："></a>函数和存储过程的区别：</h6><p>存储过程：可以有0个返回，也可以有多个返回，适合做批量插入、批量更新。</p>
+<p>函数：有且仅有1个返回，适合做处理数据后返回一个结果。</p>
+<h6 id="创建语法："><a href="#创建语法：" class="headerlink" title="创建语法："></a>创建语法：</h6><p><code>CREATE FUNCTION 函数名(参数列表) RETURNS 返回类型</code></p>
+<p><code>BEGIN</code></p>
+<p><code>函数体</code></p>
+<p><code>END</code></p>
+<p>注意：</p>
+<p>1：参数列表包含两部分：</p>
+<p>参数名 参数类型</p>
+<p>2：函数体：肯定会有return语句，如果没有也不会报错</p>
+<p>如果return语句没有放在函数体的最后也不会爆粗，但不建议。</p>
+<p>return值：</p>
+<p>3：函数体中仅有一句话，则可以省略begin end</p>
+<p>4：使用 delimiter语句设置标记结束</p>
+<h6 id="调用语法："><a href="#调用语法：" class="headerlink" title="调用语法："></a>调用语法：</h6><p><code>SELECT 函数名(参数列表)</code></p>
+<h6 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">无参有返回</span><br><span class="line">例1：返回公司的员工个数</span><br><span class="line">CREATE FUNCTION myf1() RETURNS INT</span><br><span class="line">BEGIN</span><br><span class="line">	DECLARE c INT DEFAULT 0;	#定义局部变量</span><br><span class="line">	SELECT COUNT(*) INTO c      #赋值</span><br><span class="line">	FROM employees;</span><br><span class="line">	RETURN c;</span><br><span class="line">END $</span><br><span class="line"></span><br><span class="line">SELECT myf1()$</span><br><span class="line"></span><br><span class="line">有参有返回：</span><br><span class="line">2：根据员工名，返回它的工资</span><br><span class="line">CREATE FUNCTION myf2(empName VARCHAR(20)) RETURNS DOUBLE</span><br><span class="line">BEGIN</span><br><span class="line">	SET @sal&#x3D;0;#定义用户变量 </span><br><span class="line">	SELECT salary INTO @sal   #赋值</span><br><span class="line">	FROM employees</span><br><span class="line">	WHERE last_name &#x3D; empName;</span><br><span class="line">	</span><br><span class="line">	RETURN @sal;</span><br><span class="line">END $</span><br><span class="line"></span><br><span class="line">SELECT myf2(&#39;k_ing&#39;) $</span><br><span class="line"></span><br><span class="line">3：根据部门名，返回该部门的平均工资</span><br><span class="line">CREATE FUNCTION myf3(deptName VARCHAR(20)) RETURNS DOUBLE</span><br><span class="line">BEGIN</span><br><span class="line">	DECLARE sal DOUBLE ;</span><br><span class="line">	SELECT AVG(salary) INTO sal</span><br><span class="line">	FROM employees e</span><br><span class="line">	JOIN departments d ON e.department_id &#x3D; d.department_id</span><br><span class="line">	WHERE d.department_name&#x3D;deptName;</span><br><span class="line">	RETURN sal;</span><br><span class="line">END $</span><br><span class="line"></span><br><span class="line">SELECT myf3(&#39;IT&#39;)</span><br><span class="line"></span><br><span class="line">查看函数：</span><br><span class="line">SHOW CREATE FUNCTION myf3;</span><br><span class="line"></span><br><span class="line">删除函数：</span><br><span class="line">DROP FUNCTION myf3;</span><br><span class="line"></span><br><span class="line">例：创建函数，实现传入两个float，返回二者之和</span><br><span class="line">CREATE FUNCTION test_fun1(num1 FLOAT,num2 FLOAT) RETURNS FLOAT</span><br><span class="line">BEGIN</span><br><span class="line">	DECLARE SUM FLOAT DEFAULT 0;</span><br><span class="line">	SET SUM&#x3D;num1+num2;</span><br><span class="line">	RETURN SUM;</span><br><span class="line">END $</span><br><span class="line"></span><br><span class="line">SELECT test_fun1(1,2)$</span><br></pre></td></tr></table></figure>
+
+<h6 id="调用函数："><a href="#调用函数：" class="headerlink" title="调用函数："></a>调用函数：</h6><p><code>SELECT 函数名 (实参列表)</code></p>
+<h6 id="函数和存储过程的区别：-1"><a href="#函数和存储过程的区别：-1" class="headerlink" title="函数和存储过程的区别："></a>函数和存储过程的区别：</h6><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">关键字</th>
+<th align="center">调用语法</th>
+<th align="center">返回值</th>
+<th align="center">应用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">函数</td>
+<td align="center">FUNCTION</td>
+<td align="center">SELECT 函数()</td>
+<td align="center">只能是一个</td>
+<td align="center">一般用于查询结果为一个值并返回时，当有返回值而且仅仅一个</td>
+</tr>
+<tr>
+<td align="center">存储过程</td>
+<td align="center">PROCEDURE</td>
+<td align="center">CALL 存储过程()</td>
+<td align="center">可以有0个或多个</td>
+<td align="center">一般用于更新</td>
+</tr>
+</tbody></table>
+<h6 id="字符函数："><a href="#字符函数：" class="headerlink" title="字符函数："></a>字符函数：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">concat 拼接</span><br><span class="line"></span><br><span class="line">substr 截取子串</span><br><span class="line"></span><br><span class="line">upper 转换成大写</span><br><span class="line"></span><br><span class="line">lower 转换成小写</span><br><span class="line"></span><br><span class="line">trim 去掉前后自定的空格和字符</span><br><span class="line"></span><br><span class="line">ltrim 去掉左边空格</span><br><span class="line"></span><br><span class="line">rtrim 去掉右边空格</span><br><span class="line"></span><br><span class="line">replace 替换</span><br><span class="line"></span><br><span class="line">lpad 左填充</span><br><span class="line"></span><br><span class="line">rpad 右填充</span><br><span class="line"></span><br><span class="line">instr 返回子串第一次出现的索引</span><br><span class="line"></span><br><span class="line">length 获取字节个数</span><br></pre></td></tr></table></figure>
+
+<h6 id="数组函数："><a href="#数组函数：" class="headerlink" title="数组函数："></a><strong>数组函数：</strong></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">round 四舍五入</span><br><span class="line"></span><br><span class="line">rand 随机数</span><br><span class="line"></span><br><span class="line">ceil 向上取整</span><br><span class="line"></span><br><span class="line">floor 向下取整</span><br><span class="line"></span><br><span class="line">mod 取余()</span><br><span class="line"></span><br><span class="line">truncate 截断</span><br></pre></td></tr></table></figure>
+
+<h6 id="日期函数："><a href="#日期函数：" class="headerlink" title="日期函数："></a><strong>日期函数：</strong></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">now 当前系统日期+时间</span><br><span class="line"></span><br><span class="line">curdate 当前系统日期</span><br><span class="line"></span><br><span class="line">curtime 当前系统时间</span><br><span class="line"></span><br><span class="line">str_to_date 将字符串转换成日期</span><br><span class="line"></span><br><span class="line">data_format 将日期转换成字符</span><br></pre></td></tr></table></figure>
+
+<h6 id="分组函数："><a href="#分组函数：" class="headerlink" title="分组函数："></a>分组函数：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sum 求和</span><br><span class="line">max 最大值</span><br><span class="line">min 最小值</span><br><span class="line">avg 平均值</span><br><span class="line">count 计数</span><br><span class="line"></span><br><span class="line">特点：</span><br><span class="line">1：以上五个分组函数都忽略null值，除了count(*)</span><br><span class="line">2：sum和avg一般用于处理数值型。</span><br><span class="line">   max、min、count可以处理任何数据类型</span><br><span class="line">3：都可以搭配distinct使用，用于统计去重后的结果</span><br><span class="line">4：count的参数可以支持(建议使用*)：</span><br><span class="line">	字段、*、常量值，一般放1</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="流程控制函数："><a href="#流程控制函数：" class="headerlink" title="流程控制函数："></a>流程控制函数：</h6><h6 id="if函数："><a href="#if函数：" class="headerlink" title="if函数："></a>if函数：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT IF (10&lt;5, &#39;大&#39; , &#39;小&#39;)；</span><br><span class="line"></span><br><span class="line">SELECT last_name,commission_pct,IF(commission_pct IS NULL,&#39;没奖金，呵呵&#39;,&#39;有奖金，嘻嘻&#39;) 备注</span><br><span class="line">FROM employees;</span><br></pre></td></tr></table></figure>
+
+<h6 id="case函数："><a href="#case函数：" class="headerlink" title="case函数："></a>case函数：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">case函数的使用一：</span><br><span class="line"></span><br><span class="line">case 要判断的字段或表达式</span><br><span class="line">when 常量1 then 要显示的值1或语句1;</span><br><span class="line">when 常量2 then 要显示的值2或语句2;</span><br><span class="line">...</span><br><span class="line">else 要显示的值n或语句n;</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">例：查询员工的工资，要求</span><br><span class="line">部门号&#x3D;30，显示的工资为1.1倍</span><br><span class="line">部门号&#x3D;40，显示的工资为1.2倍</span><br><span class="line">部门号&#x3D;50，显示的工资为1.3倍</span><br><span class="line">其他部门，显示的工资为元工资</span><br><span class="line"></span><br><span class="line">SELECT salary 原始工资,department_id,</span><br><span class="line">CASE department_id</span><br><span class="line">WHEN 30 THEN salary*1.1</span><br><span class="line">WHEN 40 THEN salary*1.2</span><br><span class="line">WHEN 50 THEN salary*1.3</span><br><span class="line">ELSE salary</span><br><span class="line">END AS 新工资</span><br><span class="line">FROM employees;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">case函数的使用二：类似于 多重if</span><br><span class="line"></span><br><span class="line">case </span><br><span class="line">when 条件1 then 要显示的值1或语句1</span><br><span class="line">when 条件2 then 要显示的值2或语句2</span><br><span class="line">。。。</span><br><span class="line">else 要显示的值n或语句n</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">例：查询员工的工资的情况</span><br><span class="line">如果工资&gt;20000,显示A级别</span><br><span class="line">如果工资&gt;15000,显示B级别</span><br><span class="line">如果工资&gt;10000,显示C级别</span><br><span class="line">否则，显示D级别</span><br><span class="line"></span><br><span class="line">SELECT salary</span><br><span class="line">CASE</span><br><span class="line">WHEN salary&gt;20000 THEN &#39;A&#39;</span><br><span class="line">WHEN salary&gt;15000 THEN &#39;B&#39;</span><br><span class="line">WHEN salary&gt;10000 THEN &#39;C&#39;</span><br><span class="line">ELSE &#39;D&#39;</span><br><span class="line">END AS 工资级别</span><br><span class="line">FROM emplyees;</span><br></pre></td></tr></table></figure>
+
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-04-03
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="单片机上使用的大部分都是轻触开关，轻触按键。
+独立键盘：每个按键占用一个io口，当按键数量较多时，io口利用效率不高，但程序简单，适用于所需按键较少的场合。
+矩阵键盘：电路连接复杂，但提高了io口的利用率，软件编程较复杂。适用于使用大量按键的场合。
+独立按键：
+
+&amp;emsp;&amp;emsp;按键的一端与">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>独立按键与矩阵键盘 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                独立按键与矩阵键盘
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <a id="more"></a>
+
+<p>单片机上使用的大部分都是轻触开关，轻触按键。</p>
+<p>独立键盘：每个按键占用一个io口，当按键数量较多时，io口利用效率不高，但程序简单，适用于所需按键较少的场合。</p>
+<p>矩阵键盘：电路连接复杂，但提高了io口的利用率，软件编程较复杂。适用于使用大量按键的场合。</p>
+<p>独立按键：</p>
+<p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605369130375&di=722c9e7cdf6e555ce1bd1cdc4e89e91c&imgtype=0&src=http://file.elecfans.com/web1/M00/BC/8C/pIYBAF67T1uAZUyPAABtB6TAq94163.jpg"></p>
+<p>&emsp;&emsp;按键的一端与io口连接，另一端接地。通过控制io口输出高电平即可检测按键是否按下，当按下时io口会被拉低，松开后io口回到高电平。</p>
+<p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605369468198&di=466d5acd491ae5e475abc7b87bb9782d&imgtype=0&src=http://6.eewimg.cn/news/uploadfile/2020/0225/1582610369554153.jpg"></p>
+<p>&emsp;&emsp;准双向io口： 在准双向io口的管脚处接一个轻触独立按键，另一端接地。当内部输出为1时，经过非门变为0，G与S之间无正电压，场效应管不导通，因为内部有上拉电阻，所以D会被拉到5V，如果按键没有按下，那么此处还是为5V，如果按键按下，线路相当于直接接到地线上，那么会被拉低变为0V，因为电流会往阻抗低的地方流。</p>
+<h4 id="按键特性："><a href="#按键特性：" class="headerlink" title="按键特性："></a>按键特性：</h4><p>&emsp;机械按键在按下或松开时会存在抖动现象。</p>
+<blockquote>
+<p>在编写程序时需要进行消除抖动</p>
+</blockquote>
+<h4 id="矩阵键盘："><a href="#矩阵键盘：" class="headerlink" title="矩阵键盘："></a>矩阵键盘：</h4><p>确定矩阵键盘上哪一个按键被按下可以采用列扫描和行扫描。列扫描时先把接在列上面的所有io口拉高，接在行上面的所有io口置低。（行扫描时先把接在行上面的所有io口拉高，接在列上面的所有io口置低）当其中有一列内任何一个按键按下那么整条列线都会被拉低。</p>
+<h5 id="8×8LED点阵屏："><a href="#8×8LED点阵屏：" class="headerlink" title="8×8LED点阵屏："></a>8×8LED点阵屏：</h5><ul>
+<li>行线为点阵屏LED灯的正极为共阳极点阵屏。</li>
+<li>列线为点阵屏LED灯的正极为共阴极点阵屏。</li>
+</ul>
+<p>&emsp;&emsp;点阵屏动态显示相当于数码管动态显示，是一个一个亮来显示的，但是由于机器运行速度很快，而且人眼的延时效果，所以看着时同时在显示。</p>
+<p>&emsp;&emsp;点阵屏驱动需要很多的io口，设计电路时应该尽可能节省io口的利用，所以驱动点阵屏</p>
+<p>可以利用74HC595芯片通过级联来控制点阵屏。74HC595大大节省了io口的利用。</p>
+<p>74HC595芯片是一种串入并出的芯片，是8位串行输入/输出或者并行输出的移位寄存器。（以压栈的方式进行工作）</p>
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2020-11-14
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>

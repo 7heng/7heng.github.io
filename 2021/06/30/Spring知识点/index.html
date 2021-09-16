@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="Spring有两个核心部分：Ioc 和 Aop
+Ioc：控制反转，把创建对象的过程交给Spring管理。
+Aop：面向切面，不修改源代码进行功能增强。
+Ioc底层原理：
+xml解析、工厂模式、反射。
+
+原始方式和工厂方式在一个类中使用另一个类的方法或对象：
+
+Ioc容器通过xml文件配置的方式创建了">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>Spring知识点 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                Spring知识点
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <p><strong>Spring有两个核心部分</strong>：Ioc 和 Aop</p>
+<p><strong>Ioc</strong>：控制反转，把创建对象的过程交给Spring管理。</p>
+<p><strong>Aop</strong>：面向切面，不修改源代码进行功能增强。</p>
+<h3 id="Ioc底层原理："><a href="#Ioc底层原理：" class="headerlink" title="Ioc底层原理："></a>Ioc底层原理：</h3><ul>
+<li>xml解析、工厂模式、反射。</li>
+</ul>
+<p><strong>原始方式和工厂方式在一个类中使用另一个类的方法或对象：</strong></p>
+<p><img src="/images/Spring/spring_7.png"></p>
+<p><strong>Ioc容器通过xml文件配置的方式创建了对象：</strong></p>
+<p><img src="/images/Spring/spring_8.png"></p>
+<p><strong>Spring提供了Ioc容器实现两种方式：(两个接口)</strong></p>
+<p>1)：<strong>BeanFactory</strong>：Ioc容器基本实现，是Spring内部的使用接口，不提供开发人员进行使用。</p>
+<ul>
+<li><strong>加载配置文件时不会创建对象，在获取对象(使用)才去创建对象</strong>。</li>
+</ul>
+<p>2)：<strong>ApplicationContext</strong>：BeanFactory接口的子接口，提供更多更强大的功能，一般由开发人员进行使用。</p>
+<ul>
+<li><strong>加载配置文件时就会把配置文件对象进行创建</strong>。</li>
+</ul>
+<h3 id="Ioc操作Bean管理："><a href="#Ioc操作Bean管理：" class="headerlink" title="Ioc操作Bean管理："></a>Ioc操作Bean管理：</h3><p><strong>什么是Bean管理？</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1：Bean管理指的是两个操作：</span><br><span class="line">①Spring创建对象</span><br><span class="line"></span><br><span class="line">②Spring注入属性</span><br><span class="line"></span><br><span class="line">2：Bean管理操作方式有两种：</span><br><span class="line">1)：基于xml配置文件方式实现。</span><br><span class="line">	基于xml方式创建对象</span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;唯一标识&quot;</span> <span class="attr">class</span>=<span class="string">&quot;类全路径名(包类路径)&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">①在Spring配置文件中，使用bean标签，标签里面添加相对应属性，就可以实现对象创建</span><br><span class="line">②在bean标签中有很多属性，介绍常用的属性：</span><br><span class="line">id属性：唯一标识</span><br><span class="line">class属性：类全路径(包类路径)</span><br><span class="line">③创建对象的时候，默认也是执行无参数构造方法完场创建对象</span><br><span class="line">	基于xml方式注入属性</span><br><span class="line"></span><br><span class="line">2)：基于注解方式实现。</span><br></pre></td></tr></table></figure>
+
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-06-30
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>

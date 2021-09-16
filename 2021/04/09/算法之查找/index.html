@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="线性表的查找：一：顺序查找(线性查找)：理解：顺序查找一个数据，找到该元素就返回其在数组中的下标，没找到则返回空。
+优点：算法简单，逻辑次序无要求，且不同存储结构均适用。
+缺点：ASL(平均查找长度)太长，时间效率低。
+Demo：
+1234567891011121314151617181920212">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>算法之查找 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                算法之查找
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h2 id="线性表的查找："><a href="#线性表的查找：" class="headerlink" title="线性表的查找："></a>线性表的查找：</h2><h3 id="一：顺序查找-线性查找-："><a href="#一：顺序查找-线性查找-：" class="headerlink" title="一：顺序查找(线性查找)："></a>一：顺序查找(线性查找)：</h3><p><strong>理解：</strong>顺序查找一个数据，找到该元素就返回其在数组中的下标，没找到则返回空。</p>
+<p><strong>优点：</strong>算法简单，逻辑次序无要求，且不同存储结构均适用。</p>
+<p><strong>缺点：</strong>ASL(平均查找长度)太长，时间效率低。</p>
+<p><strong>Demo：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSequentialSearch</span> </span>&#123;</span><br><span class="line">	 	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> a[]=&#123;<span class="number">49</span>,<span class="number">38</span>,<span class="number">65</span>,<span class="number">97</span>,<span class="number">76</span>,<span class="number">13</span>,<span class="number">27</span>,<span class="number">49</span>,<span class="number">78</span>,<span class="number">34</span>,<span class="number">12</span>,<span class="number">64</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">62</span>,&#125;;</span><br><span class="line">		System.out.println(<span class="string">&quot;请输入要查询的数字：&quot;</span>);</span><br><span class="line">	 	Scanner input=<span class="keyword">new</span> Scanner(System.in);	</span><br><span class="line">	 	<span class="keyword">int</span> input1=input.nextInt();	</span><br><span class="line">	 	SequentialSearch(a,input1);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SequentialSearch</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> input)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">	 	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">	 		<span class="keyword">if</span>(arr[i]==input)&#123;</span><br><span class="line">	 			System.out.println(input+<span class="string">&quot;的位置为：&quot;</span>+i);	</span><br><span class="line">	 			<span class="keyword">break</span>;</span><br><span class="line">	 			&#125;</span><br><span class="line">	 		<span class="keyword">if</span>(i==arr.length-<span class="number">1</span>)</span><br><span class="line">	 			System.out.println(<span class="string">&quot;No Result!&quot;</span>);</span><br><span class="line">	 		&#125;</span><br><span class="line">	 	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>时间复杂度：</strong>O(n)</p>
+<p><strong>空间复杂度：</strong>O(1)</p>
+<p><strong>小Tips：</strong>可以添设”哨兵“，来加快速度。</p>
+<h3 id="二：折半查找-二分或对分查找-："><a href="#二：折半查找-二分或对分查找-：" class="headerlink" title="二：折半查找(二分或对分查找)："></a>二：折半查找(二分或对分查找)：</h3><p><strong>理解：</strong>得到首元素的索引head，并求出数组长度length-1得到尾元素的索引end。利用首尾元素求出中间元素middle， [ (head + end) / 2 ] ,利用middle值与target值进行比较，如果相同，则返回。如果不同,middle&gt;target，则进行尾元素索引的更改,变为end=middle-1；如果middle&lt;target，则进行首元素索引的更改,变为head=middle+1；</p>
+<p><strong>优点：</strong>效率比顺序查找高。</p>
+<p><strong>缺点：</strong>只适用于有序表，且限于顺序存储结构(对线性表无效)。</p>
+<p><strong>Demo：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SearchUtils</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SearchUtils su = <span class="keyword">new</span> SearchUtils();</span><br><span class="line">        <span class="keyword">int</span>[] arr = &#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">12</span>,<span class="number">23</span>,<span class="number">33</span>,<span class="number">44</span>,<span class="number">45</span>,<span class="number">67</span>,<span class="number">78</span>,<span class="number">98</span>,<span class="number">100</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> res = su.binarySearch(arr, <span class="number">44</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;res=&quot;</span> + res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> head = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> end = arr.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> middle;</span><br><span class="line">        <span class="keyword">while</span> (head &lt;= end) &#123;</span><br><span class="line">            middle = (head + end) / <span class="number">2</span>;</span><br><span class="line">            <span class="comment">//如果要查找的元素target小于中间位置的元素middle，指向数组的较大端的end索引重新指向中间索引middle的左边（middle-1）</span></span><br><span class="line">            <span class="keyword">if</span> (target &lt; arr[middle]) &#123;</span><br><span class="line">                end = middle - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//如果要查找的元素target大于中间位置的元素middle，指向数组的较小端的head索引重新指向中间索引middle的右边（middle+1）</span></span><br><span class="line">            <span class="keyword">if</span> (target &gt; arr[middle]) &#123;</span><br><span class="line">                head = middle + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (arr[middle] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> middle;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度：O(lg2^n)</p>
+<h3 id="三：分块查找-索引顺序表的查找-："><a href="#三：分块查找-索引顺序表的查找-：" class="headerlink" title="三：分块查找(索引顺序表的查找)："></a>三：分块查找(索引顺序表的查找)：</h3><p><strong>理解：</strong>先将所有元素按大小进行分块，然后在块内进行查找。在分块时，块内的元素不一定是有序的，只要一个块内的元素在同一区间就行。用标准的语言描述是：算法的思想是将n个数据元素”按块有序”划分为m块,(m ≤ n)。每块中的关键字（元素）不一定有序，但前一块中的最大关键字必须小于后一块的最小关键字，即要求表示“分块有序”的。</p>
+<p><strong>思想：</strong>首先查找索引表，因为索引表为有序表，所以可以利用顺序或折半查找，再在块内进行查找，因为块内可以无序，所以利用顺序查找，在块内查找到则显示查询成功，否则查找失败。</p>
+<p><strong>e.g：索引表：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">14</th>
+<th align="center">34</th>
+<th align="center">66</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">5</td>
+<td align="center">10</td>
+</tr>
+</tbody></table>
+<p><strong>元素表：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">索引</th>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+<th align="center">9</th>
+<th align="center">10</th>
+<th align="center">11</th>
+<th align="center">12</th>
+<th align="center">13</th>
+<th align="center">14</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">值</td>
+<td align="center">8</td>
+<td align="center">14</td>
+<td align="center">6</td>
+<td align="center">9</td>
+<td align="center">10</td>
+<td align="center">22</td>
+<td align="center">34</td>
+<td align="center">18</td>
+<td align="center">19</td>
+<td align="center">31</td>
+<td align="center">40</td>
+<td align="center">38</td>
+<td align="center">54</td>
+<td align="center">66</td>
+<td align="center">46</td>
+</tr>
+</tbody></table>
+<p><strong>查找过程：</strong>先确定待查记录所在块(顺序或折半查找),再在块内查找(顺序查找)。</p>
+<p><strong>查找效率：</strong>ASL=Lb（对索引表查找的ASL）+Lw（对块内查找的ASL）</p>
+<p><strong>优点：</strong>插入删除比较容易，无需进行大量移动。</p>
+<p><strong>缺点：</strong>要增加一个索引表的存储空间并对初始化索引表并对初始索引表进行排序运算。</p>
+<p><strong>适用情况：</strong>如果线性表既要快速查找又经常动态变化，则可采用分块查找。</p>
+<p><strong>Demo：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SSTable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> data[];</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> length;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">searchIndex</span><span class="params">(IndexTable it, <span class="keyword">int</span> m, SSTable st, <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> low = <span class="number">0</span>, high = m -<span class="number">1</span>, mid, i;</span><br><span class="line">        <span class="keyword">int</span> b = n/m;</span><br><span class="line">        <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">            mid=(low + high) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (it.elem[mid].key &gt;= k) &#123;</span><br><span class="line">                high = mid - <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                low = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (low &lt; m) &#123;</span><br><span class="line">            i = it.elem[low].start;</span><br><span class="line">            <span class="keyword">while</span> (i &lt;= it.elem[low].start + b -<span class="number">1</span> &amp;&amp; st.data[i] != k) &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (i &lt;= it.elem[low].start + b -<span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">createSSTable</span><span class="params">(<span class="keyword">int</span>[] a)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = <span class="keyword">new</span> <span class="keyword">int</span>[a.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">            <span class="keyword">this</span>.data[i] = a[i];</span><br><span class="line">            <span class="keyword">this</span>.length++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 索引表结点 */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexItem</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span>  <span class="keyword">int</span> key;</span><br><span class="line">        <span class="keyword">public</span>  <span class="keyword">int</span> start;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 索引表 */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexTable</span></span>&#123;</span><br><span class="line">        <span class="keyword">public</span>  IndexItem[] elem;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createIndexTable</span><span class="params">(<span class="keyword">int</span>[][] b)</span></span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.elem = <span class="keyword">new</span> IndexItem[b.length];</span><br><span class="line">            <span class="keyword">int</span> i;</span><br><span class="line">            <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; b.length; i++)&#123;</span><br><span class="line">                elem[i] = <span class="keyword">new</span> IndexItem();</span><br><span class="line">                elem[i].key = b[i][<span class="number">0</span>];</span><br><span class="line">                elem[i].start = b[i][<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">this</span>.length++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] a = &#123;<span class="number">8</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">22</span>, <span class="number">34</span>, <span class="number">18</span>, <span class="number">19</span>, <span class="number">31</span>, <span class="number">40</span>, <span class="number">38</span>, <span class="number">54</span>, <span class="number">66</span>, <span class="number">46</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[][] b = &#123;&#123;<span class="number">14</span>, <span class="number">0</span>&#125;,&#123;<span class="number">34</span>, <span class="number">5</span>&#125;,&#123;<span class="number">66</span>, <span class="number">10</span>&#125;&#125;;</span><br><span class="line">        SSTable st = <span class="keyword">new</span> SSTable();</span><br><span class="line">        IndexTable it = st.<span class="function">new <span class="title">IndexTable</span><span class="params">()</span></span>;</span><br><span class="line">        st.createSSTable(a);</span><br><span class="line">        it.createIndexTable(b);</span><br><span class="line">        <span class="keyword">int</span> x = st.searchIndex(it, b.length, st, a.length, <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;要查找的元素不存在&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;查找成功，该元素在表中的位置为：&quot;</span> + (x + <span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="数表的查找："><a href="#数表的查找：" class="headerlink" title="数表的查找："></a>数表的查找：</h2><ul>
+<li>当表插入、删除等操作频繁时，为维护表的有序性，需要移动表中很多记录。</li>
+</ul>
+<p>改用动态查找表—几种特殊的树</p>
+<ul>
+<li><p>表结构在<strong>查找过程中动态生成</strong>。</p>
+</li>
+<li><p>对于给定值key，若表中存在，则成功返回；否则，插入关键字等于key的记录。</p>
+</li>
+</ul>
+<h4 id="1：二叉排序树："><a href="#1：二叉排序树：" class="headerlink" title="1：二叉排序树："></a>1：二叉排序树：</h4><ul>
+<li>又称二叉搜索树，二叉查找树。</li>
+</ul>
+<p><strong>定义：</strong></p>
+<p>二叉排序树或是空树，或是满足如下性质的二叉树：</p>
+<ol>
+<li>若其<strong>左子树非空</strong>，则左子树上所有结点的值均<strong>小于根结点</strong>的值;</li>
+<li>若其<strong>右子树非空</strong>，则右子树上所有节点的值均<strong>大于根节点</strong>的值;</li>
+<li>其<strong>左右子树本身又各是一颗二叉排序树</strong>;</li>
+</ol>
+<p><strong>中序遍历非空的二叉排序树所得到的数据元素序列是一个按关键字排列的递增有序序列</strong>。</p>
+<h5 id="查找："><a href="#查找：" class="headerlink" title="查找："></a>查找：</h5><ul>
+<li>若查找的关键字等于根节点，成功。</li>
+<li>否则<ul>
+<li>若小于根节点，查其左子树。</li>
+<li>若大于根结点，查其右子树。</li>
+</ul>
+</li>
+<li>在左右子数上的操作类似。</li>
+</ul>
+<p><strong>进阶思想：二叉排序树的递归查找</strong></p>
+<ol>
+<li>若二叉排序树为空，则查找失败，返回空指针。</li>
+<li>若二叉树排序树非空，则给定值key与根节点的关键字。</li>
+</ol>
+<ul>
+<li>若key等于根结点，则查找成功，返回根节点地址。</li>
+<li>若key小于根结点，则进一步查找左子树。</li>
+<li>若key大于根节点，则进一步查找右子树。</li>
+</ul>
+<p><strong>二叉树排序树的查找分析：</strong></p>
+<p>二叉排序树上查找某关键字等于给定值的结点过程，其实就是走了一条从根到该结点的路径。</p>
+<ul>
+<li><strong>比较的关键字次数=此节点所在层次数</strong> </li>
+<li><strong>最多的比较次数=树的深度</strong></li>
+<li>含有n个结点的二叉排序树的<strong>平均查找长度</strong>和树的<strong>形态</strong>有关。</li>
+<li>尽量让二叉树的形态均衡，提高二叉排序树的查找效率。</li>
+</ul>
+<p><img src="/images/Tree/tree_1.png"></p>
+<h5 id="插入："><a href="#插入：" class="headerlink" title="插入："></a>插入：</h5><ul>
+<li>若二叉排序树为空，则插入结点作为根节点插入到空树中。</li>
+<li>否则，继续在其左、右子树上查找<ul>
+<li>树中已有，不再插入</li>
+<li>树中没有<ul>
+<li>查找直至某个叶子结点的左子树或右子树为空为止，则插入结点应为该叶子结点的左孩子或有孩子。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>通俗一点的说法就是：</strong></p>
+<p>①：如果空，则为根节点。</p>
+<p>②：大于根结点，插入右子树。</p>
+<p>③：小于根结点，插入左子树。</p>
+<p><strong>二叉排序树的操作：—生成：</strong></p>
+<ul>
+<li>从空树出发，经过一系列的查找、插入操作之后，可生成一棵二叉排序树。</li>
+<li><strong>一个无序列序列可通过构造二叉排序树而变成一个有序序列。构造树的过程就是对无序序列进行排序的过程。</strong></li>
+<li>插入的结点均为叶子结点，故无需移动其他结点。相当于在有序序列上插入记录而无需移动其他记录。</li>
+</ul>
+<p><strong>但是：</strong></p>
+<ul>
+<li>关键字的输入顺序不同，建立的二叉树排序树不同。</li>
+</ul>
+<h5 id="删除："><a href="#删除：" class="headerlink" title="删除："></a>删除：</h5><p>关于删除，相对来说要比查找和插入要麻烦一些，但是请耐心看下去。</p>
+<ul>
+<li>从二叉排序树中删除一个结点，不能把以该结点为根的子树都删去，只能删除该结点，并且还<strong>应保证删除后所得的二叉树仍然满足二叉排序树的性质不变</strong>。</li>
+<li>由于中序遍历二叉排序树可以得到一个递增有序的序列。那么，在二叉排序树中删去一个结点相当于删去有序序列中的一个结点。<ul>
+<li>将因删除结点而断开的二叉链表重新连接起来。</li>
+<li>防止重新链接后树的高度增加。</li>
+</ul>
+</li>
+</ul>
+<p><strong>通俗一点的说法就是：</strong></p>
+<p>①：被删除的为叶子结点，直接删去该结点。</p>
+<p>②：被删除结点只有右孩子或左孩子，用其左子树或右子树替换它(结点替换)。其双亲结点的相应指针域的值改为”指向被删除结点的左子树或右子树”。</p>
+<p>③：被删除的节点上既有左子树，又有右子树：</p>
+<ul>
+<li>(1)：用前驱结点去替换，然后删除要删除的结点。</li>
+<li>(2)：用后继结点去替换，然后删除要删除的结点。</li>
+<li>不管用前驱结点替换还是后继结点替换，都应该保存二叉树的性质;</li>
+</ul>
+<p><img src="/images/Tree/tree_2.png"></p>
+<p><strong>Demo：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BinaryTree</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * BinaryTree 的节点数据结构</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span></span>&#123;</span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">int</span> key = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">private</span> String data = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">boolean</span> isVisited = <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">private</span> TreeNode leftChild = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">private</span> TreeNode rightChild = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="title">TreeNode</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="title">TreeNode</span><span class="params">(<span class="keyword">int</span> key,String data)</span></span>&#123;</span><br><span class="line">                <span class="keyword">this</span>.key = key;</span><br><span class="line">                <span class="keyword">this</span>.data = data;</span><br><span class="line">                <span class="keyword">this</span>.leftChild = <span class="keyword">null</span>;</span><br><span class="line">                <span class="keyword">this</span>.rightChild = <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取根节点</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> TreeNode <span class="title">getRoot</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRoot</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.root = root;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//定义根节点</span></span><br><span class="line">        <span class="keyword">private</span> TreeNode root = <span class="keyword">null</span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">BinaryTree</span><span class="params">()</span></span>&#123;</span><br><span class="line">            root = <span class="keyword">new</span> TreeNode(<span class="number">10</span>,<span class="string">&quot;A&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 创建一棵二叉树</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createBinaryTree</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">            TreeNode nodeB = <span class="keyword">new</span> TreeNode(<span class="number">8</span>,<span class="string">&quot;B&quot;</span>);</span><br><span class="line">            TreeNode nodeC = <span class="keyword">new</span> TreeNode(<span class="number">12</span>,<span class="string">&quot;C&quot;</span>);</span><br><span class="line">            TreeNode nodeD = <span class="keyword">new</span> TreeNode(<span class="number">7</span>,<span class="string">&quot;D&quot;</span>);</span><br><span class="line">            TreeNode nodeE = <span class="keyword">new</span> TreeNode(<span class="number">9</span>,<span class="string">&quot;E&quot;</span>);</span><br><span class="line">            TreeNode nodeF = <span class="keyword">new</span> TreeNode(<span class="number">22</span>,<span class="string">&quot;F&quot;</span>);</span><br><span class="line">            root.leftChild = nodeB;</span><br><span class="line">            root.rightChild = nodeC;</span><br><span class="line">            nodeB.leftChild = nodeD;</span><br><span class="line">            nodeB.rightChild = nodeE;</span><br><span class="line">            nodeC.rightChild = nodeF;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 前序遍历</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(TreeNode node)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(node != <span class="keyword">null</span>)&#123;</span><br><span class="line">                visited(node);</span><br><span class="line">                preOrder(node.leftChild);</span><br><span class="line">                preOrder(node.rightChild);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 中序遍历</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> node</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inOrder</span><span class="params">(TreeNode node)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(node != <span class="keyword">null</span>)&#123;</span><br><span class="line">                preOrder(node.leftChild);</span><br><span class="line">                visited(node);</span><br><span class="line">                preOrder(node.rightChild);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 后序遍历</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> node</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postOrder</span><span class="params">(TreeNode node)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(node != <span class="keyword">null</span>)&#123;</span><br><span class="line">                preOrder(node.leftChild);</span><br><span class="line">                preOrder(node.rightChild);</span><br><span class="line">                visited(node);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 非递归前序遍历</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> node</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">nonRecPreOrder</span><span class="params">(TreeNode node)</span></span>&#123;</span><br><span class="line">            Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">            TreeNode pNode = node;</span><br><span class="line">            <span class="keyword">while</span>(pNode != <span class="keyword">null</span> || stack.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">while</span>(pNode != <span class="keyword">null</span>)&#123;</span><br><span class="line">                    visited(pNode);</span><br><span class="line">                    stack.push(pNode);</span><br><span class="line">                    pNode = pNode.leftChild;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(stack.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                    pNode = stack.pop();</span><br><span class="line">                    pNode = pNode.rightChild;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 非递归中序遍历</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> node</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">nonRecInOrder</span><span class="params">(TreeNode node)</span></span>&#123;</span><br><span class="line">            Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">            TreeNode pNode = node;</span><br><span class="line">            <span class="keyword">while</span>(pNode != <span class="keyword">null</span> || stack.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">while</span>(pNode != <span class="keyword">null</span>)&#123;</span><br><span class="line">                    stack.push(pNode);</span><br><span class="line">                    pNode = pNode.leftChild;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(stack.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                    pNode = stack.pop();</span><br><span class="line">                    visited(pNode);</span><br><span class="line">                    pNode = pNode.rightChild;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 非递归后序遍历</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> pNode</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">nonRecPostOrder</span><span class="params">(TreeNode pNode)</span></span>&#123;</span><br><span class="line">            Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">            TreeNode node = pNode;</span><br><span class="line">            <span class="keyword">while</span>(pNode != <span class="keyword">null</span>)&#123;</span><br><span class="line"><span class="comment">//左子树入栈</span></span><br><span class="line">                <span class="keyword">while</span>(pNode.leftChild != <span class="keyword">null</span>)&#123;</span><br><span class="line">                    stack.push(pNode);</span><br><span class="line">                    pNode = pNode.leftChild;</span><br><span class="line">                &#125;</span><br><span class="line"><span class="comment">//当前节点无右子树或者右子树已输出</span></span><br><span class="line">                <span class="keyword">while</span>(pNode != <span class="keyword">null</span> &amp;&amp; (pNode.rightChild == <span class="keyword">null</span> || pNode.rightChild == node))&#123;</span><br><span class="line">                    visited(pNode);</span><br><span class="line"><span class="comment">//记录上一个已输出的节点</span></span><br><span class="line">                    node = pNode;</span><br><span class="line">                    <span class="keyword">if</span>(!stack.isEmpty())&#123;</span><br><span class="line">                        pNode = stack.pop();</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        <span class="keyword">return</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"><span class="comment">//右子树入栈</span></span><br><span class="line">                stack.push(pNode);</span><br><span class="line">                pNode = pNode.rightChild;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">visited</span><span class="params">(TreeNode node)</span> </span>&#123;</span><br><span class="line">            node.isVisited = <span class="keyword">true</span>;</span><br><span class="line">            System.out.println(node.data+<span class="string">&quot;,&quot;</span>+node.key);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 计算树的高度</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">height</span><span class="params">(TreeNode node)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(node == <span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">int</span> i = height(node.leftChild);</span><br><span class="line">                <span class="keyword">int</span> j = height(node.rightChild);</span><br><span class="line">                <span class="keyword">return</span> (i&lt;j)?j+<span class="number">1</span>:i+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 计算树的节点数</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> node</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@return</span> 树的节点数</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">(TreeNode node)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(node == <span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>+size(node.leftChild)+size(node.rightChild);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">            BinaryTree binaryTree = <span class="keyword">new</span> BinaryTree();</span><br><span class="line">            TreeNode root = binaryTree.root;</span><br><span class="line">            binaryTree.createBinaryTree(root);</span><br><span class="line">            System.out.println(binaryTree.height(root));</span><br><span class="line">            System.out.println(binaryTree.size(root));</span><br><span class="line">            binaryTree.preOrder(root);</span><br><span class="line">            System.out.println(<span class="string">&quot;*******&quot;</span>);</span><br><span class="line">            binaryTree.nonRecPreOrder(root);</span><br><span class="line">            System.out.println(<span class="string">&quot;*******&quot;</span>);</span><br><span class="line">            binaryTree.nonRecInOrder(root);</span><br><span class="line">            System.out.println(<span class="string">&quot;-------------&quot;</span>);</span><br><span class="line">            binaryTree.nonRecPostOrder(root);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2：平衡二叉树："><a href="#2：平衡二叉树：" class="headerlink" title="2：平衡二叉树："></a>2：平衡二叉树：</h4>
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-04-09
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>

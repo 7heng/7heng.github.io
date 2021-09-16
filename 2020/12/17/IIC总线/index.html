@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="常用的串行总线协议：目前常用的微机与外设之间进行数据传输的串行总线主要有：UART、1-Wire、IIC和SPI总线。
+​    UART：是以异步方式进行通信（一条数据输入线，一条数据输出线）
+​    1-wire：即单线总线，又叫单总线（只有一条线）
+​    IIC：同步串行2线方式进行通信">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>IIC总线 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                IIC总线
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <a id="more"></a>
+
+<h2 id="常用的串行总线协议："><a href="#常用的串行总线协议：" class="headerlink" title="常用的串行总线协议："></a>常用的串行总线协议：</h2><p>目前常用的微机与外设之间进行数据传输的串行总线主要有：UART、1-Wire、IIC和SPI总线。</p>
+<p>​    UART：是以异步方式进行通信（一条数据输入线，一条数据输出线）</p>
+<p>​    1-wire：即单线总线，又叫单总线（只有一条线）</p>
+<p>​    IIC：同步串行2线方式进行通信（一条时钟线，一条数据线）</p>
+<p>​    SPI：同步串行3线方式进行通信（一条时钟线，一条数据据输入线，一条数据输出线）</p>
+<h3 id="I²C串行总线的组成及工作原理："><a href="#I²C串行总线的组成及工作原理：" class="headerlink" title="I²C串行总线的组成及工作原理："></a>I²C串行总线的组成及工作原理：</h3><p>​    I²C总线是PHLIPS公司推出的一种<strong>串行总线</strong>，它只有<strong>两</strong>根双向信号线。一根是数据线SDA(Serial data I/o口)，另一根是时钟线SCL(Serial clock)</p>
+<p>​    I²C总线上可以挂多个器件，而每个器件都有<strong>唯一的地址</strong>，这样可以标识通信目标。数据的通信的方式采用<strong>主从</strong>方式，主机负责主动联系从机，而从机则被动回应数据(从机无法主动发数据给主机，也无法主动向主机读取数据)</p>
+<p><img src="/images/IIC/8.png"></p>
+<p>在多主机系统中，可能同时有几个主机企图启动总线传送数据。为了避免混乱，I²C总线要通过总线仲裁，以决定由哪一台主机控制总线。</p>
+<p>在80C51单片机应用系统的串行总线扩展中，我们经常遇到的是以80C51单片机为主机，其它接口为从机的主机情况。</p>
+<p>I²C总线通过上拉电阻接正电源。当总线空闲时，两根线均为高电平。连接到总线上的任一器件输出的低电平，都将使总线的信号变低，即各器件的SDA及SCL都是<strong>线“与”关系</strong>。</p>
+<h2 id="I²C总线传输协议："><a href="#I²C总线传输协议：" class="headerlink" title="I²C总线传输协议："></a>I²C总线传输协议：</h2><h3 id="数据位的有效性规定："><a href="#数据位的有效性规定：" class="headerlink" title="数据位的有效性规定："></a>数据位的有效性规定：</h3><p>​    SCL为高电平期间，数据线上的数据必须保持稳定，只有SCL信号为低电平期间，SDA的状态才允许变化。</p>
+<p>​    <strong>I²C的起始信号和终止信号</strong>(起始信号和终止信号不受有效性规定)：</p>
+<p>​    SCL为高电平期间，SDA线由高电平向低电平的变化表示起始信号；SCL为高电平期间，SDA线由低电平向高电平的变化表示终止信号(<strong>起始信号和终止信号由主机进行</strong>)</p>
+<p><strong>当单片机不使用时钟线或数据线的时候，要进行释放，SCL(时钟线)在外同步中始终是由单片机去控制的，SDA(数据线)在不使用时需要进行释放(手动/程序)</strong></p>
+<p>起始和终止信号都是由主机发出的，在起始信号产生后，主机就处于被占用的状态；在终止信号产生后，总线就属于空闲状态。</p>
+<p>连接到I²C总线上的器件，若具有I²C总线的硬件接口，则很容易检测到起始和终止信号。</p>
+<h3 id="从机内部的操作："><a href="#从机内部的操作：" class="headerlink" title="从机内部的操作："></a>从机内部的操作：</h3><p>​    接收器件收到一个完整的数据字节后，有可能需要完成一些其它工作，如处理内部中断服务等，可能无法立刻接收下一字节，这时接收器件可以将SCL线拉成低电平，从而使主机处于等待状态。直到接收器件准备好接收下一个字节时，再释放SCL线使之为高电平，从而使数据传送可以继续进行。</p>
+<p><strong>I²C字节的传送与应答：</strong>每一个字节必须保证是8位长度，数据传送时，先传送最高位(MSB),每一个被传送的字节后面都必须跟随一位应答位(即一帧共有9位)</p>
+<p><strong>应答位的作用：</strong>主机在发送数据时，每次发送一字节数据都需要读取从机应答位，当从机空闲时可以接收该字节数据时，从机会发出应答(一帧数据的第9位为 ‘ 0 ’),当主机正忙于其它工作的处理来不及接收主机发送的数据时，从机会发出非应答(一帧数据的第9位为 ‘ 1 ’)主机则应发出终止信号以结束数据的继续传送，主机通过从机发出的应答来判断从机是否成功接收数据。</p>
+<p>当主机接收数据时，它收到最后一个数据字节后，必须向从机发出一个结束传送的信号，这个信号是由对从机的 “ 非应答 ” 来实现的。然后，从机释放SDA线，以允许主机产生终止信号。</p>
+<h2 id="数据帧格式："><a href="#数据帧格式：" class="headerlink" title="数据帧格式："></a>数据帧格式：</h2><p>​    <strong>I²C总线上传送的数据信号是广义的，即包括地址信号，又包括真正的数据信号</strong>。</p>
+<p>​    在起始信号后必须传送一个从机的地址(7位)，第8位是数据的传送方向位( R/T )，用 ‘ 0 ’ 表示主机发送数据(T)，“ 1 ” 表示主机接收数据(R)，<strong>每次数据传送总是由主机产生的终止信号结束</strong>。但是，**若主机希望继续占用总线进行新的数据传送。则可以不产生终止信号，马上再次发出起始信号对另一从机进行寻址 (多机通信)**。</p>
+<p>在总线的一次数据传送过程中，可以有以下几种组合方式：</p>
+<p>1：主机向从机发送数据，数据传送方向在整个传送过程中不变。<br><img src="/images/IIC/1.png"></p>
+<p>2：主机在第一个字节后，立即从从机读取数据<br><img src="/images/IIC/2.png"></p>
+<p>3：在传送过程中，当需要改变传送方向时，起始信号和从机地址都被重复产生一次，但两次读/写方向位正好反向<br><img src="/images/IIC/3.png"></p>
+<p><strong>总线的寻址</strong>：</p>
+<p>​    I²C总线协议有明确的规定：<strong>采用7位的寻址字节(寻址字节是起始信号后的第一个字节)</strong></p>
+<p>​    (1)<strong>寻址字节的位定义</strong>：</p>
+<p>​    </p>
+<table>
+<thead>
+<tr>
+<th>位</th>
+<th align="center">7   6   5   4   3   2   1</th>
+<th>0</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td align="center">从机地址</td>
+<td>R/W</td>
+</tr>
+</tbody></table>
+<p>D7~D1位组成从机的地址。D0位是数据传送的方向位，为 ‘ 0 ‘ 时表示主机向从机写数据。为 ‘ 1 ’ 时表示主机由从机读数据。</p>
+<p><strong>主机发送</strong>地址时，总线上的每个从机都将这7位地址码与自己的地址进行比较，如果相同，则认为自己正被主机寻址，根据 R/T 位将自己确定为发送器或接收器。</p>
+<p><strong>从机的地址</strong>由固定部分和可编程的部分组成。在一个系统中可能希望接入多个相同的从机主机地址中可编程部分决定了可接入总线该类器件的最大数目。如果一个从机的7位寻址位有4位是固定位，3位是可编程位，这时仅能寻址8个同样的器件，即可以有8个同样的器件介入到该 I²C 总线系统中。</p>
+<p>​    </p>
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2020-12-17
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>

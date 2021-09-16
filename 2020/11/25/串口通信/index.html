@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="通信有串行通信和并行通信两种方式。在多微机系统以及现代测控系统中信息的交换多采用串行通信方式。
+并行通信：通常是将数据字节的各位用多条数据线同时进行传送。
+
+优点：控制简单、传输数据快。
+缺点：由于传输线较多，长距离传送时成本高且接收方的各位同时接收存在困难。
+
+
+串行通信：使用一条数据线，将数据一">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>串口通信 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                串口通信
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <a id="more"></a>
+
+<p>通信有串行通信和并行通信两种方式。在多微机系统以及现代测控系统中信息的交换多采用串行通信方式。</p>
+<p><strong>并行通信：</strong>通常是将数据字节的各位用多条数据线同时进行传送。</p>
+<ul>
+<li>优点：控制简单、传输数据快。</li>
+<li>缺点：由于传输线较多，长距离传送时成本高且接收方的各位同时接收存在困难。</li>
+</ul>
+<p><img src="/images/Com/1.png"></p>
+<p><strong>串行通信：</strong>使用一条数据线，将数据一位一位地依次传输，每一位数据占据一个固定的时间长度。只需要少数几条线就可以在系统间交换信息，特别适用于计算机与计算机，计算机与外设直间的远距离通信。</p>
+<ul>
+<li>优点：传输线少，长距离传送时成本低。</li>
+<li>缺点：数据的传送控制比并行通信复杂。</li>
+</ul>
+<p><img src="/images/Com/2.png"></p>
+<p>串行通信又可分为<strong>异步通信</strong>和<strong>同步通信</strong>。</p>
+<p>异步通信是以字符<strong>（构成的帧）</strong>为单位，进行传输，字符与字符之间的间隙<strong>（时间间隔）</strong>是任意的，但每个字符中的各位是以固定的时间传送的，即字符之间不一定有“ 位间隔 ”的整数倍的关系，<strong>但同一字符内的各位之间的距离均为“  位间隔 ”的整数倍。</strong></p>
+<p><img src="/images/Com/3.png"></p>
+<p><strong>异步通信</strong>是一种很常用的通信方式（效率较低），异步通信在发送字符时，发送端可以在任意时刻开始发送字符，因此必须在每一个字符的开始和结束的地方加上标志，即加上开始位和停止位，以便使接收端能够正确地将每一个字符接受下来。所传送地数据以字节为单位。每个字节前加上一位起始位，每个字节后面加上停止位。&emsp;&emsp;优点：异步通信地好处是通信设备简单、便宜，但传输效率较低。</p>
+<p><strong>同步通信：</strong></p>
+<p>同步通信时要建立发送发时钟对接收方时钟地直接控制，使双方达到完全同步。此时，传输数据的位之间的距离均为“ 位间隔  ”的整数倍，同时传送的字符间不留间隙，即<strong>保持同步</strong>关系，也<strong>保持字符同步关系</strong>。发送发对接收方的同步可以通过两种方法实现。</p>
+<h4 id="传输速率："><a href="#传输速率：" class="headerlink" title="传输速率："></a>传输速率：</h4><p>比特率是<strong>每秒钟传输二进制代码的位数</strong>。单位是：位/秒（bps）。如每秒中传送240个字符，而每个字符格式包含10位（1个起始位，1个终止位，8个数据位）这时的比特率为：</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>10位 × 240个/秒 = 2400 bps</strong></p>
+<p><strong>传输距离与传输速率的关系：</strong></p>
+<p>串行接口或终端直接传送串行信息位流的最大距离与传输速率及传输线的<strong>电气特性</strong>有关。当传输线使用每0.3m（约1英尺）有50PF的电容的非平衡屏蔽双绞线时，<strong>传输距离随传输速率的增加而减小</strong>。<strong>当比特率超过1000bps时，最大传输距离迅速下降，如9600bps时最大距离下降到只有76m（约250英尺）</strong>。</p>
+<p><strong>采用RS-232C接口存在的问题（电气特性）：</strong></p>
+<ol>
+<li><p><strong>传输距离短、传输效率低</strong>：</p>
+<p>&emsp;&emsp;RS-232C总线标准受电容允许值的约束，使用时传输距离一般不要超过15米（线路条件好时也不要超过几十米）。最高传送速率为20kpbs。</p>
+<p>&emsp;&emsp;<strong>双绞线会形成分布电容，又叫寄生电容，受电气特性自动产生</strong>，因为在三极管和场效应管会自动产生，所以会影响开通与关断的速度。</p>
+<p>&emsp;&emsp;<strong>电容：两个导体产生，与两个导体间的距离成反比，与导体的面积成正比</strong>。</p>
+</li>
+<li><p><strong>有电平偏移</strong>：</p>
+<p>&emsp;&emsp;RS-232C总线标准要求收发双方共地。通信距离较大时，收发双方的地电位差别较大。在信号地上将有比较大的地电流并产生压降。</p>
+</li>
+<li><p><strong>抗干扰能力差</strong>：</p>
+<p>&emsp;&emsp;RS-232C在电平转换时采用单端输入输出，在传输过程中当干扰和噪声混在正常的信号中，为了提高信噪比，RS-232C总线标准不得不采用比较大的电压和摆幅。</p>
+</li>
+</ol>
+<p><strong>SBUF：</strong></p>
+<p>&emsp;&emsp;在逻辑上，SBUF只有一个，它即表示发送寄存器，又表示接收寄存器，具有同一个单元地址99H。但在物理结构上，则有两个完全独立的SBUF，一个是发送缓冲寄存器SBUF，另一个是接收缓冲寄存器SBUF。如果<strong>CPU写SBUF</strong>，数据就会被送入<strong>发送寄存器</strong>准备发送；如果<strong>CPU读SBUF</strong>，则读入的数据一定<strong>来自接收缓冲器</strong>。即CPU对SBUF的读写，实际上是分别对访问上述两个不同的寄存器。</p>
+<p><strong>（收） a = SBUF;</strong>&emsp;&emsp;&emsp;<strong>（发）SBUF =a;</strong></p>
+<h4 id="串行口工作前需要对相关寄存器进行配置，设定其工作模式："><a href="#串行口工作前需要对相关寄存器进行配置，设定其工作模式：" class="headerlink" title="串行口工作前需要对相关寄存器进行配置，设定其工作模式："></a>串行口工作前需要对相关寄存器进行配置，设定其工作模式：</h4><p><img src="/images/Com/4.png"></p>
+<ol>
+<li>设定T1的<strong>工作方式</strong>（编程TMOD寄存器）；</li>
+<li>计算T1的初值，装载TH1、TL1；</li>
+<li>启动T1（编程TCON中的TR1位）；</li>
+<li>确定<strong>串行口控制</strong>（编程SCON寄存器）；</li>
+<li>如需串行口在中断方式工作时，需进行中断设置编程IE寄存器。</li>
+</ol>
+<p><img src="/images/Com/5.png"></p>
+<p>当T1作为波特率发生器时，最典型的用法是<strong>使T1工作在自动再装入</strong>的<strong>8位定时器方式（即方式2，且TCON的 TR1 = 1，以启动定时器）。</strong>这时溢出率取决于TH1中的计数值。</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>T1 溢出率 = fosc / { 12 × [ 256 - (TH1) ] }</strong></p>
+<p><img src="/images/Com/6.png"></p>
+<p><img src="/images/Com/7.png"></p>
+<p><strong>fosc:外部晶振（11.0595）</strong></p>
+<p><strong>自动再装：TL1、TH1的赋值。 TL1从初值开始加，加到255溢出后，会自动取TH1的初值。</strong></p>
+<p><strong>产生波特率误差要为0，不能有误差！</strong></p>
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2020-11-25
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>

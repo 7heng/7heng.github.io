@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="BCD码：4个二进制位 (4bit) —-&amp;gt; 1个十进制位，又因为4个二进制位有2的4次方种状态，也就是16种状态。
+16种状态足够表示十进制的0~9，并且还有6种冗余。
+8421码：8421码的映射关系：
+
+
+
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+
+
+0000
+0001
+0010
+00">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>编码 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                编码
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h1 id="BCD码："><a href="#BCD码：" class="headerlink" title="BCD码："></a>BCD码：</h1><p>4个二进制位 (4bit) —-&gt; 1个十进制位，又因为4个二进制位有2的4次方种状态，也就是16种状态。</p>
+<p>16种状态足够表示十进制的0~9，并且还有6种冗余。</p>
+<h2 id="8421码："><a href="#8421码：" class="headerlink" title="8421码："></a>8421码：</h2><p>8421码的映射关系：</p>
+<table>
+<thead>
+<tr>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+<th align="center">9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0000</td>
+<td align="center">0001</td>
+<td align="center">0010</td>
+<td align="center">0011</td>
+<td align="center">0100</td>
+<td align="center">0101</td>
+<td align="center">0110</td>
+<td align="center">0111</td>
+<td align="center">1000</td>
+<td align="center">1001</td>
+</tr>
+</tbody></table>
+<p>8421码在计算机中进行加法运算：</p>
+<p>​    十进制：    5    +    8    =13</p>
+<p>​    8421码：    0101    +    1000    =1101</p>
+<p>​    因为1101不再映射表里，所以需要加上冗余的6，也就是0110</p>
+<p>​    所以1101+0110=1 0011</p>
+<p>​    0011在映射表里为3，在高位的1前面补0为0001</p>
+<p>​    所以0001 0011在映射表里为13</p>
+<p><strong>注：若相加结果在合法范围内，则无需修正</strong>。（因为8421码的二进制位的权值是固定不变的8421，所以8421码也成为<strong>有权码</strong>）</p>
+<h2 id="余3码："><a href="#余3码：" class="headerlink" title="余3码："></a>余3码：</h2><p>余3码映射表：( 8421码 + 0011 (二进制) )</p>
+<table>
+<thead>
+<tr>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+<th align="center">9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0011</td>
+<td align="center">0100</td>
+<td align="center">0101</td>
+<td align="center">0110</td>
+<td align="center">0111</td>
+<td align="center">1000</td>
+<td align="center">1001</td>
+<td align="center">1010</td>
+<td align="center">1011</td>
+<td align="center">1100</td>
+</tr>
+</tbody></table>
+<ul>
+<li>余3码的四个二进制每一个二进制没有固定的权值，所以余3码也成为<strong>无权码</strong></li>
+</ul>
+<h2 id="2421码："><a href="#2421码：" class="headerlink" title="2421码："></a>2421码：</h2><p>2421码映射表：(与8421码不同是改变了权值的定义)</p>
+<table>
+<thead>
+<tr>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+<th align="center">9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0000</td>
+<td align="center">0001</td>
+<td align="center">0010</td>
+<td align="center">0011</td>
+<td align="center">0100</td>
+<td align="center">1011</td>
+<td align="center">1100</td>
+<td align="center">1101</td>
+<td align="center">1110</td>
+<td align="center">1111</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>2421码的二进制权值是固定的2421，也是<strong>有权码</strong></p>
+</li>
+<li><p>对于2421码来说，0~ 4范围内所有数字编码的第一位都为0，5~ 9范围内所有的数字编码的第一位都为1</p>
+</li>
+<li><p>上述的规定第一位是为了避免歧义，例如5可以表示为0101或1011，但规定了数字编码的第一位后就不会存在歧义。</p>
+<h1 id="字符："><a href="#字符：" class="headerlink" title="字符："></a>字符：</h1><h2 id="ASCII码："><a href="#ASCII码：" class="headerlink" title="ASCII码："></a>ASCII码：</h2><p>数字、字母、符号共128个字符—&gt;7位二进制编码</p>
+<p><img src="/images/Char/ASCII.png"></p>
+<p>可印刷字符：32~126</p>
+<p>数字：48(011 0000)~57(011 1001)</p>
+<p>大写字母：65(100 0001)~90(101 1010)</p>
+<p>小写字母：97(110 0001)~122(111 1010)</p>
+<p>例：已知’A’的ASCII码的值为65，字符’H’存放在某存储单元M中，求M中存放的内容。</p>
+<p>​    **注意：M中存放的是‘H’的ASCII码(二进制形式)**。</p>
+<p>一：A是第一个字母，H是第8个字母，则H对应的码值=65+(8-1)=72；72对应二进制为100 1000，故M中存放的内容为0100 1000</p>
+<p>二：A的码值65写成二进制为100 0001，A是第一个字母，H是第八个字母，故对应100 1000，M中存放的内容为0100 1000。</p>
+<p>&emsp;&emsp;<strong>每个存储单元存放的内容为字节(Byte)的整数倍，即8的整数倍，例题假设存放1B</strong>。</p>
+<h2 id="字符串："><a href="#字符串：" class="headerlink" title="字符串："></a>字符串：</h2><p><img src="/images/Char/Big.png"></p>
+<p><img src="/images/Char/Small.png"></p>
+<h2 id="汉字的表示和编码："><a href="#汉字的表示和编码：" class="headerlink" title="汉字的表示和编码："></a>汉字的表示和编码：</h2><p>GB 2312-80：汉字+各种符号共7445个</p>
+<p>区位码：94个区，每区94个位置</p>
+<p>例如：啊，在第16区，01位置。</p>
+<p>将16转换为十六进制为10H，01转换为十六进制为01H，但是为了防止与其它编码冲突，所以在</p>
+<p>16进制的基础上再加上20H，变成30H和21H.这就是国标码，但会与ASCII码冲突，所以再加上80H得到B0H和A1H,这就是汉字计内码，完成汉字在计算机中的存储。</p>
+<h2 id="奇偶校验码："><a href="#奇偶校验码：" class="headerlink" title="奇偶校验码："></a>奇偶校验码：</h2><table>
+<thead>
+<tr>
+<th align="center">信息</th>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">码字</td>
+<td align="center">00</td>
+<td align="center">01</td>
+<td align="center">码距1</td>
+</tr>
+<tr>
+<td align="center">码字(方案二)</td>
+<td align="center">00</td>
+<td align="center">11</td>
+<td align="center">码距2</td>
+</tr>
+</tbody></table>
+<p><strong>码距</strong>：两个合法码字对应位上数字的不同的个数</p>
+<p>例如：原本A(00)因为跳变发送到B变成了(01),但因为码距为1，所以无法判断原本发的数据是正确还是错误。</p>
+<p>而A(00)因为跳变变成了01，但码距为2，可以知道发生了错误，因为没有01，但却无法确定是哪一位发生了跳变。<strong>所以在整个方案中，有些编码是我们没有用到的，没有用到的编码在发生错误的时候可以帮我们指示错误原因。</strong></p>
+<p><strong>奇校验码：整个校验位(有效信息位和校验位)中1的个数为奇数</strong>。</p>
+<p><strong>偶校验码：整个校验位(有效信息位和校验位)中1的个数为偶数</strong>。</p>
+<table>
+<thead>
+<tr>
+<th align="center">奇偶校验位</th>
+<th align="center">有效信息位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1位</td>
+<td align="center">n位</td>
+</tr>
+</tbody></table>
+<h1 id="海明码："><a href="#海明码：" class="headerlink" title="海明码："></a>海明码：</h1><p><strong>海明码设计思路：</strong><code>分组校验--&gt;多个校验位--&gt;校验位标注出错位置</code>。</p>
+<p>例如：信息位1010</p>
+<p>因为：2的K次方 ≥ n+k+1</p>
+<p>所以：K = 3；</p>
+<p><strong>对于n+k+1：海明码是检验信息中哪一位出错，所以原码n个，检验码k个，出现n+k个位置，k校验码对应2的k次方个状态，如k=3,对应000~ 111八个状态。如果八个状态都为错误状态,就需要一个表示正确状态，所以为n+k+1</strong>。</p>
+<p>1：设信息位D4 D3 D2 D1(1010)共4位，检验位P3 P2 P1,共3位，对应的海明码为H7 H6 H5 H4 H3 H2 H1。</p>
+<p>2：确定校验位的分布</p>
+<table>
+<thead>
+<tr>
+<th align="center">H7</th>
+<th align="center">H6</th>
+<th align="center">H5</th>
+<th align="center">H4</th>
+<th align="center">H3</th>
+<th align="center">H2</th>
+<th align="center">H1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">D4</td>
+<td align="center">D3</td>
+<td align="center">D2</td>
+<td align="center"><strong>P3</strong></td>
+<td align="center">D1</td>
+<td align="center"><strong>P2</strong></td>
+<td align="center"><strong>P1</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+</tbody></table>
+<p><strong>第二行校验位Pi放在海明码为2的(i-1)次方的位置上，信息位按顺序防到其余位置</strong>。</p>
+<p>3：求校验位的值：</p>
+<p>​    H3：3—&gt;0 1 1</p>
+<p>​    H5：5—&gt;1 0 1</p>
+<p>​    H6：6—&gt;1 1 0</p>
+<p>​    H7：7—&gt;1 1 1</p>
+<p>按列看，最左边的列1 1 0 1说明H3 H5 H7不为0，因此用D1 D2 D4进行异或得P1—&gt;0</p>
+<p>第二列1 0 1 1说明H3 H6 H7不为0，因此用D1 D3 D4进行异或得P2—&gt;1</p>
+<p>第三列0 1 1 1说明H5 H6 H7不为0，因此用D2 D3 D4进行异或得P3—&gt;0</p>
+</li>
+</ul>
+<p>4：纠错</p>
+<p>校验方程：</p>
+<p>S1=P1⊕D1⊕D2⊕D4</p>
+<p>S2=P2⊕D1⊕D3⊕D4</p>
+<p>S3=P3⊕D2⊕D3⊕D4</p>
+<p>接收到：1010010</p>
+<p>S1=P1⊕D1⊕D2⊕D4 = 0⊕0⊕1⊕1=0</p>
+<p>S2=P2⊕D1⊕D3⊕D4 = 1⊕0⊕0⊕1=0</p>
+<p>S3=P3⊕D2⊕D3⊕D4 = 0⊕1⊕0⊕1=0</p>
+<p>000无错误。</p>
+<p>接收到：1010000</p>
+<p>S1=P1⊕D1⊕D2⊕D4 = 0⊕0⊕1⊕1=0</p>
+<p>S2=P2⊕D1⊕D3⊕D4 = 0⊕0⊕0⊕1=1</p>
+<p>S3=P3⊕D2⊕D3⊕D4 = 0⊕1⊕0⊕1=0</p>
+<p>010转换为二进制为2，则第2位出错,该为1010010</p>
+<p>（格式如果变化，确定校验位得分布摆放位置变化，计算方法不变）</p>
+<h1 id="CRC循环冗余码："><a href="#CRC循环冗余码：" class="headerlink" title="CRC循环冗余码："></a>CRC循环冗余码：</h1><table>
+<thead>
+<tr>
+<th align="center">信息位</th>
+<th align="center">校验位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">K位</td>
+<td align="center">R位</td>
+</tr>
+</tbody></table>
+<p>例：设生成多项式为G(X) = x的三次方+X的2次方+1,信息码为101001，求对应的CRC码</p>
+<p>​    1：确定K,R以及生成多项式对应的二进制码。</p>
+<p>​    K = 信息码的长度 = 6，R = 生成多项式最高次幂 = 3 –&gt; 校验码位数N = K+ R =9</p>
+<p>​    生成多项式G(X) = 1·(X^3)+1·(X^2)+0·(X^1)+1·(X^0),对应的二进制码1101</p>
+<p>​    2：移位：</p>
+<p>​    信息码左移R位，低位补0 —–&gt; 1101000</p>
+<p>​    3：相除(模2除)：</p>
+<p>​    对移位后的信息码，用生成多项式进行模2除法，产生余数</p>
+<p>1101000 / 1101</p>
+<p>模2除：看被除数的最高位是1还是0，根据最高位去上位。减法做不带进位的减法，进行异或运算(相同为0，不同为1),最终取得的余数为校验位。对应的CRC码就是信息码+校验位。</p>
+<p><img src="/images/Char/CRC.png"></p>
+<p>4：检错和纠错：</p>
+<p>例：发送：101001001    记为C9C8C7C6C5C4C3C2C1</p>
+<p>​        接收：101001001—–&gt;用1001进行模2除—-&gt;余数000，代表没出错。</p>
+<p>​        接收：101001011—-&gt;用1101进行模2除—-&gt;余数为010，二进制转换为2，C2出错，但不是绝对，因为000只能代表8位，并不能完全表示。</p>
+<table>
+<thead>
+<tr>
+<th align="center">原循环冗余码</th>
+<th align="center">出错一位后的循环冗余码</th>
+<th align="center">出错位</th>
+<th align="center">余数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">101001 001</td>
+<td align="center">101001 000</td>
+<td align="center">1</td>
+<td align="center">001</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">101001 011</td>
+<td align="center">2</td>
+<td align="center">010</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">101001 101</td>
+<td align="center">3</td>
+<td align="center">011</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">101000 001</td>
+<td align="center">4</td>
+<td align="center">100</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">101011 001</td>
+<td align="center">5</td>
+<td align="center">101</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">101101 001</td>
+<td align="center">6</td>
+<td align="center">110</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">100001 001</td>
+<td align="center">7</td>
+<td align="center">111</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">111001 001</td>
+<td align="center">8</td>
+<td align="center">001</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">001001 001</td>
+<td align="center">9</td>
+<td align="center">010</td>
+</tr>
+</tbody></table>
+<p>假设信息位是K，校验位是R，那么CRC的位数就是R + K ，而R的校验位，可以表示的数从0到2R-1，而0用来表示正确的情况，那么一共有2R-1种错误码，其中每个错误码对应一位，因此我们可以得到一个公式，当满足2R - 1 &gt;= K+R的时候，CRC才具有纠错功能。而且我们可以发现余数是每7个一个循环，出错位1和出错位8的余数是一样的，出错位2和出错位9的余数是一样的，所以这也是为什么叫做循环冗余码的原因。</p>
+<p>为什么一般我们不提及CRC的纠错功能，因为CRC一般用在计算机网络中，在以太网的MAC帧中，通常4字节的效验码（FCS）不但用来检验MAC帧的数据部分，还用来检验目的地址、原地址和类型字段（60~1514）字节，信息位远远大于校验位，因此我们一般不提及CRC的纠错功能，但这并不代表没有。</p>
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-01-16
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>

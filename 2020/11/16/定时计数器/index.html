@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="51单片机有2个16位定时器/计数器：定时器0和定时器1。
+这里所说的16位是指定时/计数器内部分别有16位的计数寄存器。
+当工作在定时模式时，每经过一个机器周期的内部的16位计数寄存器的值就会加1，当这个寄存器装满时溢出。我们可以算出工作在定时模式时最高单次定时时间为65535×1.085μS=时">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>定时器/计数器 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                定时器/计数器
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <a id="more"></a>
+
+<p>51单片机有2个16位定时器/计数器：定时器0和定时器1。</p>
+<p>这里所说的16位是指定时/计数器内部分别有16位的计数寄存器。</p>
+<p>当工作在定时模式时，每经过一个机器周期的内部的16位计数寄存器的值就会加1，当这个寄存器装满时溢出。我们可以算出工作在定时模式时最高单次定时时间为65535×1.085μS=时间（单位μS）</p>
+<p>当工作在技术器模式时，T0，T1每来一个脉冲计数寄存器加1。</p>
+<p>65535： 16位的计数寄存器，最大为16个1，也就是65535。</p>
+<p>最大定时： 65535×1.085=71105.475μS≈71.1mS</p>
+<p>时钟周期：以11.0592MHZ为例，假如51单片机的时钟为11.0592MHZ，除以12后得到每秒执行的指令个数为条指令，取倒数将得到执行每条指令所需时间为1.085μS(一个周期)</p>
+<h4 id="定时器作用："><a href="#定时器作用：" class="headerlink" title="定时器作用："></a>定时器作用：</h4><p>定时计数器可以用于精确事件定时，PWM脉宽调制，波形发生，信号时序测量的方面。</p>
+<h4 id="使用51定时-技术器步骤："><a href="#使用51定时-技术器步骤：" class="headerlink" title="使用51定时/技术器步骤："></a>使用51定时/技术器步骤：</h4><ul>
+<li>启动定时/计数器（通过TCON控制器）</li>
+<li>设置定时/计数器（通过TMOD控制器）</li>
+<li>查询定时/计数器是否溢出（读TCON内TF位）</li>
+</ul>
+<p><img src="/images/Time/0.png"></p>
+<p>计数器：每来一个脉冲计数寄存器加1。一个高电平一个低电平形成一个脉冲。</p>
+<p>TMOD控制器中C/T位为功能选择位：为0时为定时器，为1时为计数器。</p>
+<blockquote>
+<p>定时器举例：</p>
+<p>TR0 = 1; &emsp;&emsp;&emsp;&emsp;// 定时器0工作</p>
+<p>TMOD - 0X01;&emsp;&emsp;&emsp;&emsp;// 16位定时器/计数器</p>
+<p>TH0 = 0X4B;   &emsp;&emsp;&emsp;&emsp;// (65535-46082) / 256 &emsp;&emsp; 高位赋值</p>
+<p>TL0 = 0XFD;&emsp;&emsp;&emsp;&emsp;// (65535-46082）% 256&emsp;&emsp;低位赋值</p>
+<p>if(TF0 == 1)&emsp;&emsp;&emsp;&emsp;&emsp;// 加满产生溢出;不用中断响应的情况下要软件清0。”置 ”1“ 为硬件置 “1” “</p>
+</blockquote>
+<p>例如：</p>
+<p> &emsp;定时50毫秒（mS）= 50000 微秒(μS)&emsp;&emsp;//因为执行计数的加1为微秒级</p>
+<p> &emsp;50000÷1.085≈46082；</p>
+<p> &emsp;65535-46082 = 初值；</p>
+<ul>
+<li>如果同时使用定时器计数器，都需要对同一个寄存位赋值时，可以用 |=（或等于）符号，相当于两个值进行求和，这样可以同时利用定时器和计数器。</li>
+</ul>
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2020-11-16
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>

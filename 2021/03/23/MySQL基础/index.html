@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="数据库基础：DB：    数据库，保存一组有组织的的数据的容器。
+DBMS：数据库管理系统，又称为数据库软件(产品)，用于管理DB中的数据。
+SQL：结构化查询语言，用于和DBMS通信的语言。
+DML：插入、修改、删除。
+DDL：库和表的管理、常见数据类型介绍、常见约束。
+TCL：事务和事务处理。
+">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>MySQL基础 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                MySQL基础
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <h1 id="数据库基础："><a href="#数据库基础：" class="headerlink" title="数据库基础："></a>数据库基础：</h1><p><strong>DB：</strong>    数据库，保存一组有组织的的数据的容器。</p>
+<p><strong>DBMS：</strong>数据库管理系统，又称为数据库软件(产品)，用于管理DB中的数据。</p>
+<p><strong>SQL：</strong>结构化查询语言，用于和DBMS通信的语言。</p>
+<p><strong>DML：</strong>插入、修改、删除。</p>
+<p><strong>DDL：</strong>库和表的管理、常见数据类型介绍、常见约束。</p>
+<p><strong>TCL：</strong>事务和事务处理。</p>
+<h2 id="数据库存储数据的特点："><a href="#数据库存储数据的特点：" class="headerlink" title="数据库存储数据的特点："></a>数据库存储数据的特点：</h2><p>​    1：将数据放到表中，表再放到库中。</p>
+<p>​    2：一个数据库中可以有多个表，每个表都有一个名字，用来标识自己，表名具有唯一性。</p>
+<p>​    3：表具有一些特性，这些特性定义了数据在表中如何存储。</p>
+<p>​    4：表由列组成，也成为字段。所有表都是由以一个或多个列组成。</p>
+<p>​    5：表中的数据是按行存储的。</p>
+<h2 id="MySQL服务的启动和停止："><a href="#MySQL服务的启动和停止：" class="headerlink" title="MySQL服务的启动和停止："></a>MySQL服务的启动和停止：</h2><p>​    方式一：计算机–&gt;右键管理–&gt;服务</p>
+<p>​    方式二：管理员身份运行DOS</p>
+<p>​    net start 服务名  (启动服务)</p>
+<p>​    net stop 服务名  (停止服务)</p>
+<h2 id="MySQL服务的登录和退出："><a href="#MySQL服务的登录和退出：" class="headerlink" title="MySQL服务的登录和退出："></a>MySQL服务的登录和退出：</h2><p>​    方式一：通过MySQL自带的客户端（只限于root用户）</p>
+<p>​    方式二：通过windows自带的客户端</p>
+<p>​        登录：<code>mysql [ -h主机名 -p端口号 ] -u用户名 -p密码</code></p>
+<h2 id="MySQL常用基本命令："><a href="#MySQL常用基本命令：" class="headerlink" title="MySQL常用基本命令："></a>MySQL常用基本命令：</h2><p>​    1：查看当前所有的数据库：    <code>show    databases;</code></p>
+<p>​     2：打开指定的库：    <code>use 库名;</code></p>
+<p>​    3：查看当前库的所有表：    <code>show tables;</code></p>
+<p>​    4：查看其它库的所有表：<code>show table from 库名;</code></p>
+<p>​    5：创建表：</p>
+<p><code>create table 表明（</code></p>
+<p><code>列名 列类型,</code></p>
+<p><code>列名 列类型,</code></p>
+<p><code>...</code>                                </p>
+<p><code>）;</code></p>
+<p>​    6：查看表结构：    <code>desc 表名;</code></p>
+<h3 id="SQL语言的分类："><a href="#SQL语言的分类：" class="headerlink" title="SQL语言的分类："></a>SQL语言的分类：</h3><p>DQL（Data Query Language)：数据查询语言</p>
+<p>​    <code>select</code></p>
+<p>DML（Data Manipulate Language)：数据操作语言</p>
+<p>​    <code>insert、update、delete</code></p>
+<p>DDL（Data Define Languge）：数据定义语言<br>        <code>create、drop、alter</code><br>    TCL（Transaction Control Language）：事务控制语言<br>        <code>commit、rollback</code></p>
+<h3 id="SQL的常见命令："><a href="#SQL的常见命令：" class="headerlink" title="SQL的常见命令："></a>SQL的常见命令：</h3><p><code>show databases;</code>    查看所有的数据库。</p>
+<p>use 库名;    打开指定的库。</p>
+<p><code>show tables from 库名;</code>    显示指定库中的所有表。</p>
+<p><code>ceeate table 表名(</code></p>
+<p>​                <code>字段名 字段类型，</code></p>
+<p>​                <code>字段名 字段类型</code></p>
+<p><code>)；</code>    创建表。</p>
+<p><code>desc 表名;</code>    查看指定表的结构。</p>
+<p><code>select * from 表名;</code>    显示表中所有数据。</p>
+<h3 id="起别名"><a href="#起别名" class="headerlink" title="起别名:"></a>起别名:</h3><p><strong>(使用AS)：</strong><code>SELECT 100%98 AS 结果;</code></p>
+<p><code>SELECT last_name AS 姓,first_name 名 FROM 表名;</code></p>
+<p><strong>(使用空格)：</strong><code>SELECT last_name AS 姓,first_name AS 名 FROM 表名;</code></p>
+<h3 id="去重："><a href="#去重：" class="headerlink" title="去重："></a>去重：</h3><p>例：查询员工表中涉及到的所有的部门编号</p>
+<p><code>SELECT DISTINCT department_id FROM 表名;</code></p>
+<h3 id="号："><a href="#号：" class="headerlink" title="+号："></a>+号：</h3><p><strong>java中的+号：</strong></p>
+<p>1：运算符，两个操作数都为数值型。</p>
+<p>2：连接符，只要有一个操作数为字符串。</p>
+<p><strong>MySQL中的+号：</strong></p>
+<p>仅有一个功能，运算符。</p>
+<p><code>select 100+90;</code>两个操作数都为数值型，则做加法运算。</p>
+<p><code>select &#39;123&#39;+90;</code> 只要其中一个为字符型,试图将字符型数值转换成数值型，如果转换成功，则继续做加法运算。</p>
+<p><code>select &#39;heng&#39;+22;</code> 如果转换失败，则将字符型数值转换成0。</p>
+<p><code>select null+10;</code> 只要其中一方为null,结果肯定为null。</p>
+<h3 id="连接："><a href="#连接：" class="headerlink" title="连接："></a>连接：</h3><p>例：查询员工姓名和姓连接成一个字段，并显示为姓名。</p>
+<p><code>SELECT (last_name,first_name) AS 姓名 FROM 表名;</code></p>
+<p><strong>补充一个计算机中取余小知识：</strong></p>
+<p><code>a % b = a - a/b*b;</code></p>
+<p>​        </p>
+<p>​    </p>
+<p>​            </p>
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-03-23
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>

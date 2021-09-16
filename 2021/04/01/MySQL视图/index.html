@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="含义：虚拟表，和普通表一样使用
+MySQL15.1版本出现的新特性，是通过表动态生成的数据。
+
+
+
+
+创建语法的关键字
+是否实际占用物理空间
+使用
+
+
+
+视图
+create view
+只是保存了sql逻辑
+增删改查，只是一般不能增删改
+
+
+表
+create table
+保存了数据
+增删改查
+
+
+视图">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="7heng">
+    
+
+    <!-- Title -->
+    
+    <title>MySQL视图 | Heng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Heng" type="application/atom+xml">
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+    <!-- Back Home -->
+    <a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+        <!-- Page Header -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="post-heading">
+                            <h1>
+                                MySQL视图
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        <article>
+            <div class="container">
+                <div class="row">
+                    <!-- Post Main Content -->
+                    <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <p>含义：虚拟表，和普通表一样使用</p>
+<p>MySQL15.1版本出现的新特性，是通过表动态生成的数据。</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">创建语法的关键字</th>
+<th align="center">是否实际占用物理空间</th>
+<th align="center">使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">视图</td>
+<td align="center">create view</td>
+<td align="center">只是保存了sql逻辑</td>
+<td align="center">增删改查，只是一般不能增删改</td>
+</tr>
+<tr>
+<td align="center">表</td>
+<td align="center">create table</td>
+<td align="center">保存了数据</td>
+<td align="center">增删改查</td>
+</tr>
+</tbody></table>
+<h6 id="视图的好处："><a href="#视图的好处：" class="headerlink" title="视图的好处："></a>视图的好处：</h6><p>1：sql语句提高重复性，效率高。</p>
+<p>2：和表实现了分离，提高了安全性。</p>
+<h6 id="视图的创建："><a href="#视图的创建：" class="headerlink" title="视图的创建："></a>视图的创建：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">语法：</span><br><span class="line">CREATE VIEW 视图名</span><br><span class="line">AS</span><br><span class="line">查询语句;</span><br></pre></td></tr></table></figure>
+
+<h6 id="视图的增删改查："><a href="#视图的增删改查：" class="headerlink" title="视图的增删改查："></a>视图的增删改查：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1：查看视图的数据</span><br><span class="line">SELECT * FROM my_v4;</span><br><span class="line">SELECT * FROM my_v1 WHERE last_name&#x3D;&#39;partners&#39;;</span><br><span class="line"></span><br><span class="line">2：插入视图的数据</span><br><span class="line">INSERT INTO my_V4(last_name,department_id) VALUES(&#39;柯南&#39;,18);</span><br><span class="line"></span><br><span class="line">3：修改视图的数据</span><br><span class="line">UPDATE my_v4 SET last_name&#x3D;&#39;秀一&#39;WHERE last_name&#x3D;&#39;安室透&#39;;</span><br><span class="line"></span><br><span class="line">4：删除视图的数据</span><br><span class="line">DELETE FROM my_v4;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">例：查询姓张的学生名和专业名</span><br><span class="line">SELECT stuname,majorname</span><br><span class="line">FROM stuinfo s</span><br><span class="line">INNER JOIN major m ON s.&#39;majorid&#39;&#x3D;m.&#39;id&#39;</span><br><span class="line">WHERE s.&#39;stuname&#39; LIKE &#39;张%&#39;;</span><br><span class="line"></span><br><span class="line">CREATE VIEW v1</span><br><span class="line">AS</span><br><span class="line">SELECT stuname,majorname</span><br><span class="line">FROM stuinfo s</span><br><span class="line">INNER stuinfo s</span><br><span class="line">INNER JOIN major m ON s.&#39;majorid&#39;-m.&#39;id&#39;;</span><br><span class="line"></span><br><span class="line">SELECT * FROM v1 WHERE stuname LIKE &#39;张%&#39;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">创建视图：</span><br><span class="line">语法：</span><br><span class="line">CREATE VIEW 视图名</span><br><span class="line">AS</span><br><span class="line">查询语句;</span><br><span class="line"></span><br><span class="line">USE myemployees;</span><br><span class="line">例1：查询姓名中包含a字符的员工名、部门名和工种信息</span><br><span class="line">①：创建</span><br><span class="line">CREATE VIEW myv1</span><br><span class="line">AS</span><br><span class="line">SELECT last_name,department_name,job_title</span><br><span class="line">FROM employees e</span><br><span class="line">JOIN departments d ON e.department_id  &#x3D; d.department_id</span><br><span class="line">JOIN jobs j ON j.job_id  &#x3D; e.job_id;</span><br><span class="line"></span><br><span class="line">②：使用</span><br><span class="line">SELECT * FROM myv1 WHERE last_name LIKE &#39;%a%&#39;;</span><br><span class="line"></span><br><span class="line">2：查询各部门的平均工资级别</span><br><span class="line">①：创建视图查看每个部门的平均工资</span><br><span class="line">CREATE VIEW myv2</span><br><span class="line">AS</span><br><span class="line">SELECT AVG(salary) ag,department_id</span><br><span class="line">FROM employees</span><br><span class="line">GROUP BY department_id;</span><br><span class="line"></span><br><span class="line">②：使用</span><br><span class="line">SELECT myv2.&#96;ag&#96;,g.grade_level</span><br><span class="line">FROM myv2</span><br><span class="line">JOIN job_grades g</span><br><span class="line">ON myv2.&#96;ag&#96; BETWEEN g.&#96;lowest_sal&#96; AND g.&#96;highest_sal&#96;;</span><br><span class="line"></span><br><span class="line">3：查询平均工资最低的部门信息</span><br><span class="line">SELECT * FROM myv2 ORDER BY ag LIMIT 1;</span><br><span class="line"></span><br><span class="line">4：查询平均工资最低的部门名和工资</span><br><span class="line">CREATE VIEW myv3</span><br><span class="line">AS</span><br><span class="line">SELECT * FROM myv2 ORDER BY ag LIMIT 1;</span><br><span class="line"></span><br><span class="line">SELECT d.*,m.ag</span><br><span class="line">FROM myv3 m</span><br><span class="line">JOIN departments d</span><br><span class="line">ON m.&#96;department_id&#96;&#x3D;d.&#96;department_id&#96;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">视图的修改：</span><br><span class="line">方式一：</span><br><span class="line">create or replace view  视图名</span><br><span class="line">as</span><br><span class="line">查询语句;</span><br><span class="line"></span><br><span class="line">例：</span><br><span class="line">SELECT * FROM myv3 </span><br><span class="line"></span><br><span class="line">CREATE OR REPLACE VIEW myv3</span><br><span class="line">AS</span><br><span class="line">SELECT AVG(salary),job_id</span><br><span class="line">FROM employees</span><br><span class="line">GROUP BY job_id;</span><br><span class="line"></span><br><span class="line">方式二：</span><br><span class="line">alter view 视图名</span><br><span class="line">as</span><br><span class="line">查询语句;</span><br><span class="line"></span><br><span class="line">例：</span><br><span class="line">ALTER VIEW myv3</span><br><span class="line">AS</span><br><span class="line">SELECT * FROM employees;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">删除视图：</span><br><span class="line">语法：drop view 视图名,视图名,...;</span><br><span class="line"></span><br><span class="line">例：</span><br><span class="line">DROP VIEW emp_v1,emp_v2,myv3;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查看视图：</span><br><span class="line">DESC myv3;</span><br><span class="line">SHOW CREATE VIEW myv3;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">视图的更新：</span><br><span class="line">CREATE OR REPLACE VIEW myv1</span><br><span class="line">AS</span><br><span class="line">SELECT last_name,email,salary*12(1+IFNULL(commission_pct,0)) &quot;annual salary&quot;</span><br><span class="line">FROM employees;</span><br><span class="line"></span><br><span class="line">CREATE OR REPLACE VIEW myv1</span><br><span class="line">AS</span><br><span class="line">SELECT last_name,email</span><br><span class="line">FROM employees;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#1.插入</span><br><span class="line">INSERT INTO myv1 VALUES(&#39;恒子&#39;,&#39;Cy7heng@163.com&#39;);</span><br><span class="line"></span><br><span class="line">#2.修改</span><br><span class="line">UPDATE myv1 SET last_name &#x3D; &#39;张无忌&#39; WHERE last_name&#x3D;&#39;宇智波鼬&#39;;</span><br><span class="line"></span><br><span class="line">#3.删除</span><br><span class="line">DELETE FROM myv1 WHERE last_name &#x3D; &#39;漩涡鸣人&#39;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="具备以下特点的视图不允许更新："><a href="#具备以下特点的视图不允许更新：" class="headerlink" title="具备以下特点的视图不允许更新："></a>具备以下特点的视图不允许更新：</h5><p><strong>包含以下关键字的sql语句，分组函数、distinot、group by、having、union、或者union all</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">CREATE OR REPLACE VIEW myv1</span><br><span class="line">AS</span><br><span class="line">SELECT MAX(salary) m,department_id</span><br><span class="line">FROM employees</span><br><span class="line">GROUP BY deparment_id;</span><br><span class="line"></span><br><span class="line"># 常量视图：</span><br><span class="line">CREATE OR REPLACE VIEW myv2</span><br><span class="line">AS</span><br><span class="line">SELECT &#39;john&#39; NAME;</span><br><span class="line"></span><br><span class="line"># Select中包含子查询：</span><br><span class="line">CREATE OR REPLACE VIEW myv3</span><br><span class="line">AS</span><br><span class="line">SELECT department_id,(SELECT MAX(salary) FROM employees) 最高工资</span><br><span class="line">FROM departments;</span><br><span class="line"></span><br><span class="line"># join:</span><br><span class="line">CREATE OR REPLACE VIEW myv4</span><br><span class="line">AS</span><br><span class="line">SELECT last_name,department_name</span><br><span class="line">FROM employees e</span><br><span class="line">JOIN departments d</span><br><span class="line">ON e.department_id  &#x3D; d.department_id;</span><br><span class="line"></span><br><span class="line"># from一个不能更新的视图</span><br><span class="line">CREATE OR REPLACE VIEW myv5</span><br><span class="line">AS</span><br><span class="line">SELECT * FROM myv3;</span><br><span class="line"></span><br><span class="line"># where子句的子查询引用了from子句中的表</span><br><span class="line">CREATE OR REPLACE VIEW myv6</span><br><span class="line">AS</span><br><span class="line">SELECT last_name,email,salary</span><br><span class="line">FROM employees</span><br><span class="line">WHERE employee_id IN(</span><br><span class="line">	SELECT  manager_id</span><br><span class="line">	FROM employees</span><br><span class="line">	WHERE manager_id IS NOT NULL</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+
+                            <!-- Meta -->
+                            <div class="post-meta">
+                                <hr>
+                                <br>
+                                <div class="post-tags">
+                                    
+                                </div>
+                                <div class="post-date">
+                                    2021-04-01
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <!-- Disqus Comments -->
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+</section>
+
+<!-- Image viewer-->
+
+    <!-- Custom picture view-->
+    <link href="/css/viewer.min.css" rel="stylesheet" />
+    <script
+      src="/js/viewer.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    
+    <script type="text/javascript">
+      // set image viewer
+      Viewer.setDefaults({
+        zoomRatio: [0.5],
+        navbar: false,
+        toolbar: false,
+        button: false,
+        title: [2, (image, imageData) => `${image.alt}`],
+        show: function() {
+          this.viewer.zoomTo(0.5);
+        }
+      });
+      var imageList = document.getElementsByTagName("img");
+      Array.prototype.forEach.call(imageList, element => {
+        var viewer = new Viewer(element);
+      });
+    </script>
+
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+    console.log("© zchen9 🙋 2015-" + new Date().getFullYear());
+</script>
+  
+    <!-- Google Analytics -->
+    
+
+    <!-- Service Worker -->
+    <!-- if using service worker -->
+
+    
+</body>
+
+</html>
